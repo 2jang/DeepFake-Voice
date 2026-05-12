@@ -95,12 +95,7 @@ SpeechFake 데이터셋 구조
 
 def download_via_modelscope(output_dir: str):
     """ModelScope SDK로 다운로드."""
-    try:
-        from modelscope.msdatasets import MsDataset
-    except ImportError:
-        print("modelscope 패키지를 설치해주세요:")
-        print("  pip install modelscope")
-        sys.exit(1)
+    from modelscope.msdatasets import MsDataset
 
     print("ModelScope에서 SpeechFake 다운로드 시작...")
     print(f"리포지토리: {MODELSCOPE_REPO}")

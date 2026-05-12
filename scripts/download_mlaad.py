@@ -1,5 +1,5 @@
 """
-MLAAD v9 다운로드 스크립트
+MLAAD v9 다운로드 스크립트 (Hugging Face 토큰 인증 포함)
 =========================
 Multi-Language Audio Anti-Spoofing Dataset v9
 - 출처: https://huggingface.co/datasets/mueller91/MLAAD
@@ -19,12 +19,10 @@ Multi-Language Audio Anti-Spoofing Dataset v9
     # tiny 버전 (테스트용)
     python scripts/download_mlaad.py --output data/mlaad --tiny
 
-    # HuggingFace 미러 사용 (중국/느린 네트워크)
-    HF_ENDPOINT=https://hf-mirror.com python scripts/download_mlaad.py --output data/mlaad
-
 사전 준비:
-    pip install huggingface_hub tqdm
-    huggingface-cli login
+    1. pip install huggingface_hub tqdm python-dotenv
+    2. 스크립트 실행 경로에 .env 파일을 만들고 아래 내용을 작성합니다:
+       HF_TOKEN=본인의_허깅페이스_토큰
 """
 
 import argparse
@@ -38,9 +36,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 try:
     from huggingface_hub import HfApi, hf_hub_download, snapshot_download
     from tqdm import tqdm
+    from dotenv import load_dotenv
 except ImportError:
     print("필수 패키지를 설치해주세요:")
-    print("  pip install huggingface_hub tqdm")
+    print("  pip install huggingface_hub tqdm python-dotenv")
     sys.exit(1)
 
 
@@ -48,8 +47,8 @@ REPO_FULL = "mueller91/MLAAD"
 REPO_TINY = "mueller91/MLAAD-tiny"
 
 
-def get_file_list(repo_id: str) -> list[str]:
-    api = HfApi()
+def get_file_list(repo_id: str, token: str | None = None) -> list[str]:
+    api = HfApi(token=token)
     files = api.list_repo_files(repo_id, repo_type="dataset")
     return list(files)
 
@@ -70,7 +69,7 @@ def filter_files_by_languages(files: list[str], languages: list[str]) -> list[st
 
 
 def download_full(repo_id: str, output_dir: str, languages: list[str] | None = None,
-                  max_workers: int = 4):
+                  max_workers: int = 4, token: str | None = None):
     """snapshot_download로 전체(또는 필터링된) 데이터셋 다운로드."""
     allow_patterns = None
     if languages:
@@ -93,15 +92,16 @@ def download_full(repo_id: str, output_dir: str, languages: list[str] | None = N
         local_dir=output_dir,
         allow_patterns=allow_patterns,
         max_workers=max_workers,
+        token=token,
     )
     return path
 
 
 def download_selective(repo_id: str, output_dir: str, languages: list[str],
-                       max_workers: int = 4):
+                       max_workers: int = 4, token: str | None = None):
     """파일 목록을 먼저 조회 후 선택적 다운로드 (세밀한 제어용)."""
     print("파일 목록 조회 중...")
-    all_files = get_file_list(repo_id)
+    all_files = get_file_list(repo_id, token=token)
     print(f"전체 파일 수: {len(all_files)}")
 
     target_files = filter_files_by_languages(all_files, languages)
@@ -131,6 +131,7 @@ def download_selective(repo_id: str, output_dir: str, languages: list[str],
                 filename=filename,
                 repo_type="dataset",
                 local_dir=str(output_path),
+                token=token,
             )
             return filename, True
         except Exception as e:
@@ -206,6 +207,13 @@ def print_dataset_info(output_dir: str):
 
 
 def main():
+    # .env 파일에서 환경 변수 불러오기
+    load_dotenv()
+    hf_token = os.environ.get("HF_TOKEN")
+    
+    if not hf_token:
+        print("⚠️ 경고: .env 파일에서 HF_TOKEN을 찾을 수 없습니다. 공개 데이터셋은 다운로드 가능하지만 권한이 필요한 경우 실패할 수 있습니다.")
+
     parser = argparse.ArgumentParser(
         description="MLAAD v9 다운로드 스크립트",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -255,7 +263,7 @@ def main():
 
     if args.list_languages:
         print(f"파일 목록 조회 중... ({repo_id})")
-        all_files = get_file_list(repo_id)
+        all_files = get_file_list(repo_id, token=hf_token)
         langs = set()
         for f in all_files:
             parts = f.split("/")
@@ -277,6 +285,7 @@ def main():
     print(f"저장 경로:  {output_dir}")
     print(f"언어 필터:  {args.languages or '전체'}")
     print(f"스레드:     {args.workers}")
+    print(f"토큰 사용:  {'예' if hf_token else '아니오'}")
     print("=" * 60)
     print()
 
@@ -286,6 +295,7 @@ def main():
             output_dir=output_dir,
             languages=args.languages,
             max_workers=args.workers,
+            token=hf_token,
         )
     else:
         result = download_full(
@@ -293,6 +303,7 @@ def main():
             output_dir=output_dir,
             languages=args.languages,
             max_workers=args.workers,
+            token=hf_token,
         )
 
     if result:

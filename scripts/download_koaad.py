@@ -52,14 +52,17 @@ except ImportError:
     sys.exit(1)
 
 
-GDRIVE_FOLDER_ID = "1RihDtMWUc5sPg5fNqJ_L015U6HMgwF2u"
-GDRIVE_FOLDER_URL = f"https://drive.google.com/drive/folders/{GDRIVE_FOLDER_ID}"
-PRETRAINED_FOLDER_URL = "https://drive.google.com/drive/folders/1YWMC64MW4HjGUX1fnBaMkMIGgAJde9Ch"
 GITHUB_REPO = "https://github.com/ldh-Hoon/KoAAD.git"
 AIHUB_URL = "https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71349"
 
-# sounds.zip 관련 — Google Drive에서 다운로드하지 않고 AIHUB 원본 사용
-SKIP_FILES = {"sounds.zip", "sounds"}
+# 다운로드할 fake 음성 파일 (Google Drive 파일 ID + 저장 파일명)
+# sounds.zip은 제외 — AIHUB real 음성 사용
+FAKE_FILES = [
+    {"id": "1AERV-X9NKz_ejQUKkodBDDtbvLp_YD7Z", "name": "Google_Cloud_TTS.zip"},
+    {"id": "1NAz89M91MApWqvoHT4xZp-xysW0dUOMt",  "name": "XTTS2.zip"},
+    {"id": "1BQ4eWU4Ge7fjsBYxoPzTZh60bZ2F1_5S",  "name": "네이버기사TTS.zip"},
+]
+
 
 DATASET_INFO = """
 KoAAD (Korean Audio Anti-spoofing Dataset)
@@ -107,91 +110,51 @@ KoAAD (Korean Audio Anti-spoofing Dataset)
 """
 
 
-def download_via_gdown(folder_id: str, output_dir: str, skip_files: set = None) -> bool:
-    """gdown으로 Google Drive 폴더 다운로드 (sounds.zip 제외)."""
+def download_fake_files(output_dir: str, fake_files: list = None) -> bool:
+    """FAKE_FILES 목록의 파일을 ID로 직접 다운로드.
+
+    폴더 전체 다운로드(download_folder) 대신 파일별 개별 다운로드를 사용해
+    sounds.zip 같은 접근 제한 파일을 처음부터 건너뜁니다.
+    """
     try:
         import gdown
     except ImportError:
-        print("gdown 패키지를 설치해주세요:")
-        print("  pip install gdown")
+        print("gdown 패키지를 설치해주세요: pip install gdown")
         return False
 
-    os.makedirs(output_dir, exist_ok=True)
-    url = f"https://drive.google.com/drive/folders/{folder_id}"
+    if fake_files is None:
+        fake_files = FAKE_FILES
 
-    print(f"Google Drive 폴더 다운로드 중 (fake 음성만)...")
-    if skip_files:
-        print(f"  건너뛸 파일: {', '.join(skip_files)}")
-    print(f"  URL: {url}")
+    os.makedirs(output_dir, exist_ok=True)
+    print(f"fake 음성 파일 {len(fake_files)}개 다운로드 중...")
     print(f"  저장: {output_dir}")
     print()
 
-    try:
-        gdown.download_folder(
-            url=url,
-            output=output_dir,
-            quiet=False,
-            use_cookies=False,
-        )
+    all_ok = True
+    for i, f in enumerate(fake_files, 1):
+        fid, fname = f["id"], f["name"]
+        dest = os.path.join(output_dir, fname)
 
-        # sounds.zip 및 관련 파일이 다운로드되었으면 삭제
-        if skip_files:
-            _cleanup_skipped_files(output_dir, skip_files)
+        if os.path.exists(dest):
+            size_mb = os.path.getsize(dest) / 1e6
+            print(f"  [{i}/{len(fake_files)}] {fname} — 이미 존재 ({size_mb:.1f} MB), 건너뜀")
+            continue
 
-        return True
-    except Exception as e:
-        print(f"\ngdown 다운로드 실패: {e}")
-        return False
+        print(f"  [{i}/{len(fake_files)}] {fname}")
+        url = f"https://drive.google.com/uc?id={fid}"
+        try:
+            result = gdown.download(url, dest, quiet=False)
+            if result:
+                size_mb = os.path.getsize(dest) / 1e6
+                print(f"    ✓ 완료 ({size_mb:.1f} MB)")
+            else:
+                print(f"    ✗ 실패: {fname}")
+                all_ok = False
+        except Exception as e:
+            print(f"    ✗ 오류: {e}")
+            all_ok = False
 
-
-def _cleanup_skipped_files(output_dir: str, skip_files: set):
-    """다운로드 후 불필요한 파일(sounds.zip 등) 삭제.
-
-    gdown은 파일 단위 필터링을 지원하지 않으므로,
-    다운로드 후 sounds.zip을 삭제하는 방식으로 처리합니다.
-    """
-    import shutil
-
-    for name in skip_files:
-        target = os.path.join(output_dir, name)
-        if os.path.isfile(target):
-            size_mb = os.path.getsize(target) / 1e6
-            os.remove(target)
-            print(f"  [삭제] {name} ({size_mb:.1f} MB) — AIHUB 원본 사용")
-        elif os.path.isdir(target):
-            size_mb = sum(
-                f.stat().st_size for f in Path(target).rglob("*") if f.is_file()
-            ) / 1e6
-            shutil.rmtree(target)
-            print(f"  [삭제] {name}/ ({size_mb:.1f} MB) — AIHUB 원본 사용")
-
-
-def download_via_gdown_cli(folder_id: str, output_dir: str, skip_files: set = None) -> bool:
-    """gdown CLI로 다운로드."""
-    url = f"https://drive.google.com/drive/folders/{folder_id}"
-    cmd = ["gdown", "--folder", url, "-O", output_dir]
-
-    print(f"gdown CLI로 다운로드 중 (fake 음성만)...")
-    if skip_files:
-        print(f"  건너뛸 파일: {', '.join(skip_files)}")
-    print(f"  명령어: {' '.join(cmd)}")
-    print()
-
-    try:
-        result = subprocess.run(cmd, check=True, text=True)
-
-        # sounds.zip 및 관련 파일 삭제
-        if skip_files:
-            _cleanup_skipped_files(output_dir, skip_files)
-
-        return True
-    except FileNotFoundError:
-        print("gdown CLI가 설치되지 않았습니다: pip install gdown")
-        return False
-    except subprocess.CalledProcessError as e:
-        print(f"gdown CLI 실패: {e}")
-        return False
-
+    return all_ok
 
 def clone_repo(output_dir: str) -> bool:
     """KoAAD GitHub 리포지토리 클론."""
@@ -383,12 +346,6 @@ def main():
         help="다운로드된 데이터셋 구조 확인",
     )
     parser.add_argument(
-        "--method",
-        choices=["gdown", "gdown-cli"],
-        default="gdown",
-        help="다운로드 방법 (기본: gdown)",
-    )
-    parser.add_argument(
         "--link-aihub",
         action="store_true",
         help="AIHUB 데이터를 KoAAD 디렉토리에 심볼릭 링크로 연결",
@@ -407,44 +364,31 @@ def main():
         print_structure(output_dir, aihub_dir)
         return
 
+    files_str = ", ".join(f["name"] for f in FAKE_FILES)
     print("=" * 60)
-    print("KoAAD 데이터셋 다운로드 (sounds.zip 제외)")
+    print("KoAAD fake 음성 다운로드 (파일 직접 지정)")
     print("=" * 60)
-    print(f"Google Drive: {GDRIVE_FOLDER_URL}")
-    print(f"Fake 저장:    {output_dir}")
-    print(f"Real (AIHUB): {aihub_dir}")
-    print(f"건너뛸 파일:  {', '.join(SKIP_FILES)}")
+    print(f"다운로드 파일: {files_str}")
+    print(f"저장:          {output_dir}")
+    print(f"Real (AIHUB):  {aihub_dir}")
     print("=" * 60)
     print()
 
-    # Google Drive 데이터 다운로드 (fake 음성만)
-    if args.method == "gdown":
-        success = download_via_gdown(GDRIVE_FOLDER_ID, output_dir, skip_files=SKIP_FILES)
-    else:
-        success = download_via_gdown_cli(GDRIVE_FOLDER_ID, output_dir, skip_files=SKIP_FILES)
+    # 파일 ID 직접 지정 방식 — sounds.zip 문제 없음
+    success = download_fake_files(output_dir)
 
     if not success:
         print()
         print("=" * 60)
-        print("자동 다운로드 실패. 대안을 시도해주세요:")
+        print("일부 파일 다운로드 실패")
         print("=" * 60)
         print()
-        print("방법 1 — gdown 재시도:")
-        print("  pip install --upgrade gdown")
-        print(f"  gdown --folder '{GDRIVE_FOLDER_URL}' -O {output_dir}")
-        print("  # 다운로드 후 sounds.zip 수동 삭제")
-        print(f"  rm -f {os.path.join(output_dir, 'sounds.zip')}")
+        print("수동 다운로드 링크:")
+        for f in FAKE_FILES:
+            url = f"https://drive.google.com/uc?id={f['id']}&export=download"
+            print(f"  {f['name']}: {url}")
         print()
-        print("방법 2 — 수동 다운로드:")
-        print(f"  1. 브라우저에서 열기: {GDRIVE_FOLDER_URL}")
-        print(f"  2. sounds.zip을 제외하고 폴더별로 다운로드")
-        print(f"  3. {output_dir}에 저장")
-        print()
-        print("방법 3 — rclone 사용:")
-        print("  rclone copy gdrive:KoAAD data/koaad --drive-shared-with-me --exclude 'sounds.zip'")
-        print()
-        print("참고: Google Drive는 대용량 폴더 다운로드 시 제한이 있을 수 있습니다.")
-        print("      파일이 많은 경우 하위 폴더별로 나누어 다운로드하세요.")
+        print(f"다운로드 후 {output_dir} 에 저장해주세요.")
 
     # GitHub 리포 클론
     if args.clone_repo:

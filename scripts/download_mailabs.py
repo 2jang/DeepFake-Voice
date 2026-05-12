@@ -2,13 +2,14 @@
 M-AILABS Speech Dataset 다운로드 스크립트
 ========================================
 - 출처: https://www.caito.de/2019/01/03/the-m-ailabs-speech-dataset/
+- 미러 서버: https://ics.tau-ceti.space/
 - 규모: ~1,000시간, 9개 언어, 16kHz mono WAV
 - 용도: 실제(bonafide) 음성 — MLAAD 딥페이크의 대응 데이터
 - 라이선스: BSD 3-Clause (상업적 사용 가능)
 - 인증: 불필요
 
 사용법:
-    # 전체 다운로드 (9개 언어, ~100GB+ 압축)
+    # 전체 다운로드 (9개 언어, ~78GB 압축)
     python scripts/download_mailabs.py --output data/mailabs
 
     # 특정 언어만 다운로드
@@ -44,18 +45,19 @@ except ImportError:
     sys.exit(1)
 
 
-BASE_URL = "http://www.caito.de/data/Training/stt_tts"
+# 제공해주신 새로운 다운로드 서버 링크로 변경
+BASE_URL = "https://ics.tau-ceti.space/data/Training/stt_tts"
 
 LANGUAGES = {
-    "de_DE": {"name": "German", "duration": "237h 22m", "size_gb_approx": 30.0},
-    "fr_FR": {"name": "French", "duration": "190h 30m", "size_gb_approx": 24.0},
-    "it_IT": {"name": "Italian", "duration": "127h 40m", "size_gb_approx": 16.0},
-    "es_ES": {"name": "Spanish", "duration": "108h 34m", "size_gb_approx": 14.0},
-    "en_US": {"name": "English (US)", "duration": "102h 7m", "size_gb_approx": 13.0},
-    "uk_UK": {"name": "Ukrainian", "duration": "87h 8m", "size_gb_approx": 11.0},
-    "pl_PL": {"name": "Polish", "duration": "53h 50m", "size_gb_approx": 7.0},
-    "ru_RU": {"name": "Russian", "duration": "46h 47m", "size_gb_approx": 6.0},
-    "en_UK": {"name": "English (UK)", "duration": "45h 35m", "size_gb_approx": 6.0},
+    "de_DE": {"name": "German", "duration": "237h 22m", "size_gb_approx": 20.0},
+    "fr_FR": {"name": "French", "duration": "190h 30m", "size_gb_approx": 15.0},
+    "it_IT": {"name": "Italian", "duration": "127h 40m", "size_gb_approx": 9.5},
+    "es_ES": {"name": "Spanish", "duration": "108h 34m", "size_gb_approx": 8.3},
+    "en_US": {"name": "English (US)", "duration": "102h 7m", "size_gb_approx": 7.5},
+    "uk_UK": {"name": "Ukrainian", "duration": "87h 8m", "size_gb_approx": 6.7},
+    "pl_PL": {"name": "Polish", "duration": "53h 50m", "size_gb_approx": 4.2},
+    "ru_RU": {"name": "Russian", "duration": "46h 47m", "size_gb_approx": 3.6},
+    "en_UK": {"name": "English (UK)", "duration": "45h 35m", "size_gb_approx": 3.5},
 }
 
 
@@ -109,7 +111,7 @@ def download_file(url: str, dest_path: str, chunk_size: int = 8192) -> bool:
 
     except requests.exceptions.ConnectionError:
         print(f"  연결 실패: {url}")
-        print("  caito.de 서버가 응답하지 않습니다. 잠시 후 재시도하세요.")
+        print("  ics.tau-ceti.space 서버가 응답하지 않습니다. 잠시 후 재시도하세요.")
         return False
     except requests.exceptions.Timeout:
         print(f"  타임아웃: {url}")
@@ -136,7 +138,7 @@ def extract_tgz(tgz_path: str, output_dir: str) -> bool:
 
 
 def check_server_available() -> bool:
-    """caito.de 서버 접근 가능 여부 확인."""
+    """서버 접근 가능 여부 확인."""
     try:
         response = requests.head(
             f"{BASE_URL}/en_UK.tgz", timeout=10, allow_redirects=True
@@ -221,17 +223,17 @@ def main():
     if args.list_languages:
         print("M-AILABS 사용 가능한 언어:")
         print()
-        print(f"{'코드':<8} {'언어':<18} {'시간':<12} {'예상 크기'}")
+        print(f"{'코드':<8} {'언어':<18} {'시간':<12} {'예상 다운로드 크기'}")
         print("-" * 55)
         total_hours = 0
         total_gb = 0
         for code, info in LANGUAGES.items():
-            print(f"{code:<8} {info['name']:<18} {info['duration']:<12} ~{info['size_gb_approx']:.0f} GB")
+            print(f"{code:<8} {info['name']:<18} {info['duration']:<12} ~{info['size_gb_approx']:.1f} GB")
             total_gb += info["size_gb_approx"]
         print("-" * 55)
-        print(f"{'합계':<8} {'9개 언어':<18} {'~1,000h':<12} ~{total_gb:.0f} GB")
+        print(f"{'합계':<8} {'9개 언어':<18} {'~1,000h':<12} ~{total_gb:.1f} GB")
         print()
-        print("URL 형식: http://www.caito.de/data/Training/stt_tts/<code>.tgz")
+        print(f"URL 형식: {BASE_URL}/<code>.tgz")
         return
 
     target_langs = args.languages if args.languages else list(LANGUAGES.keys())
@@ -254,14 +256,14 @@ def main():
     print("=" * 60)
     print(f"저장 경로:   {output_dir}")
     print(f"대상 언어:   {target_langs}")
-    print(f"예상 크기:   ~{total_size:.0f} GB (압축)")
+    print(f"예상 크기:   ~{total_size:.1f} GB (압축/다운로드 기준)")
     print(f"압축 해제:   {'예' if not args.no_extract else '아니오'}")
     print("=" * 60)
     print()
 
     print("서버 접근 확인 중...")
     if not check_server_available():
-        print("경고: caito.de 서버에 접근할 수 없습니다.")
+        print("경고: ics.tau-ceti.space 서버에 접근할 수 없습니다.")
         print("서버가 일시적으로 다운되었거나 네트워크 문제일 수 있습니다.")
         print()
         print("대안:")
@@ -279,7 +281,7 @@ def main():
         url = get_download_url(lang)
         tgz_path = os.path.join(archive_dir, f"{lang}.tgz")
 
-        print(f"[{lang}] {info['name']} ({info['duration']}, ~{info['size_gb_approx']:.0f} GB)")
+        print(f"[{lang}] {info['name']} ({info['duration']}, ~{info['size_gb_approx']:.1f} GB)")
 
         # 다운로드
         success = download_file(url, tgz_path)
