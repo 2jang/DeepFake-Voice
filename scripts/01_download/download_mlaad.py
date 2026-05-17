@@ -8,16 +8,16 @@ Multi-Language Audio Anti-Spoofing Dataset v9
 
 사용법:
     # 전체 다운로드
-    python scripts/download_mlaad.py --output data/mlaad
+    python scripts/01_download/download_mlaad.py --output data/mlaad
 
     # 한국어만 다운로드
-    python scripts/download_mlaad.py --output data/mlaad --languages ko
+    python scripts/01_download/download_mlaad.py --output data/mlaad --languages ko
 
     # 한국어 + 영어 + 일본어
-    python scripts/download_mlaad.py --output data/mlaad --languages ko en ja
+    python scripts/01_download/download_mlaad.py --output data/mlaad --languages ko en ja
 
     # tiny 버전 (테스트용)
-    python scripts/download_mlaad.py --output data/mlaad --tiny
+    python scripts/01_download/download_mlaad.py --output data/mlaad --tiny
 
 사전 준비:
     1. pip install huggingface_hub tqdm python-dotenv
@@ -219,9 +219,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
-  python scripts/download_mlaad.py --output data/mlaad --languages ko
-  python scripts/download_mlaad.py --output data/mlaad --tiny
-  python scripts/download_mlaad.py --output data/mlaad --languages ko en ja --workers 8
+  python scripts/01_download/download_mlaad.py --output data/mlaad --languages ko
+  python scripts/01_download/download_mlaad.py --output data/mlaad --tiny
+  python scripts/01_download/download_mlaad.py --output data/mlaad --languages ko en ja --workers 8
         """,
     )
     parser.add_argument(

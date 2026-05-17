@@ -10,19 +10,19 @@ M-AILABS Speech Dataset 다운로드 스크립트
 
 사용법:
     # 전체 다운로드 (9개 언어, ~78GB 압축)
-    python scripts/download_mailabs.py --output data/mailabs
+    python scripts/01_download/download_mailabs.py --output data/mailabs
 
     # 특정 언어만 다운로드
-    python scripts/download_mailabs.py --output data/mailabs --languages en_US en_UK
+    python scripts/01_download/download_mailabs.py --output data/mailabs --languages en_US en_UK
 
     # 독일어 + 프랑스어
-    python scripts/download_mailabs.py --output data/mailabs --languages de_DE fr_FR
+    python scripts/01_download/download_mailabs.py --output data/mailabs --languages de_DE fr_FR
 
     # 사용 가능한 언어 목록
-    python scripts/download_mailabs.py --list-languages
+    python scripts/01_download/download_mailabs.py --list-languages
 
     # 다운로드만 (압축 해제 안 함)
-    python scripts/download_mailabs.py --output data/mailabs --no-extract
+    python scripts/01_download/download_mailabs.py --output data/mailabs --no-extract
 
 사전 준비:
     pip install requests tqdm
@@ -185,9 +185,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
-  python scripts/download_mailabs.py --output data/mailabs --languages en_US
-  python scripts/download_mailabs.py --output data/mailabs --languages en_US de_DE fr_FR
-  python scripts/download_mailabs.py --list-languages
+  python scripts/01_download/download_mailabs.py --output data/mailabs --languages en_US
+  python scripts/01_download/download_mailabs.py --output data/mailabs --languages en_US de_DE fr_FR
+  python scripts/01_download/download_mailabs.py --list-languages
         """,
     )
     parser.add_argument(
