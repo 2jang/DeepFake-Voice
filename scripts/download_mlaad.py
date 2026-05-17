@@ -22,7 +22,7 @@ Multi-Language Audio Anti-Spoofing Dataset v9
 사전 준비:
     1. pip install huggingface_hub tqdm python-dotenv
     2. 스크립트 실행 경로에 .env 파일을 만들고 아래 내용을 작성합니다:
-        HF_TOKEN=본인의_허깅페이스_토큰
+       HF_TOKEN=본인의_허깅페이스_토큰
 """
 
 import argparse
@@ -182,29 +182,16 @@ def print_dataset_info(output_dir: str):
         if not lang_dir.is_dir():
             continue
         lang = lang_dir.name
-        
-        # WAV, MP3, JSON 파일 개별 탐색
         wav_files = list(lang_dir.rglob("*.wav"))
-        mp3_files = list(lang_dir.rglob("*.mp3"))
-        json_files = list(lang_dir.rglob("*.json"))
-        
-        all_target_files = wav_files + mp3_files + json_files
-        
-        lang_size = sum(f.stat().st_size for f in all_target_files)
-        lang_stats[lang] = {
-            "total_files": len(all_target_files),
-            "wav": len(wav_files),
-            "mp3": len(mp3_files),
-            "json": len(json_files),
-            "size_mb": lang_size / 1e6
-        }
-        total_files += len(all_target_files)
+        lang_size = sum(f.stat().st_size for f in wav_files)
+        lang_stats[lang] = {"files": len(wav_files), "size_mb": lang_size / 1e6}
+        total_files += len(wav_files)
         total_size += lang_size
 
     for lang, stats in lang_stats.items():
-        print(f"  {lang}: {stats['total_files']:,}개 파일 (WAV: {stats['wav']:,}, MP3: {stats['mp3']:,}, JSON: {stats['json']:,}), {stats['size_mb']:.1f} MB")
+        print(f"  {lang}: {stats['files']:,}개 파일, {stats['size_mb']:.1f} MB")
 
-    print(f"\n총 {len(lang_stats)}개 언어, {total_files:,}개 대상 파일, {total_size / 1e9:.2f} GB")
+    print(f"\n총 {len(lang_stats)}개 언어, {total_files:,}개 파일, {total_size / 1e9:.2f} GB")
 
     # meta.csv 파일 수 확인
     meta_files = list(fake_dir.rglob("meta.csv"))
@@ -284,10 +271,8 @@ def main():
                 langs.add(parts[1])
         print(f"\n사용 가능한 언어 ({len(langs)}개):")
         for lang in sorted(langs):
-            count_wav = sum(1 for f in all_files if f.startswith(f"fake/{lang}/") and f.endswith(".wav"))
-            count_mp3 = sum(1 for f in all_files if f.startswith(f"fake/{lang}/") and f.endswith(".mp3"))
-            count_json = sum(1 for f in all_files if f.startswith(f"fake/{lang}/") and f.endswith(".json"))
-            print(f"  {lang}: ~{count_wav}개 WAV, ~{count_mp3}개 MP3, ~{count_json}개 JSON")
+            count = sum(1 for f in all_files if f.startswith(f"fake/{lang}/") and f.endswith(".wav"))
+            print(f"  {lang}: ~{count}개 WAV")
         return
 
     output_dir = os.path.abspath(args.output)
