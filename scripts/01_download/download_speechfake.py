@@ -15,19 +15,19 @@ SpeechFake 데이터셋 다운로드 스크립트
 
 사용법:
     # ModelScope에서 전체 다운로드
-    python scripts/download_speechfake.py --output data/speechfake --method modelscope
+    python scripts/01_download/download_speechfake.py --output data/speechfake --method modelscope
 
     # HuggingFace에서 전체 다운로드
-    python scripts/download_speechfake.py --output data/speechfake --method huggingface
+    python scripts/01_download/download_speechfake.py --output data/speechfake --method huggingface
 
     # Git LFS 클론 (ModelScope)
-    python scripts/download_speechfake.py --output data/speechfake --method git
+    python scripts/01_download/download_speechfake.py --output data/speechfake --method git
 
     # 다운로드 후 한국어만 추출
-    python scripts/download_speechfake.py --output data/speechfake --extract-languages ko
+    python scripts/01_download/download_speechfake.py --output data/speechfake --extract-languages ko
 
     # 데이터셋 정보만 확인
-    python scripts/download_speechfake.py --info
+    python scripts/01_download/download_speechfake.py --info
 
 사전 준비:
     # ModelScope 방식
@@ -292,16 +292,16 @@ def main():
         epilog="""
 예시:
   # ModelScope SDK (권장)
-  python scripts/download_speechfake.py -o data/speechfake --method modelscope
+  python scripts/01_download/download_speechfake.py -o data/speechfake --method modelscope
 
   # HuggingFace
-  python scripts/download_speechfake.py -o data/speechfake --method huggingface
+  python scripts/01_download/download_speechfake.py -o data/speechfake --method huggingface
 
   # Git LFS 클론
-  python scripts/download_speechfake.py -o data/speechfake --method git
+  python scripts/01_download/download_speechfake.py -o data/speechfake --method git
 
   # 한국어 추출
-  python scripts/download_speechfake.py -o data/speechfake --extract-languages ko
+  python scripts/01_download/download_speechfake.py -o data/speechfake --extract-languages ko
         """,
     )
     parser.add_argument(
@@ -390,7 +390,7 @@ def main():
         print("방법 2 — HuggingFace:")
         print(f"  pip install huggingface_hub")
         print(f"  huggingface-cli login")
-        print(f"  python scripts/download_speechfake.py -o {output_dir} --method huggingface")
+        print(f"  python scripts/01_download/download_speechfake.py -o {output_dir} --method huggingface")
         print()
         print("방법 3 — Git LFS:")
         print(f"  git lfs install")

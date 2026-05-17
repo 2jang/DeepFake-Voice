@@ -15,19 +15,19 @@ MUSAN (A Music, Speech, and Noise Corpus) 다운로드 스크립트
 
 사용법:
     # 전체 다운로드 (speech + music + noise)
-    python scripts/download_musan.py --output data/musan
+    python scripts/01_download/download_musan.py --output data/musan
 
     # noise만 다운로드 (증강 목적이면 이것만으로 충분)
-    python scripts/download_musan.py --output data/musan --categories noise
+    python scripts/01_download/download_musan.py --output data/musan --categories noise
 
     # noise + music
-    python scripts/download_musan.py --output data/musan --categories noise music
+    python scripts/01_download/download_musan.py --output data/musan --categories noise music
 
     # EU 미러 사용 (아시아에서 느릴 경우)
-    python scripts/download_musan.py --output data/musan --mirror eu
+    python scripts/01_download/download_musan.py --output data/musan --mirror eu
 
     # 데이터셋 정보만 확인
-    python scripts/download_musan.py --info
+    python scripts/01_download/download_musan.py --info
 
 사전 준비:
     pip install requests tqdm
@@ -248,11 +248,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
-  python scripts/download_musan.py --output data/musan
-  python scripts/download_musan.py --output data/musan --categories noise
-  python scripts/download_musan.py --output data/musan --categories noise music
-  python scripts/download_musan.py --output data/musan --mirror eu
-  python scripts/download_musan.py --info
+  python scripts/01_download/download_musan.py --output data/musan
+  python scripts/01_download/download_musan.py --output data/musan --categories noise
+  python scripts/01_download/download_musan.py --output data/musan --categories noise music
+  python scripts/01_download/download_musan.py --output data/musan --mirror eu
+  python scripts/01_download/download_musan.py --info
         """,
     )
     parser.add_argument(
@@ -345,7 +345,7 @@ def main():
         print()
         print("다운로드 실패. 다른 미러를 시도해주세요:")
         for name, mirror_url in MIRRORS.items():
-            print(f"  python scripts/download_musan.py -o {output_dir} --mirror {name}")
+            print(f"  python scripts/01_download/download_musan.py -o {output_dir} --mirror {name}")
         print()
         print("또는 직접 다운로드:")
         print(f"  wget -c {url} -O {tar_path}")

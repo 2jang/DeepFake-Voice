@@ -21,19 +21,19 @@ KoAAD (Korean Audio Anti-spoofing Dataset) 다운로드 스크립트
 
 사용법:
     # KoAAD Google Drive 폴더 다운로드 (fake 음성만, sounds.zip 제외)
-    python scripts/download_koaad.py --output data/koaad
+    python scripts/01_download/download_koaad.py --output data/koaad
 
     # AIHUB 데이터 경로 지정 (real 음성)
-    python scripts/download_koaad.py --output data/koaad --aihub-dir data/aihub
+    python scripts/01_download/download_koaad.py --output data/koaad --aihub-dir data/aihub
 
     # GitHub 코드도 함께 클론
-    python scripts/download_koaad.py --output data/koaad --clone-repo
+    python scripts/01_download/download_koaad.py --output data/koaad --clone-repo
 
     # 데이터셋 정보만 확인
-    python scripts/download_koaad.py --info
+    python scripts/01_download/download_koaad.py --info
 
     # 다운로드 후 구조 확인
-    python scripts/download_koaad.py --output data/koaad --structure
+    python scripts/01_download/download_koaad.py --output data/koaad --structure
 
 사전 준비:
     pip install gdown tqdm
@@ -303,13 +303,13 @@ def main():
         epilog="""
 예시:
   # fake 음성만 다운로드 (sounds.zip 건너뜀)
-  python scripts/download_koaad.py --output data/koaad
+  python scripts/01_download/download_koaad.py --output data/koaad
 
   # AIHUB real 음성 경로 지정 + 심볼릭 링크 생성
-  python scripts/download_koaad.py --output data/koaad --aihub-dir data/aihub
+  python scripts/01_download/download_koaad.py --output data/koaad --aihub-dir data/aihub
 
   # 정보 확인
-  python scripts/download_koaad.py --info
+  python scripts/01_download/download_koaad.py --info
 
 참고:
   - sounds.zip은 다운로드하지 않습니다 (AIHUB 원본 데이터 사용)
@@ -426,7 +426,7 @@ def main():
         print(f"    5. {aihub_dir} 경로에 저장")
         print()
         print("  다운로드 후 다시 실행하여 확인:")
-        print(f"    python scripts/download_koaad.py --structure --aihub-dir {args.aihub_dir}")
+        print(f"    python scripts/01_download/download_koaad.py --structure --aihub-dir {args.aihub_dir}")
 
 
 if __name__ == "__main__":

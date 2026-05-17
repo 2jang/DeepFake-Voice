@@ -2,11 +2,11 @@
 """data/ 폴더의 모든 하위 디렉토리와 특정 확장자(wav, mp3, json)를 제외한 모든 파일을 표시.
 
 사용법:
-    python scripts/list_data.py                      # 기본 data/ 경로
-    python scripts/list_data.py path/to/dir          # 특정 경로 지정
-    python scripts/list_data.py --tree               # tree 형태로 표시
-    python scripts/list_data.py --exclude wav flac   # 제외할 확장자 수동 지정
-    python scripts/list_data.py -o output.txt        # 결과를 txt 파일로 저장
+    python scripts/utils/list_data.py                      # 기본 data/ 경로
+    python scripts/utils/list_data.py path/to/dir          # 특정 경로 지정
+    python scripts/utils/list_data.py --tree               # tree 형태로 표시
+    python scripts/utils/list_data.py --exclude wav flac   # 제외할 확장자 수동 지정
+    python scripts/utils/list_data.py -o output.txt        # 결과를 txt 파일로 저장
 """
 
 from __future__ import annotations
@@ -133,7 +133,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    target = Path(args.target) if args.target else Path(__file__).resolve().parent.parent / "data"
+    target = Path(args.target) if args.target else Path(__file__).resolve().parent.parent.parent / "data"
 
     if not target.exists():
         print(f"오류: 디렉토리가 존재하지 않습니다 — {target}", file=sys.stderr)
