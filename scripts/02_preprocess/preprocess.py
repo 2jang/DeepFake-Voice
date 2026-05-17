@@ -34,6 +34,16 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 logger = logging.getLogger("preprocess")
 
+try:
+    import soundfile  # noqa: F401
+    import librosa  # noqa: F401
+    import numpy  # noqa: F401
+    from tqdm import tqdm
+    HAS_AUDIO_LIBS = True
+except ImportError:
+    HAS_AUDIO_LIBS = False
+    tqdm = None
+
 # ════════════════════════════════════════════════════════════
 #  경로 설정 — 실행 환경에 맞게 수정하세요
 # ════════════════════════════════════════════════════════════
