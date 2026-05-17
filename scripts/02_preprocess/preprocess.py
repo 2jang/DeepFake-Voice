@@ -385,6 +385,11 @@ def _process_wrapper(args):
     return process_single(*args)
 
 
+def _process_batch(args):
+    rows, output_root = args
+    return [process_single(row, output_root) for row in rows]
+
+
 # ════════════════════════════════════════════════════════════
 #  CLI 명령어
 # ════════════════════════════════════════════════════════════
@@ -467,22 +472,31 @@ def cmd_process(args: argparse.Namespace) -> int:
     print(f"  병렬 워커: {args.workers}")
 
     results = []
-    work_items = [(row, output_root) for row in rows]
+    batch_size = max(1, len(rows) // (args.workers * 4))
+    batch_size = min(batch_size, 200)
+    batches = []
+    for i in range(0, len(rows), batch_size):
+        batches.append((rows[i:i + batch_size], output_root))
+
+    print(f"  배치 크기: {batch_size} (총 {len(batches)}개 배치)")
 
     with ProcessPoolExecutor(max_workers=args.workers) as executor:
-        futures = {executor.submit(_process_wrapper, item): i for i, item in enumerate(work_items)}
-        with tqdm(total=len(futures), desc="처리 중", unit="file") as pbar:
+        futures = {executor.submit(_process_batch, batch): i for i, batch in enumerate(batches)}
+        with tqdm(total=len(rows), desc="처리 중", unit="file") as pbar:
             for future in as_completed(futures):
                 try:
-                    result = future.result()
-                    results.append(result)
+                    batch_results = future.result()
+                    results.extend(batch_results)
+                    pbar.update(len(batch_results))
                 except Exception as e:
                     idx = futures[future]
-                    row = rows[idx].copy()
-                    row["quality_ok"] = "False"
-                    row["quality_reason"] = f"worker_error:{e}"
-                    results.append(row)
-                pbar.update(1)
+                    batch_rows = batches[idx][0]
+                    for row in batch_rows:
+                        failed = row.copy()
+                        failed["quality_ok"] = "False"
+                        failed["quality_reason"] = f"worker_error:{e}"
+                        results.append(failed)
+                    pbar.update(len(batch_rows))
 
     with open(processed_csv, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
