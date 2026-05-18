@@ -438,25 +438,97 @@ def cmd_scan(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_sample(args: argparse.Namespace) -> int:
+    """raw_metadata.csv에서 조합별 필요량 기반 샘플링 → sampled_metadata.csv"""
+    import pandas as pd
+
+    meta_dir = Path(args.meta_dir) if args.meta_dir else METADATA_DIR
+    raw_csv = meta_dir / "raw_metadata.csv"
+    if not raw_csv.exists():
+        print("오류: raw_metadata.csv가 없습니다. 먼저 scan을 실행하세요.")
+        return 1
+
+    seed = args.seed
+    buffer = args.buffer
+
+    df = pd.read_csv(raw_csv)
+    print(f"\n{'='*60}")
+    print(f"  스마트 샘플링")
+    print(f"  원본: {len(df):,}개  (real={len(df[df['label']=='real']):,}, fake={len(df[df['label']=='fake']):,})")
+    print(f"  버퍼: {buffer:.0%}")
+    print(f"{'='*60}")
+
+    # 조합별 fake 총량 계산 → real 캡 결정
+    c2_fake = len(df[df["dataset"] == "mlaad"]) + \
+              len(df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")])
+    c3_fake = len(df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")]) + \
+              len(df[(df["dataset"] == "koaad") & (df["label"] == "fake")])
+
+    # mailabs: C2에서 가장 많이 필요 (C2 fake 기준)
+    # koaad real (aihub): C3에서 필요 (C3 fake 기준)
+    caps = {
+        ("mailabs", "real"): int(c2_fake * buffer),
+        ("koaad", "real"): int(c3_fake * buffer),
+    }
+
+    print(f"\n  조합별 fake 규모:")
+    print(f"    C2 fake: {c2_fake:,} → mailabs real 캡: {caps[('mailabs', 'real')]:,}")
+    print(f"    C3 fake: {c3_fake:,} → koaad real 캡: {caps[('koaad', 'real')]:,}")
+
+    # 샘플링 실행
+    sampled_parts = []
+    print(f"\n  샘플링 결과:")
+    for (ds, label), group in df.groupby(["dataset", "label"]):
+        cap = caps.get((ds, label))
+        if cap and len(group) > cap:
+            sampled = group.sample(n=cap, random_state=seed)
+            print(f"    {ds:20s} {label:5s}: {len(group):>10,} → {len(sampled):>10,}")
+        else:
+            sampled = group
+            print(f"    {ds:20s} {label:5s}: {len(group):>10,}    (유지)")
+        sampled_parts.append(sampled)
+
+    result = pd.concat(sampled_parts).sample(frac=1, random_state=seed)
+
+    out_csv = meta_dir / "sampled_metadata.csv"
+    result.to_csv(out_csv, index=False)
+
+    n_real = len(result[result["label"] == "real"])
+    n_fake = len(result[result["label"] == "fake"])
+    saved = len(df) - len(result)
+
+    print(f"\n  샘플링 후: {len(result):,}개 (real={n_real:,}, fake={n_fake:,})")
+    print(f"  절감: {saved:,}개 ({saved/len(df):.0%})")
+    print(f"  저장: {out_csv}")
+    print(f"{'='*60}\n")
+
+    return 0
+
+
 def cmd_process(args: argparse.Namespace) -> int:
-    """raw_metadata.csv를 읽고 리샘플링 + 품질 검증 수행."""
+    """sampled/raw_metadata.csv를 읽고 리샘플링 + 품질 검증 수행."""
     if not HAS_AUDIO_LIBS:
         logger.error("필요한 패키지를 설치하세요: pip install soundfile librosa numpy tqdm")
         return 1
 
     meta_dir = Path(args.meta_dir) if args.meta_dir else METADATA_DIR
     output_root = Path(args.output_root) if args.output_root else OUTPUT_ROOT
-    raw_csv = meta_dir / "raw_metadata.csv"
+
+    input_csv = meta_dir / "sampled_metadata.csv"
+    if not input_csv.exists():
+        input_csv = meta_dir / "raw_metadata.csv"
     processed_csv = meta_dir / "processed_metadata.csv"
 
-    if not raw_csv.exists():
-        logger.error("raw_metadata.csv가 없습니다. 먼저 scan을 실행하세요.")
+    if not input_csv.exists():
+        logger.error("메타데이터 CSV가 없습니다. 먼저 scan (→ sample)을 실행하세요.")
         return 1
+
+    print(f"\n  입력: {input_csv.name}")
 
     output_root.mkdir(parents=True, exist_ok=True)
 
     rows = []
-    with open(raw_csv, "r", encoding="utf-8") as f:
+    with open(input_csv, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         rows = list(reader)
 
@@ -651,6 +723,12 @@ def main() -> int:
     p_scan.add_argument("--data-root", default=None, help=f"data/ 경로 (기본: {DATA_ROOT})")
     p_scan.add_argument("--meta-dir", default=None, help=f"메타데이터 출력 경로 (기본: {METADATA_DIR})")
 
+    # sample
+    p_sample = sub.add_parser("sample", help="조합별 필요량 기반 샘플링 → sampled_metadata.csv")
+    p_sample.add_argument("--meta-dir", default=None, help=f"메타데이터 경로 (기본: {METADATA_DIR})")
+    p_sample.add_argument("--seed", type=int, default=SEED, help="랜덤 시드 (기본: 42)")
+    p_sample.add_argument("--buffer", type=float, default=1.3, help="버퍼 비율 (기본: 1.3 = 30%%)")
+
     # process
     p_proc = sub.add_parser("process", help="리샘플링 + 품질 검증 → processed_metadata.csv")
     p_proc.add_argument("--workers", type=int, default=4, help="병렬 워커 수 (기본: 4)")
@@ -671,6 +749,8 @@ def main() -> int:
 
     if args.command == "scan":
         return cmd_scan(args)
+    elif args.command == "sample":
+        return cmd_sample(args)
     elif args.command == "process":
         return cmd_process(args)
     elif args.command == "report":
