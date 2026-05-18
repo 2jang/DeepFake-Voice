@@ -118,20 +118,22 @@ def build_c1(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_c2(df: pd.DataFrame) -> pd.DataFrame:
-    """C2: MLAAD v9 (전체) + M-AILABS + SpeechFake-MD ko — 다국어+한국어."""
+    """C2: MLAAD v9 (전체) + M-AILABS + SpeechFake ko (MD+Real) — 다국어+한국어."""
     mlaad = df[df["dataset"] == "mlaad"]
     mailabs = df[df["dataset"] == "mailabs"]
     sf_md_ko = df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")]
+    sf_real_ko = df[(df["dataset"] == "speechfake-real") & (df["language"] == "ko")]
 
-    return pd.concat([mlaad, mailabs, sf_md_ko])
+    return pd.concat([mlaad, mailabs, sf_md_ko, sf_real_ko])
 
 
 def build_c3(df: pd.DataFrame) -> pd.DataFrame:
-    """C3: SpeechFake-MD ko + KoAAD — 한국어 only."""
+    """C3: SpeechFake ko (MD+Real) + KoAAD — 한국어 only."""
     sf_md_ko = df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")]
+    sf_real_ko = df[(df["dataset"] == "speechfake-real") & (df["language"] == "ko")]
     koaad = df[df["dataset"] == "koaad"]
 
-    return pd.concat([sf_md_ko, koaad])
+    return pd.concat([sf_md_ko, sf_real_ko, koaad])
 
 
 # ════════════════════════════════════════════════════════════
@@ -139,15 +141,15 @@ def build_c3(df: pd.DataFrame) -> pd.DataFrame:
 # ════════════════════════════════════════════════════════════
 
 def build_t1(df: pd.DataFrame, seed: int) -> pd.DataFrame:
-    """T1: SpeechFake-MD ko test split — 한국어 기본 평가."""
-    sf_md_ko = df[
-        (df["dataset"] == "speechfake-md") & (df["language"] == "ko")
+    """T1: SpeechFake ko (MD+Real) test split — 한국어 기본 평가."""
+    sf_ko = df[
+        (df["dataset"].isin(["speechfake-md", "speechfake-real"])) & (df["language"] == "ko")
     ]
-    if len(sf_md_ko) == 0:
-        print("    [경고] SpeechFake-MD ko 데이터가 없습니다.")
+    if len(sf_ko) == 0:
+        print("    [경고] SpeechFake ko 데이터가 없습니다.")
         return pd.DataFrame(columns=df.columns)
 
-    _, _, test = speaker_disjoint_split(sf_md_ko, 0.6, 0.2, seed)
+    _, _, test = speaker_disjoint_split(sf_ko, 0.6, 0.2, seed)
     return test
 
 
