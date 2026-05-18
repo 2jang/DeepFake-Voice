@@ -6,7 +6,7 @@
 데이터셋 (연구계획서 v5):
     - MLAAD v9: 다국어 딥페이크 (data/mlaad/)
     - M-AILABS: 다국어 실제 음성 (data/mailabs/)
-    - SpeechFake-MD ko: 한국어 딥페이크+실제 (data/speechfake-md/)
+    - SpeechFake: 한국어 딥페이크+실제 (data/speechfake/MD/, data/speechfake/Real/)
     - KoAAD: 한국어 딥페이크+실제 (data/koaad/)
 
 사용법:
@@ -170,35 +170,59 @@ def scan_mlaad(data_root: Path) -> Iterator[AudioMeta]:
         )
 
 
-def scan_speechfake_md(data_root: Path) -> Iterator[AudioMeta]:
-    """data/speechfake-md/{tts_system}/{lang}[/{voice}]/*.wav
-    한국어 부분만 사용 (연구계획서 v5)."""
-    md_root = data_root / "speechfake-md"
-    if not md_root.exists():
-        logger.warning("SpeechFake-MD 경로 없음: %s", md_root)
+def scan_speechfake(data_root: Path) -> Iterator[AudioMeta]:
+    """data/speechfake/MD/{tts_system}/{lang}/*.wav — fake
+    data/speechfake/Real/{corpus}/{lang}/**/*.wav — real"""
+    sf_root = data_root / "speechfake"
+    if not sf_root.exists():
+        logger.warning("SpeechFake 경로 없음: %s", sf_root)
         return
 
-    for f in _find_audio(md_root):
-        parts = f.relative_to(md_root).parts
-        tts_system = parts[0] if len(parts) > 1 else "unknown"
+    md_root = sf_root / "MD"
+    if md_root.exists():
+        for f in _find_audio(md_root):
+            parts = f.relative_to(md_root).parts
+            tts_system = parts[0] if len(parts) > 1 else "unknown"
 
-        raw_lang = parts[1] if len(parts) > 2 else "unknown"
-        lang = raw_lang.split("_")[-1] if "_" in raw_lang else raw_lang
+            raw_lang = parts[1] if len(parts) > 2 else "unknown"
+            lang = raw_lang.split("-")[0] if "-" in raw_lang else raw_lang
 
-        if len(parts) > 3:
-            voice = parts[2]
-            speaker_id = f"sfmd_{tts_system}_{voice}"
-        else:
-            speaker_id = f"sfmd_{tts_system}_{lang}"
+            if len(parts) > 3:
+                speaker_id = f"sfmd_{tts_system}_{parts[2]}"
+            else:
+                speaker_id = f"sfmd_{tts_system}_{lang}"
 
-        yield AudioMeta(
-            file_path=str(f),
-            dataset="speechfake-md",
-            label="fake",
-            language=lang,
-            speaker_id=speaker_id,
-            tts_type=tts_system,
-        )
+            yield AudioMeta(
+                file_path=str(f),
+                dataset="speechfake-md",
+                label="fake",
+                language=lang,
+                speaker_id=speaker_id,
+                tts_type=tts_system,
+            )
+
+    real_root = sf_root / "Real"
+    if real_root.exists():
+        for f in _find_audio(real_root):
+            parts = f.relative_to(real_root).parts
+            corpus = parts[0] if parts else "unknown"
+
+            lang = "unknown"
+            for p in parts:
+                if len(p) == 2 or (len(p) == 5 and p[2] == "_"):
+                    lang = p[:2]
+                    break
+
+            speaker_id = f"sfreal_{corpus}_{f.stem}"
+
+            yield AudioMeta(
+                file_path=str(f),
+                dataset="speechfake-real",
+                label="real",
+                language=lang,
+                speaker_id=speaker_id,
+                tts_type="none",
+            )
 
 
 def scan_koaad(data_root: Path) -> Iterator[AudioMeta]:
@@ -209,24 +233,27 @@ def scan_koaad(data_root: Path) -> Iterator[AudioMeta]:
         logger.warning("KoAAD 경로 없음: %s", koaad_root)
         return
 
+    KOAAD_LABEL_MAP = {
+        "google_cloud_tts": "fake",
+        "xtts2": "fake",
+        "naver_news": "fake",
+        "aihub": "real",
+    }
+
     for f in _find_audio(koaad_root):
         parts = f.relative_to(koaad_root).parts
-        parts_lower = [p.lower() for p in parts]
+        folder = parts[0] if parts else ""
 
-        if any("fake" in p or "spoof" in p or "synthetic" in p for p in parts_lower):
-            label = "fake"
-        elif any("real" in p or "bonafide" in p or "genuine" in p for p in parts_lower):
-            label = "real"
-        else:
-            label = "unknown"
+        label = KOAAD_LABEL_MAP.get(folder, "unknown")
+        if label == "unknown":
+            parts_lower = [p.lower() for p in parts]
+            if any(k in p for p in parts_lower for k in ("fake", "spoof", "synthetic", "tts")):
+                label = "fake"
+            elif any(k in p for p in parts_lower for k in ("real", "bonafide", "genuine", "news")):
+                label = "real"
 
-        speaker_id = f"koaad_{f.stem}"
-        for p in parts:
-            if p not in ("real", "fake", "bonafide", "spoof", "synthetic", "genuine"):
-                speaker_id = f"koaad_{p}"
-                break
-
-        tts_type = "none" if label == "real" else "unknown"
+        speaker_id = f"koaad_{folder}" if folder else f"koaad_{f.stem}"
+        tts_type = folder if label == "fake" else "none"
 
         yield AudioMeta(
             file_path=str(f),
@@ -361,7 +388,7 @@ def cmd_scan(args: argparse.Namespace) -> int:
     scanners = [
         ("MLAAD v9 (다국어 가짜)", scan_mlaad, (data_root,)),
         ("M-AILABS (다국어 실제)", scan_mailabs, (data_root,)),
-        ("SpeechFake-MD (한국어 가짜)", scan_speechfake_md, (data_root,)),
+        ("SpeechFake (한국어 가짜+실제)", scan_speechfake, (data_root,)),
         ("KoAAD (한국어 실제+가짜)", scan_koaad, (data_root,)),
     ]
 
@@ -551,18 +578,31 @@ def _print_scan_summary(csv_path: Path) -> None:
             ds = row["dataset"]
             label = row["label"]
             if ds not in counts:
-                counts[ds] = {"real": 0, "fake": 0}
-            counts[ds][label] += 1
+                counts[ds] = {"real": 0, "fake": 0, "unknown": 0}
+            if label in counts[ds]:
+                counts[ds][label] += 1
+            else:
+                counts[ds]["unknown"] += 1
 
     print("\n  데이터셋별 분포:")
     total_real = 0
     total_fake = 0
+    total_unknown = 0
     for ds in sorted(counts):
-        r, fk = counts[ds]["real"], counts[ds]["fake"]
+        r = counts[ds]["real"]
+        fk = counts[ds]["fake"]
+        unk = counts[ds]["unknown"]
         total_real += r
         total_fake += fk
-        print(f"    {ds:20s}  real={r:>10,}  fake={fk:>10,}")
-    print(f"    {'합계':20s}  real={total_real:>10,}  fake={total_fake:>10,}")
+        total_unknown += unk
+        line = f"    {ds:20s}  real={r:>10,}  fake={fk:>10,}"
+        if unk > 0:
+            line += f"  unknown={unk:>10,}"
+        print(line)
+    line = f"    {'합계':20s}  real={total_real:>10,}  fake={total_fake:>10,}"
+    if total_unknown > 0:
+        line += f"  unknown={total_unknown:>10,}"
+    print(line)
 
 
 # ════════════════════════════════════════════════════════════
