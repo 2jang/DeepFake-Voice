@@ -63,6 +63,7 @@ METADATA_DIR = Path(r"metadata")
 # ════════════════════════════════════════════════════════════
 
 TARGET_SR = 16_000
+SEED = 42
 AUDIO_EXTENSIONS = {".wav", ".mp3", ".flac", ".ogg", ".m4a"}
 
 SILENCE_THRESHOLD_RMS = 0.005
