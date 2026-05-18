@@ -28,7 +28,7 @@ def run_cmd(cmd: list[str]) -> bool:
 
 def upload_manifests() -> None:
     print("\n=== Uploading manifests ===")
-    run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests", "--force"])
+    run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests"])
 
 
 def upload_dataset(dataset: str, processed_root: Path) -> None:
@@ -48,7 +48,7 @@ def upload_dataset(dataset: str, processed_root: Path) -> None:
         print(f"  [{i}/{len(subdirs)}] {speaker_dir.name}")
         ok = run_cmd([
             "modal", "volume", "put", VOLUME,
-            str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
+            str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}",
         ])
         if not ok:
             print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
