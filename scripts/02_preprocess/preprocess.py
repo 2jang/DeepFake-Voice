@@ -7,7 +7,7 @@
     - MLAAD v9: 다국어 딥페이크 (data/mlaad/)
     - M-AILABS: 다국어 실제 음성 (data/mailabs/)
     - SpeechFake: 한국어 딥페이크+실제 (data/speechfake/MD/, data/speechfake/Real/)
-    - KoAAD: 한국어 딥페이크+실제 (data/koaad/)
+    - KoAAD: 한국어 딥페이크 (data/koaad/) + 실제 (data/aihub/)
 
 사용법:
     # 1단계: 스캔 — 메타데이터 CSV 생성 (오디오 처리 없음, 빠름)
@@ -233,35 +233,49 @@ def scan_koaad(data_root: Path) -> Iterator[AudioMeta]:
         logger.warning("KoAAD 경로 없음: %s", koaad_root)
         return
 
-    KOAAD_LABEL_MAP = {
-        "google_cloud_tts": "fake",
-        "xtts2": "fake",
-        "naver_news": "fake",
-        "aihub": "real",
-    }
-
     for f in _find_audio(koaad_root):
         parts = f.relative_to(koaad_root).parts
         folder = parts[0] if parts else ""
 
-        label = KOAAD_LABEL_MAP.get(folder, "unknown")
-        if label == "unknown":
-            parts_lower = [p.lower() for p in parts]
-            if any(k in p for p in parts_lower for k in ("fake", "spoof", "synthetic", "tts")):
-                label = "fake"
-            elif any(k in p for p in parts_lower for k in ("real", "bonafide", "genuine", "news")):
-                label = "real"
-
         speaker_id = f"koaad_{folder}" if folder else f"koaad_{f.stem}"
-        tts_type = folder if label == "fake" else "none"
 
         yield AudioMeta(
             file_path=str(f),
             dataset="koaad",
-            label=label,
+            label="fake",
             language="ko",
             speaker_id=speaker_id,
-            tts_type=tts_type,
+            tts_type=folder or "unknown",
+        )
+
+
+def scan_aihub(data_root: Path) -> Iterator[AudioMeta]:
+    """data/aihub/Training/01.원천데이터/TS_{style}_{id}/*.wav
+    data/aihub/Validation/01.원천데이터/VS_{style}_{id}/*.wav
+    KoAAD의 real 파트 — 한국어 실제 음성."""
+    aihub_root = data_root / "aihub"
+    if not aihub_root.exists():
+        logger.warning("AIHub 경로 없음: %s", aihub_root)
+        return
+
+    for f in _find_audio(aihub_root):
+        parts = f.relative_to(aihub_root).parts
+
+        speaker_folder = ""
+        for p in parts:
+            if p.startswith(("TS_", "VS_")):
+                speaker_folder = p
+                break
+
+        speaker_id = f"koaad_aihub_{speaker_folder}" if speaker_folder else f"koaad_aihub_{f.stem}"
+
+        yield AudioMeta(
+            file_path=str(f),
+            dataset="koaad",
+            label="real",
+            language="ko",
+            speaker_id=speaker_id,
+            tts_type="none",
         )
 
 
@@ -389,7 +403,8 @@ def cmd_scan(args: argparse.Namespace) -> int:
         ("MLAAD v9 (다국어 가짜)", scan_mlaad, (data_root,)),
         ("M-AILABS (다국어 실제)", scan_mailabs, (data_root,)),
         ("SpeechFake (한국어 가짜+실제)", scan_speechfake, (data_root,)),
-        ("KoAAD (한국어 실제+가짜)", scan_koaad, (data_root,)),
+        ("KoAAD (한국어 가짜)", scan_koaad, (data_root,)),
+        ("AIHub (한국어 실제)", scan_aihub, (data_root,)),
     ]
 
     total = 0
