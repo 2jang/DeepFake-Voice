@@ -259,12 +259,10 @@ def main() -> int:
     save_manifest(t3, output_dir / "T3_mlaad_test.csv", "T3 (MLAAD test, ko제외)")
 
     eval_indices = set(t1.index) | set(t2.index) | set(t3.index)
-    eval_speakers = set(t1["speaker_id"]) | set(t2["speaker_id"]) | set(t3["speaker_id"])
 
     df_train_pool = df[~df.index.isin(eval_indices)]
-    df_train_pool = df_train_pool[~df_train_pool["speaker_id"].isin(eval_speakers)]
 
-    print(f"\n  평가셋 화자 제외 후 학습 풀: {len(df_train_pool):,}개")
+    print(f"\n  평가셋 파일 제외 후 학습 풀: {len(df_train_pool):,}개")
 
     # ── 학습 조합 (C1/C2/C3) ──
     print(f"\n  ── 학습 조합 생성 (C1/C2/C3) ──")
