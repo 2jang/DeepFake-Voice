@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import argparse
 import subprocess
-import sys
 from pathlib import Path
 
 DATASETS = ["koaad", "mailabs", "mlaad", "speechfake-md", "speechfake-real"]
@@ -29,7 +28,7 @@ def run_cmd(cmd: list[str]) -> bool:
 
 def upload_manifests() -> None:
     print("\n=== Uploading manifests ===")
-    run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests"])
+    run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests", "--force"])
 
 
 def upload_dataset(dataset: str, processed_root: Path) -> None:
@@ -38,20 +37,29 @@ def upload_dataset(dataset: str, processed_root: Path) -> None:
         print(f"  Skip {dataset} (not found: {dataset_dir})")
         return
 
-    subdirs = sorted([d for d in dataset_dir.iterdir() if d.is_dir()])
-    if not subdirs:
-        print(f"  Skip {dataset} (no subdirectories)")
+    n_files = sum(1 for _ in dataset_dir.rglob("*.wav"))
+    print(f"\n=== {dataset}: {n_files} files ===")
+
+    # Try dataset-level upload first (fast)
+    print(f"  Trying bulk upload...")
+    ok = run_cmd([
+        "modal", "volume", "put", VOLUME,
+        str(dataset_dir), f"processed/{dataset}", "--force",
+    ])
+    if ok:
+        print(f"  Done: {dataset}")
         return
 
-    print(f"\n=== {dataset}: {len(subdirs)} speaker dirs ===")
+    # Fallback: upload speaker dirs one by one
+    subdirs = sorted([d for d in dataset_dir.iterdir() if d.is_dir()])
+    print(f"  Bulk failed — falling back to {len(subdirs)} speaker dirs")
 
     for i, speaker_dir in enumerate(subdirs, 1):
-        n_files = sum(1 for _ in speaker_dir.rglob("*.wav"))
-        remote = f"processed/{dataset}/{speaker_dir.name}"
-        print(f"  [{i}/{len(subdirs)}] {speaker_dir.name} ({n_files} files)")
+        n = sum(1 for _ in speaker_dir.rglob("*.wav"))
+        print(f"  [{i}/{len(subdirs)}] {speaker_dir.name} ({n} files)")
         ok = run_cmd([
             "modal", "volume", "put", VOLUME,
-            str(speaker_dir), remote,
+            str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
         ])
         if not ok:
             print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
