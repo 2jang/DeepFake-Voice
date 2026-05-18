@@ -587,17 +587,25 @@ def cmd_report(args: argparse.Namespace) -> int:
 def _print_scan_summary(csv_path: Path) -> None:
     """스캔 직후 간단한 요약 출력."""
     counts: dict[str, dict[str, int]] = {}
+    lang_counts: dict[str, dict[str, int]] = {}
     with open(csv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             ds = row["dataset"]
             label = row["label"]
+            lang = row.get("language", "unknown")
+
             if ds not in counts:
                 counts[ds] = {"real": 0, "fake": 0, "unknown": 0}
             if label in counts[ds]:
                 counts[ds][label] += 1
             else:
                 counts[ds]["unknown"] += 1
+
+            if lang not in lang_counts:
+                lang_counts[lang] = {"real": 0, "fake": 0}
+            if label in lang_counts[lang]:
+                lang_counts[lang][label] += 1
 
     print("\n  데이터셋별 분포:")
     total_real = 0
@@ -618,6 +626,13 @@ def _print_scan_summary(csv_path: Path) -> None:
     if total_unknown > 0:
         line += f"  unknown={total_unknown:>10,}"
     print(line)
+
+    ko = lang_counts.get("ko", {"real": 0, "fake": 0})
+    non_ko_real = total_real - ko["real"]
+    non_ko_fake = total_fake - ko["fake"]
+    print(f"\n  언어별 분포:")
+    print(f"    {'한국어 (ko)':20s}  real={ko['real']:>10,}  fake={ko['fake']:>10,}")
+    print(f"    {'기타 언어':20s}  real={non_ko_real:>10,}  fake={non_ko_fake:>10,}")
 
 
 # ════════════════════════════════════════════════════════════
