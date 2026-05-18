@@ -31,9 +31,6 @@ def upload_manifests() -> None:
     run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests", "--force"])
 
 
-BATCH_SIZE = 20
-
-
 def upload_dataset(dataset: str, processed_root: Path) -> None:
     dataset_dir = processed_root / dataset
     if not dataset_dir.exists():
@@ -45,22 +42,17 @@ def upload_dataset(dataset: str, processed_root: Path) -> None:
         print(f"  Skip {dataset} (no subdirectories)")
         return
 
-    total_batches = (len(subdirs) + BATCH_SIZE - 1) // BATCH_SIZE
-    print(f"\n=== {dataset}: {len(subdirs)} speaker dirs, {total_batches} batches (×{BATCH_SIZE}) ===")
+    print(f"\n=== {dataset}: {len(subdirs)} speaker dirs ===")
 
-    for b in range(total_batches):
-        batch = subdirs[b * BATCH_SIZE : (b + 1) * BATCH_SIZE]
-        names = [d.name for d in batch]
-        print(f"  [batch {b+1}/{total_batches}] {names[0]} ~ {names[-1]}")
-
-        for speaker_dir in batch:
-            ok = run_cmd([
-                "modal", "volume", "put", VOLUME,
-                str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
-            ])
-            if not ok:
-                print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
-                return
+    for i, speaker_dir in enumerate(subdirs, 1):
+        print(f"  [{i}/{len(subdirs)}] {speaker_dir.name}")
+        ok = run_cmd([
+            "modal", "volume", "put", VOLUME,
+            str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
+        ])
+        if not ok:
+            print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
+            return
 
     print(f"  Done: {dataset}")
 
