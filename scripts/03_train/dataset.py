@@ -36,7 +36,8 @@ class AudioDataset(Dataset):
         row = self.df.iloc[idx]
         label = self.LABEL_MAP[row["label"]]
 
-        wav, sr = sf.read(row["file_path"], dtype="float32")
+        file_path = row["file_path"].replace("\\", "/")
+        wav, sr = sf.read(file_path, dtype="float32")
         if wav.ndim > 1:
             wav = wav[:, 0]
 
