@@ -181,8 +181,8 @@ class AASIST(nn.Module):
         if x.dim() == 2:
             x = x.unsqueeze(1)  # (B, 1, T)
 
-        # encoder
-        x = F.max_pool1d(torch.abs(self.sinc_conv(x)), 3)
+        # encoder — pool(9) to keep temporal dim manageable for 2D blocks
+        x = F.max_pool1d(torch.abs(self.sinc_conv(x)), 9)
         x = F.selu(self.first_bn(x.unsqueeze(1)))
         x = self.block0(x)
         x = self.block1(x)

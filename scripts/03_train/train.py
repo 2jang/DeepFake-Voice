@@ -21,6 +21,7 @@ import torch
 import torch.nn as nn
 import yaml
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -42,10 +43,12 @@ def train_one_epoch(
     optimizer: torch.optim.Optimizer,
     criterion: nn.Module,
     device: torch.device,
+    epoch: int = 0,
 ) -> float:
     model.train()
     total_loss = 0.0
-    for wav, label in loader:
+    pbar = tqdm(loader, desc=f"  Train ep{epoch}", leave=False, ncols=80)
+    for wav, label in pbar:
         wav, label = wav.to(device), label.to(device)
         optimizer.zero_grad()
         logits = model(wav)
@@ -53,6 +56,7 @@ def train_one_epoch(
         loss.backward()
         optimizer.step()
         total_loss += loss.item() * wav.size(0)
+        pbar.set_postfix(loss=f"{loss.item():.4f}")
     return total_loss / len(loader.dataset)
 
 
@@ -64,7 +68,7 @@ def evaluate(
 ) -> dict[str, float]:
     model.eval()
     all_labels, all_scores = [], []
-    for wav, label in loader:
+    for wav, label in tqdm(loader, desc="  Eval", leave=False, ncols=80):
         wav = wav.to(device)
         logits = model(wav)
         probs = torch.softmax(logits, dim=1)[:, 1].cpu().numpy()
@@ -177,7 +181,7 @@ def main() -> int:
     print(f"  {'-'*45}")
 
     for epoch in range(1, max_epochs + 1):
-        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
         dev_acc = dev_metrics["accuracy"]
