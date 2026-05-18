@@ -4,15 +4,15 @@
 processed_metadata.csv를 기반으로 C1/C2/C3 학습 데이터 조합과
 T1/T2/T3 고정 평가셋을 생성합니다.
 
-조합 정의:
-    C1: MLAAD v9 (ko 제외) + M-AILABS          — 다국어 only
-    C2: MLAAD v9 (전체) + M-AILABS + SpeechFake (ko) + AI Hub — 다국어+한국어
-    C3: SpeechFake (ko) + AI Hub               — 한국어 only
+조합 정의 (연구계획서 v5):
+    C1: MLAAD v9 (ko 제외) + M-AILABS                      — 다국어 only
+    C2: MLAAD v9 (전체) + M-AILABS + SpeechFake-MD ko       — 다국어+한국어
+    C3: SpeechFake-MD ko + KoAAD                            — 한국어 only
 
 평가셋 정의:
     T1: SpeechFake-MD ko test split            — 한국어 기본 평가
-    T2: AI Hub holdout                         — 한국어 cross-dataset
-    T3: MLAAD test split                       — 다국어 성능 유지
+    T2: KoAAD holdout                          — 한국어 cross-dataset
+    T3: MLAAD test split (ko 제외)             — 다국어 성능 유지
 
 사용법:
     python scripts/02_preprocess/build_splits.py --meta-dir metadata --output-dir manifests
@@ -118,28 +118,20 @@ def build_c1(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_c2(df: pd.DataFrame) -> pd.DataFrame:
-    """C2: MLAAD v9 (전체) + M-AILABS + SpeechFake (ko) + AI Hub — 다국어+한국어."""
+    """C2: MLAAD v9 (전체) + M-AILABS + SpeechFake-MD ko — 다국어+한국어."""
     mlaad = df[df["dataset"] == "mlaad"]
     mailabs = df[df["dataset"] == "mailabs"]
+    sf_md_ko = df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")]
 
-    sf_ko = df[
-        (df["dataset"].isin(["speechfake-bd", "speechfake-md"])) &
-        (df["language"] == "ko")
-    ]
-    aihub = df[df["dataset"] == "aihub"]
-
-    return pd.concat([mlaad, mailabs, sf_ko, aihub])
+    return pd.concat([mlaad, mailabs, sf_md_ko])
 
 
 def build_c3(df: pd.DataFrame) -> pd.DataFrame:
-    """C3: SpeechFake (ko) + AI Hub — 한국어 only."""
-    sf_ko = df[
-        (df["dataset"].isin(["speechfake-bd", "speechfake-md"])) &
-        (df["language"] == "ko")
-    ]
-    aihub = df[df["dataset"] == "aihub"]
+    """C3: SpeechFake-MD ko + KoAAD — 한국어 only."""
+    sf_md_ko = df[(df["dataset"] == "speechfake-md") & (df["language"] == "ko")]
+    koaad = df[df["dataset"] == "koaad"]
 
-    return pd.concat([sf_ko, aihub])
+    return pd.concat([sf_md_ko, koaad])
 
 
 # ════════════════════════════════════════════════════════════
@@ -152,54 +144,32 @@ def build_t1(df: pd.DataFrame, seed: int) -> pd.DataFrame:
         (df["dataset"] == "speechfake-md") & (df["language"] == "ko")
     ]
     if len(sf_md_ko) == 0:
-        print("    [경고] SpeechFake-MD ko 데이터가 없습니다. speechfake-bd ko 사용.")
-        sf_md_ko = df[
-            (df["dataset"] == "speechfake-bd") & (df["language"] == "ko")
-        ]
-
-    if len(sf_md_ko) == 0:
+        print("    [경고] SpeechFake-MD ko 데이터가 없습니다.")
         return pd.DataFrame(columns=df.columns)
 
     _, _, test = speaker_disjoint_split(sf_md_ko, 0.6, 0.2, seed)
-
-    aihub = df[df["dataset"] == "aihub"]
-    if len(aihub) > 0:
-        _, _, aihub_test = speaker_disjoint_split(aihub, 0.6, 0.2, seed)
-        n_needed = len(test)
-        if len(aihub_test) > n_needed:
-            aihub_test = aihub_test.sample(n=n_needed, random_state=seed)
-        test = pd.concat([test, aihub_test])
-
     return test
 
 
 def build_t2(df: pd.DataFrame, seed: int) -> pd.DataFrame:
-    """T2: AI Hub holdout — 한국어 cross-dataset 평가."""
-    aihub = df[df["dataset"] == "aihub"]
-    if len(aihub) == 0:
+    """T2: KoAAD holdout — 한국어 cross-dataset 평가."""
+    koaad = df[df["dataset"] == "koaad"]
+    if len(koaad) == 0:
+        print("    [경고] KoAAD 데이터가 없습니다.")
         return pd.DataFrame(columns=df.columns)
 
-    _, _, test = speaker_disjoint_split(aihub, 0.7, 0.1, seed)
-
-    sf_ko_fake = df[
-        (df["dataset"].isin(["speechfake-bd", "speechfake-md"])) &
-        (df["language"] == "ko") &
-        (df["label"] == "fake")
-    ]
-    if len(sf_ko_fake) > 0:
-        fake_sample = sf_ko_fake.sample(n=min(len(test), len(sf_ko_fake)), random_state=seed)
-        test = pd.concat([test, fake_sample])
-
+    _, _, test = speaker_disjoint_split(koaad, 0.7, 0.1, seed)
     return test
 
 
 def build_t3(df: pd.DataFrame, seed: int) -> pd.DataFrame:
-    """T3: MLAAD test split — 다국어 성능 유지 확인."""
-    mlaad = df[df["dataset"] == "mlaad"]
-    if len(mlaad) == 0:
+    """T3: MLAAD test split (ko 제외) — 다국어 성능 유지 확인."""
+    mlaad_non_ko = df[(df["dataset"] == "mlaad") & (df["language"] != "ko")]
+    if len(mlaad_non_ko) == 0:
+        print("    [경고] MLAAD (ko 제외) 데이터가 없습니다.")
         return pd.DataFrame(columns=df.columns)
 
-    _, _, test = speaker_disjoint_split(mlaad, 0.7, 0.1, seed)
+    _, _, test = speaker_disjoint_split(mlaad_non_ko, 0.7, 0.1, seed)
 
     mailabs = df[df["dataset"] == "mailabs"]
     if len(mailabs) > 0:
@@ -262,9 +232,9 @@ def main() -> int:
     t2 = build_t2(df, args.seed)
     t3 = build_t3(df, args.seed)
 
-    save_manifest(t1, output_dir / "T1_speechfake_ko_test.csv", "T1 (SpeechFake-ko)")
-    save_manifest(t2, output_dir / "T2_aihub_holdout.csv", "T2 (AI Hub holdout)")
-    save_manifest(t3, output_dir / "T3_mlaad_test.csv", "T3 (MLAAD test)")
+    save_manifest(t1, output_dir / "T1_speechfake_ko_test.csv", "T1 (SpeechFake-MD ko)")
+    save_manifest(t2, output_dir / "T2_koaad_holdout.csv", "T2 (KoAAD holdout)")
+    save_manifest(t3, output_dir / "T3_mlaad_test.csv", "T3 (MLAAD test, ko제외)")
 
     eval_indices = set(t1.index) | set(t2.index) | set(t3.index)
     eval_speakers = set(t1["speaker_id"]) | set(t2["speaker_id"]) | set(t3["speaker_id"])

@@ -3,6 +3,12 @@
 
 원본 오디오를 스캔하여 메타데이터를 생성하고, 16kHz mono WAV로 변환하며, 품질 검증을 수행합니다.
 
+데이터셋 (연구계획서 v5):
+    - MLAAD v9: 다국어 딥페이크 (data/mlaad/)
+    - M-AILABS: 다국어 실제 음성 (data/mailabs/)
+    - SpeechFake-MD ko: 한국어 딥페이크+실제 (data/speechfake-md/)
+    - KoAAD: 한국어 딥페이크+실제 (data/koaad/)
+
 사용법:
     # 1단계: 스캔 — 메타데이터 CSV 생성 (오디오 처리 없음, 빠름)
     python scripts/02_preprocess/preprocess.py scan
@@ -49,7 +55,6 @@ except ImportError:
 # ════════════════════════════════════════════════════════════
 
 DATA_ROOT = Path(r"data")
-SPEECHFAKE_ROOT = Path(r"D:\speechfake")
 OUTPUT_ROOT = Path(r"processed")
 METADATA_DIR = Path(r"metadata")
 
@@ -71,13 +76,6 @@ MIN_DURATION_SEC = 0.5
 # ════════════════════════════════════════════════════════════
 
 CORPUS_LANG: dict[str, str] = {}
-for _name, _lang in [
-    ("aishell", "zh"), ("Aishell", "zh"), ("Aishell3", "zh"), ("aishell3", "zh"),
-    ("LibriTTS", "en"), ("LibriTTS_train-clean-100_16k", "en"),
-    ("VCTK", "en"), ("VCTK_Corpus", "en"), ("VCTK-Corpus", "en"),
-    ("CommonVoice", "multi"),
-]:
-    CORPUS_LANG[_name] = _lang
 
 
 # ════════════════════════════════════════════════════════════
@@ -118,58 +116,6 @@ def _find_audio(root: Path) -> Iterator[Path]:
     for f in root.rglob("*"):
         if f.is_file() and f.suffix.lower() in AUDIO_EXTENSIONS:
             yield f
-
-
-def scan_aihub(data_root: Path) -> Iterator[AudioMeta]:
-    """data/aihub/Training/01.원천데이터/TS_{체}_{번호}/*.wav"""
-    aihub_root = data_root / "aihub"
-    if not aihub_root.exists():
-        logger.warning("AI Hub 경로 없음: %s", aihub_root)
-        return
-
-    for f in _find_audio(aihub_root):
-        speaker_id = "unknown"
-        for p in f.relative_to(aihub_root).parts:
-            if p.startswith(("TS_", "VS_")):
-                speaker_id = p
-                break
-
-        yield AudioMeta(
-            file_path=str(f),
-            dataset="aihub",
-            label="real",
-            language="ko",
-            speaker_id=speaker_id,
-            tts_type="none",
-        )
-
-
-def scan_speechfake_bd(data_root: Path) -> Iterator[AudioMeta]:
-    """data/speechfake-BD/{tts_system}/{corpus}[/{voice}]/*.wav"""
-    bd_root = data_root / "speechfake-BD"
-    if not bd_root.exists():
-        logger.warning("SpeechFake-BD 경로 없음: %s", bd_root)
-        return
-
-    for f in _find_audio(bd_root):
-        parts = f.relative_to(bd_root).parts
-        tts_system = parts[0] if len(parts) > 1 else "unknown"
-        corpus = parts[1] if len(parts) > 2 else "unknown"
-        lang = CORPUS_LANG.get(corpus, "unknown")
-
-        if len(parts) > 3:
-            speaker_id = f"sfbd_{tts_system}_{parts[2]}"
-        else:
-            speaker_id = f"sfbd_{tts_system}_{corpus}"
-
-        yield AudioMeta(
-            file_path=str(f),
-            dataset="speechfake-bd",
-            label="fake",
-            language=lang,
-            speaker_id=speaker_id,
-            tts_type=tts_system,
-        )
 
 
 def scan_mailabs(data_root: Path) -> Iterator[AudioMeta]:
@@ -224,9 +170,10 @@ def scan_mlaad(data_root: Path) -> Iterator[AudioMeta]:
         )
 
 
-def scan_speechfake_md(sf_root: Path) -> Iterator[AudioMeta]:
-    """D:/speechfake/MD/{tts_system}/{lang}[/{voice}]/*.wav"""
-    md_root = sf_root / "MD"
+def scan_speechfake_md(data_root: Path) -> Iterator[AudioMeta]:
+    """data/speechfake-md/{tts_system}/{lang}[/{voice}]/*.wav
+    한국어 부분만 사용 (연구계획서 v5)."""
+    md_root = data_root / "speechfake-md"
     if not md_root.exists():
         logger.warning("SpeechFake-MD 경로 없음: %s", md_root)
         return
@@ -254,32 +201,40 @@ def scan_speechfake_md(sf_root: Path) -> Iterator[AudioMeta]:
         )
 
 
-def scan_speechfake_real(sf_root: Path) -> Iterator[AudioMeta]:
-    """D:/speechfake/Real/{corpus}[/{split}]/{speaker}/*.wav"""
-    real_root = sf_root / "Real"
-    if not real_root.exists():
-        logger.warning("SpeechFake-Real 경로 없음: %s", real_root)
+def scan_koaad(data_root: Path) -> Iterator[AudioMeta]:
+    """data/koaad/ — 한국어 딥페이크+실제 음성.
+    폴더 구조에 따라 real/fake 판별."""
+    koaad_root = data_root / "koaad"
+    if not koaad_root.exists():
+        logger.warning("KoAAD 경로 없음: %s", koaad_root)
         return
 
-    for f in _find_audio(real_root):
-        parts = f.relative_to(real_root).parts
-        corpus = parts[0] if parts else "unknown"
-        lang = CORPUS_LANG.get(corpus, "unknown")
+    for f in _find_audio(koaad_root):
+        parts = f.relative_to(koaad_root).parts
+        parts_lower = [p.lower() for p in parts]
 
-        speaker_id = "unknown"
-        skip = {"train", "dev", "test", "wav", "wavs"}
-        for p in parts[1:]:
-            if p not in skip and not p.endswith((".wav", ".mp3")):
-                speaker_id = f"sfreal_{corpus}_{p}"
+        if any("fake" in p or "spoof" in p or "synthetic" in p for p in parts_lower):
+            label = "fake"
+        elif any("real" in p or "bonafide" in p or "genuine" in p for p in parts_lower):
+            label = "real"
+        else:
+            label = "unknown"
+
+        speaker_id = f"koaad_{f.stem}"
+        for p in parts:
+            if p not in ("real", "fake", "bonafide", "spoof", "synthetic", "genuine"):
+                speaker_id = f"koaad_{p}"
                 break
+
+        tts_type = "none" if label == "real" else "unknown"
 
         yield AudioMeta(
             file_path=str(f),
-            dataset="speechfake-real",
-            label="real",
-            language=lang,
+            dataset="koaad",
+            label=label,
+            language="ko",
             speaker_id=speaker_id,
-            tts_type="none",
+            tts_type=tts_type,
         )
 
 
@@ -397,20 +352,17 @@ def _process_batch(args):
 def cmd_scan(args: argparse.Namespace) -> int:
     """모든 데이터 소스를 스캔하고 raw_metadata.csv 생성."""
     data_root = Path(args.data_root) if args.data_root else DATA_ROOT
-    sf_root = Path(args.speechfake_root) if args.speechfake_root else SPEECHFAKE_ROOT
     meta_dir = Path(args.meta_dir) if args.meta_dir else METADATA_DIR
     meta_dir.mkdir(parents=True, exist_ok=True)
 
     out_path = meta_dir / "raw_metadata.csv"
-    logger.info("스캔 시작: data_root=%s, speechfake_root=%s", data_root, sf_root)
+    logger.info("스캔 시작: data_root=%s", data_root)
 
     scanners = [
-        ("AI Hub (한국어 실제)", scan_aihub, (data_root,)),
-        ("SpeechFake-BD (가짜)", scan_speechfake_bd, (data_root,)),
-        ("M-AILABS (다국어 실제)", scan_mailabs, (data_root,)),
         ("MLAAD v9 (다국어 가짜)", scan_mlaad, (data_root,)),
-        ("SpeechFake-MD (다국어 가짜)", scan_speechfake_md, (sf_root,)),
-        ("SpeechFake-Real (실제)", scan_speechfake_real, (sf_root,)),
+        ("M-AILABS (다국어 실제)", scan_mailabs, (data_root,)),
+        ("SpeechFake-MD (한국어 가짜)", scan_speechfake_md, (data_root,)),
+        ("KoAAD (한국어 실제+가짜)", scan_koaad, (data_root,)),
     ]
 
     total = 0
@@ -627,7 +579,6 @@ def main() -> int:
     # scan
     p_scan = sub.add_parser("scan", help="데이터 소스 스캔 → raw_metadata.csv 생성")
     p_scan.add_argument("--data-root", default=None, help=f"data/ 경로 (기본: {DATA_ROOT})")
-    p_scan.add_argument("--speechfake-root", default=None, help=f"speechfake 경로 (기본: {SPEECHFAKE_ROOT})")
     p_scan.add_argument("--meta-dir", default=None, help=f"메타데이터 출력 경로 (기본: {METADATA_DIR})")
 
     # process
