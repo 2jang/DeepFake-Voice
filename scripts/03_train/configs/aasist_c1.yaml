@@ -17,7 +17,7 @@ data:
 training:
   optimizer: adam
   lr: 0.0001
-  batch_size: 24
+  batch_size: 16
   epochs: 50
   early_stopping_patience: 10
   weight_decay: 0.0001
