@@ -2,3 +2,8 @@
 data
 metadata
 processed
+manifests
+experiments
+__pycache__
+*.pyc
+.ipynb_checkpoints
