@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Phase 1.3–1.4: 데이터 조합별 분할 및 평가셋 생성
 
-processed_metadata.csv를 기반으로 C1/C2/C3 학습 데이터 조합과
-T1/T2/T3 고정 평가셋을 생성합니다.
+processed_metadata.csv (없으면 raw_metadata.csv)를 기반으로
+C1/C2/C3 학습 데이터 조합과 T1/T2/T3 고정 평가셋을 생성합니다.
 
 조합 정의 (연구계획서 v5):
-    C1: MLAAD v9 (ko 제외) + M-AILABS                      — 다국어 only
-    C2: MLAAD v9 (전체) + M-AILABS + SpeechFake-MD ko       — 다국어+한국어
-    C3: SpeechFake-MD ko + KoAAD                            — 한국어 only
+    C1: MLAAD v9 (ko 제외) + M-AILABS                          — 다국어 only
+    C2: MLAAD v9 (전체) + M-AILABS + SpeechFake ko (MD+Real)   — 다국어+한국어
+    C3: SpeechFake ko (MD+Real) + KoAAD (fake+aihub real)      — 한국어 only
 
 평가셋 정의:
-    T1: SpeechFake-MD ko test split            — 한국어 기본 평가
+    T1: SpeechFake ko (MD+Real) test split     — 한국어 기본 평가
     T2: KoAAD holdout                          — 한국어 cross-dataset
     T3: MLAAD test split (ko 제외)             — 다국어 성능 유지
 
