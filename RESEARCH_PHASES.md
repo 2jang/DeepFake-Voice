@@ -65,9 +65,9 @@
 
 | 모델 | 파라미터 | 코드 출처 | 입력 형태 |
 |------|---------|-----------|-----------|
-| AASIST | 297K | clovaai/aasist | Raw waveform |
-| LCNN | 1.5M | 임동훈(2024) 참고 구현 | LFCC / Mel-Spec |
-| RawNet2 | 17M | Jungjee/RawNet | Raw waveform |
+| AASIST | 229K | clovaai/aasist 참고 구현 | Raw waveform |
+| LCNN | 1.4M | ASVspoof baseline 참고 구현 | Log power spectrogram |
+| RawNet2 | 18.5M | Jungjee/RawNet 참고 구현 | Raw waveform |
 
 ### 2.2 수행 절차
 
