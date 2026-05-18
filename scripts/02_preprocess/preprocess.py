@@ -13,10 +13,13 @@
     # 1단계: 스캔 — 메타데이터 CSV 생성 (오디오 처리 없음, 빠름)
     python scripts/02_preprocess/preprocess.py scan
 
-    # 2단계: 처리 — 리샘플링 + 품질 검증 (병렬 처리)
+    # 2단계: 샘플링 — 조합별 필요량만 추출
+    python scripts/02_preprocess/preprocess.py sample
+
+    # 3단계: 처리 — 리샘플링 + 품질 검증 (병렬 처리)
     python scripts/02_preprocess/preprocess.py process --workers 8
 
-    # 3단계: 통계 리포트
+    # 4단계: 통계 리포트
     python scripts/02_preprocess/preprocess.py report
 
 필요한 패키지:
