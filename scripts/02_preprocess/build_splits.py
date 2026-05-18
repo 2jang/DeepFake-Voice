@@ -62,6 +62,7 @@ def speaker_disjoint_split(
     """화자(speaker_id) 기준 겹침 없이 train/dev/test 분할.
 
     화자를 먼저 분할한 후 해당 화자의 모든 발화를 해당 세트에 배치합니다.
+    화자 수가 너무 적어서 어느 split에 한쪽 라벨이 빠지면 stratified random split으로 fallback.
     """
     speakers = df["speaker_id"].unique()
     rng = np.random.RandomState(seed)
@@ -78,6 +79,25 @@ def speaker_disjoint_split(
     train_df = df[df["speaker_id"].isin(train_speakers)].copy()
     dev_df = df[df["speaker_id"].isin(dev_speakers)].copy()
     test_df = df[df["speaker_id"].isin(test_speakers)].copy()
+
+    labels = df["label"].unique()
+    splits_ok = all(
+        set(split["label"].unique()) == set(labels)
+        for split in [train_df, dev_df, test_df]
+        if len(split) > 0
+    )
+
+    if not splits_ok:
+        print(f"      [fallback] 화자 수 부족 → stratified random split 사용")
+        from sklearn.model_selection import train_test_split
+        test_ratio = 1.0 - train_ratio - dev_ratio
+        train_df, temp_df = train_test_split(
+            df, test_size=(dev_ratio + test_ratio), random_state=seed, stratify=df["label"],
+        )
+        dev_frac = dev_ratio / (dev_ratio + test_ratio)
+        dev_df, test_df = train_test_split(
+            temp_df, test_size=(1 - dev_frac), random_state=seed, stratify=temp_df["label"],
+        )
 
     return train_df, dev_df, test_df
 
@@ -150,7 +170,7 @@ def build_t1(df: pd.DataFrame, seed: int) -> pd.DataFrame:
         return pd.DataFrame(columns=df.columns)
 
     _, _, test = speaker_disjoint_split(sf_ko, 0.6, 0.2, seed)
-    return test
+    return balance_labels(test, seed)
 
 
 def build_t2(df: pd.DataFrame, seed: int) -> pd.DataFrame:
