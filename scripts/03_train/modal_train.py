@@ -50,15 +50,15 @@ ALL_CONFIGS = [
 
 # A10G (24GB VRAM) batch sizes — larger than local 8GB GPU
 MODAL_BATCH_SIZES = {
-    "aasist": 64,
-    "lcnn": 128,
-    "rawnet2": 64,
+    "aasist": 128,
+    "lcnn": 256,
+    "rawnet2": 128,
 }
 
 
 @app.function(
     image=image,
-    gpu="A10G",  # 24GB VRAM. Change to "T4" (16GB, cheaper) or "A100" (80GB, faster)
+    gpu="H100",
     volumes={"/data": volume},
     mounts=[modal.Mount.from_local_dir(str(SCRIPT_DIR), remote_path="/app/train")],
     timeout=3600 * 8,
