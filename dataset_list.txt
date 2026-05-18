@@ -1,0 +1,2749 @@
+대상 경로: data
+============================================================
+
+[디렉토리]
+------------------------------------------------------------
+data\aihub
+data\aihub\Training
+data\aihub\Training\01.원천데이터
+data\aihub\Training\01.원천데이터\TS_구연체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_030 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_056 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_060 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_061 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_062 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_063 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_065 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_069 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_101 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_102 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_103 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_104 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_105 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_106 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_107 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_108 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_109 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_110 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_111 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_112 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_113 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_114 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_115 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_116 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_151 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_152 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_153 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_154 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_155 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_156 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_157 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_158 (wav files)
+data\aihub\Training\01.원천데이터\TS_구연체_159 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_004 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_007 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_043 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_047 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_055 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_056 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_060 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_061 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_062 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_063 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_065 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_068 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_069 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_070 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_071 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_106 (wav files)
+data\aihub\Training\01.원천데이터\TS_낭독체_111 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_003 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_007 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_009 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_043 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_049 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_055 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_056 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_059 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_062 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_063 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_065 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_068 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_069 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_070 (wav files)
+data\aihub\Training\01.원천데이터\TS_대화체_071 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_004 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_009 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_043 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_049 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_056 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_059 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_060 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_061 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_062 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_063 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_065 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_068 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_069 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_070 (wav files)
+data\aihub\Training\01.원천데이터\TS_독백체_071 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_003 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_004 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_006 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_007 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_009 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_012 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_015 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_019 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_028 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_030 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_036 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_037 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_043 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_049 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_055 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_애니체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_003 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_004 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_007 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_009 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_012 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_015 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_019 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_030 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_036 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_037 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_040 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_055 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_056 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_059 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_060 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_061 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_062 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_063 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_065 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_중계체_068 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_001 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_002 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_003 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_004 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_005 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_006 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_007 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_008 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_009 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_010 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_011 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_012 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_013 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_014 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_015 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_016 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_017 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_018 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_019 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_020 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_021 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_022 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_023 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_024 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_025 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_026 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_027 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_029 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_030 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_031 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_032 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_033 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_034 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_036 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_037 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_038 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_039 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_041 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_042 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_043 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_046 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_047 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_048 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_051 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_052 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_053 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_054 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_055 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_064 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_067 (wav files)
+data\aihub\Training\01.원천데이터\TS_친절체_068 (wav files)
+data\aihub\Training\02.라벨링데이터
+data\aihub\Training\02.라벨링데이터\TL_구연체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_030 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_056 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_060 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_061 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_062 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_063 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_065 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_069 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_101 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_102 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_103 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_104 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_105 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_106 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_107 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_108 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_109 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_110 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_111 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_112 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_113 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_114 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_115 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_116 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_151 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_152 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_153 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_154 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_155 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_156 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_157 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_158 (json files)
+data\aihub\Training\02.라벨링데이터\TL_구연체_159 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_004 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_007 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_043 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_047 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_055 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_056 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_060 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_061 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_062 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_063 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_065 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_068 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_069 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_070 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_071 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_106 (json files)
+data\aihub\Training\02.라벨링데이터\TL_낭독체_111 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_003 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_007 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_009 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_043 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_049 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_055 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_056 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_059 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_062 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_063 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_065 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_068 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_069 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_070 (json files)
+data\aihub\Training\02.라벨링데이터\TL_대화체_071 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_004 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_009 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_043 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_049 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_056 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_059 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_060 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_061 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_062 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_063 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_065 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_068 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_069 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_070 (json files)
+data\aihub\Training\02.라벨링데이터\TL_독백체_071 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_003 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_004 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_006 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_007 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_009 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_012 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_015 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_019 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_028 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_030 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_036 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_037 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_043 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_049 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_055 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_애니체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_003 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_004 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_007 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_009 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_012 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_015 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_019 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_030 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_036 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_037 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_040 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_055 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_056 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_059 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_060 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_061 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_062 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_063 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_065 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_중계체_068 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_001 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_002 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_003 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_004 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_005 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_006 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_007 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_008 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_009 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_010 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_011 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_012 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_013 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_014 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_015 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_016 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_017 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_018 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_019 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_020 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_021 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_022 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_023 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_024 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_025 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_026 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_027 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_029 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_030 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_031 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_032 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_033 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_034 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_036 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_037 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_038 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_039 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_041 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_042 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_043 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_046 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_047 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_048 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_051 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_052 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_053 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_054 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_055 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_064 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_067 (json files)
+data\aihub\Training\02.라벨링데이터\TL_친절체_068 (json files)
+data\aihub\Validation
+data\aihub\Validation\01.원천데이터
+data\aihub\Validation\01.원천데이터\VS_구연체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_030 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_056 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_060 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_061 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_062 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_063 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_065 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_069 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_101 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_102 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_103 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_104 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_105 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_106 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_107 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_108 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_109 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_110 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_111 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_112 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_113 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_114 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_115 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_116 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_151 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_152 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_153 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_154 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_155 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_156 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_157 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_158 (wav files)
+data\aihub\Validation\01.원천데이터\VS_구연체_159 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_004 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_007 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_043 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_047 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_055 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_056 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_060 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_061 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_062 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_063 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_065 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_068 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_069 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_070 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_071 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_106 (wav files)
+data\aihub\Validation\01.원천데이터\VS_낭독체_111 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_003 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_007 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_009 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_043 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_049 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_055 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_056 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_059 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_062 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_063 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_065 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_068 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_069 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_070 (wav files)
+data\aihub\Validation\01.원천데이터\VS_대화체_071 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_004 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_009 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_043 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_049 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_056 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_059 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_060 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_061 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_062 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_063 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_065 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_068 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_069 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_070 (wav files)
+data\aihub\Validation\01.원천데이터\VS_독백체_071 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_003 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_004 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_006 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_007 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_009 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_012 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_015 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_019 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_028 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_030 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_036 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_037 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_043 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_049 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_055 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_애니체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_003 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_004 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_007 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_009 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_012 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_015 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_019 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_030 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_036 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_037 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_040 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_055 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_056 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_059 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_060 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_061 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_062 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_063 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_065 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_중계체_068 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_001 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_002 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_003 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_004 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_005 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_006 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_007 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_008 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_009 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_010 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_011 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_012 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_013 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_014 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_015 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_016 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_017 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_018 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_019 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_020 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_021 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_022 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_023 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_024 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_025 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_026 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_027 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_029 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_030 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_031 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_032 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_033 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_034 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_036 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_037 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_038 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_039 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_041 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_042 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_043 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_046 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_047 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_048 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_051 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_052 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_053 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_054 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_055 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_064 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_067 (wav files)
+data\aihub\Validation\01.원천데이터\VS_친절체_068 (wav files)
+data\aihub\Validation\02.라벨링데이터 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_030 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_040 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_041 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_042 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_046 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_048 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_056 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_060 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_061 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_062 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_063 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_065 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_069 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_101 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_102 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_103 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_104 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_105 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_106 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_107 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_108 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_109 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_110 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_111 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_112 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_113 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_114 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_115 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_116 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_151 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_152 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_153 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_154 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_155 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_156 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_157 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_158 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_구연체_159 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_002 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_003 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_007 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_008 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_009 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_010 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_011 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_013 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_014 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_016 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_020 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_025 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_026 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_027 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_031 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_034 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_040 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_041 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_042 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_043 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_046 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_048 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_049 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_051 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_053 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_054 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_055 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_056 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_059 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_062 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_063 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_064 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_065 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_067 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_068 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_069 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_070 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_대화체_071 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_002 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_004 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_008 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_009 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_010 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_011 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_013 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_014 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_016 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_020 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_025 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_026 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_027 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_031 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_034 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_040 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_041 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_042 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_043 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_046 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_048 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_049 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_051 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_053 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_054 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_056 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_059 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_060 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_061 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_062 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_063 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_064 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_065 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_067 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_068 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_069 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_070 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_독백체_071 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_002 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_003 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_004 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_006 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_007 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_008 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_009 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_010 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_011 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_012 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_013 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_014 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_015 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_016 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_019 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_020 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_025 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_026 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_027 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_028 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_030 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_031 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_034 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_036 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_037 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_040 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_041 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_042 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_043 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_046 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_048 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_049 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_051 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_053 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_054 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_055 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_064 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_애니체_067 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_002 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_003 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_004 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_007 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_008 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_009 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_010 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_011 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_012 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_013 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_014 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_015 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_016 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_019 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_020 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_025 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_026 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_027 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_030 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_031 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_034 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_036 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_037 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_040 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_051 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_053 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_054 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_055 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_056 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_059 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_060 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_061 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_062 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_063 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_064 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_065 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_067 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_중계체_068 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_001 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_002 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_003 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_004 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_005 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_006 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_007 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_008 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_009 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_010 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_011 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_012 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_013 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_014 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_015 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_016 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_017 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_019 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_020 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_021 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_022 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_023 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_024 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_025 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_026 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_027 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_029 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_030 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_031 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_032 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_033 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_034 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_036 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_037 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_038 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_039 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_041 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_042 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_043 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_046 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_047 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_048 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_051 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_052 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_053 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_054 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_055 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_064 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_067 (json files)
+data\aihub\Validation\02.라벨링데이터\VL_친절체_068 (json files)
+data\koaad
+data\koaad\google_cloud_tts (wav files)
+data\koaad\naver_news (mp3 files)
+data\koaad\xtts2 (wav files)
+data\mailabs
+data\mailabs\de_DE
+data\mailabs\de_DE\by_book
+data\mailabs\de_DE\by_book\female
+data\mailabs\de_DE\by_book\female\angela_merkel
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone (json files)
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\wavs (wav files)
+data\mailabs\de_DE\by_book\female\eva_k
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus (json files)
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus\wavs (wav files)
+data\mailabs\de_DE\by_book\female\eva_k\kleine_lord (json files)
+data\mailabs\de_DE\by_book\female\eva_k\kleine_lord\wavs (wav files)
+data\mailabs\de_DE\by_book\female\eva_k\toten_seelen (json files)
+data\mailabs\de_DE\by_book\female\eva_k\toten_seelen\wavs (wav files)
+data\mailabs\de_DE\by_book\female\eva_k\werde_die_du_bist (json files)
+data\mailabs\de_DE\by_book\female\eva_k\werde_die_du_bist\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger
+data\mailabs\de_DE\by_book\female\ramona_deininger\alter_afrikaner (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\alter_afrikaner\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\caspar (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\caspar\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\frankenstein (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\frankenstein\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\grune_gesicht (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\grune_gesicht\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\menschenhasser (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\menschenhasser\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\sterben (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\sterben\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\tom_sawyer (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\tom_sawyer\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\tschun (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\tschun\wavs (wav files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\weihnachtsabend (json files)
+data\mailabs\de_DE\by_book\female\ramona_deininger\weihnachtsabend\wavs (wav files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\das_letzte_marchen (json files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\das_letzte_marchen\wavs (wav files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\ferien_vom_ich (json files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\ferien_vom_ich\wavs (wav files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\maerchen (json files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\maerchen\wavs (wav files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\mein_weg_als_deutscher_und_jude (json files)
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\mein_weg_als_deutscher_und_jude\wavs (wav files)
+data\mailabs\de_DE\by_book\male
+data\mailabs\de_DE\by_book\male\karlsson
+data\mailabs\de_DE\by_book\male\karlsson\altehous (json files)
+data\mailabs\de_DE\by_book\male\karlsson\altehous\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\herrnarnesschatz (json files)
+data\mailabs\de_DE\by_book\male\karlsson\herrnarnesschatz\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\kammmacher (json files)
+data\mailabs\de_DE\by_book\male\karlsson\kammmacher\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\kleinzaches (json files)
+data\mailabs\de_DE\by_book\male\karlsson\kleinzaches\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\koenigsgaukler (json files)
+data\mailabs\de_DE\by_book\male\karlsson\koenigsgaukler\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\liebesbriefe (json files)
+data\mailabs\de_DE\by_book\male\karlsson\liebesbriefe\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\maedchen_von_moorhof (json files)
+data\mailabs\de_DE\by_book\male\karlsson\maedchen_von_moorhof\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\odysseus (json files)
+data\mailabs\de_DE\by_book\male\karlsson\odysseus\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\reise_tilsit (json files)
+data\mailabs\de_DE\by_book\male\karlsson\reise_tilsit\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\sandmann (json files)
+data\mailabs\de_DE\by_book\male\karlsson\sandmann\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\schmied_seines_glueckes (json files)
+data\mailabs\de_DE\by_book\male\karlsson\schmied_seines_glueckes\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\spiegel_kaetzchen (json files)
+data\mailabs\de_DE\by_book\male\karlsson\spiegel_kaetzchen\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\undine (json files)
+data\mailabs\de_DE\by_book\male\karlsson\undine\wavs (wav files)
+data\mailabs\de_DE\by_book\male\karlsson\unterm_birnbaum (json files)
+data\mailabs\de_DE\by_book\male\karlsson\unterm_birnbaum\wavs (wav files)
+data\mailabs\de_DE\by_book\mix
+data\mailabs\de_DE\by_book\mix\auf_zwei_planeten (json files)
+data\mailabs\de_DE\by_book\mix\auf_zwei_planeten\wavs (wav files)
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe (json files)
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe\wavs (wav files)
+data\mailabs\en_UK
+data\mailabs\en_UK\by_book
+data\mailabs\en_UK\by_book\female
+data\mailabs\en_UK\by_book\female\elizabeth_klett
+data\mailabs\en_UK\by_book\female\elizabeth_klett\jane_eyre (json files)
+data\mailabs\en_UK\by_book\female\elizabeth_klett\jane_eyre\wavs (wav files)
+data\mailabs\en_UK\by_book\female\elizabeth_klett\wives_and_daughters (json files)
+data\mailabs\en_UK\by_book\female\elizabeth_klett\wives_and_daughters\wavs (wav files)
+data\mailabs\en_US
+data\mailabs\en_US\by_book
+data\mailabs\en_US\by_book\female
+data\mailabs\en_US\by_book\female\judy_bieber
+data\mailabs\en_US\by_book\female\judy_bieber\dorothy_and_wizard_oz (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\dorothy_and_wizard_oz\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\emerald_city_of_oz (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\emerald_city_of_oz\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\ozma_of_oz (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\ozma_of_oz\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\rinkitink_in_oz (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\rinkitink_in_oz\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\sky_island (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\sky_island\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\the_master_key (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\the_master_key\wavs (wav files)
+data\mailabs\en_US\by_book\female\judy_bieber\the_sea_fairies (json files)
+data\mailabs\en_US\by_book\female\judy_bieber\the_sea_fairies\wavs (wav files)
+data\mailabs\en_US\by_book\female\mary_ann
+data\mailabs\en_US\by_book\female\mary_ann\midnight_passenger (json files)
+data\mailabs\en_US\by_book\female\mary_ann\midnight_passenger\wavs (wav files)
+data\mailabs\en_US\by_book\female\mary_ann\northandsouth (json files)
+data\mailabs\en_US\by_book\female\mary_ann\northandsouth\wavs (wav files)
+data\mailabs\en_US\by_book\male
+data\mailabs\en_US\by_book\male\elliot_miller
+data\mailabs\en_US\by_book\male\elliot_miller\hunters_space (json files)
+data\mailabs\en_US\by_book\male\elliot_miller\hunters_space\wavs (wav files)
+data\mailabs\en_US\by_book\male\elliot_miller\pink_fairy_book (json files)
+data\mailabs\en_US\by_book\male\elliot_miller\pink_fairy_book\wavs (wav files)
+data\mailabs\en_US\by_book\male\elliot_miller\pirates_of_ersatz (json files)
+data\mailabs\en_US\by_book\male\elliot_miller\pirates_of_ersatz\wavs (wav files)
+data\mailabs\en_US\by_book\male\elliot_miller\poisoned_pen (json files)
+data\mailabs\en_US\by_book\male\elliot_miller\poisoned_pen\wavs (wav files)
+data\mailabs\en_US\by_book\male\elliot_miller\silent_bullet (json files)
+data\mailabs\en_US\by_book\male\elliot_miller\silent_bullet\wavs (wav files)
+data\mailabs\es_ES
+data\mailabs\es_ES\by_book
+data\mailabs\es_ES\by_book\female
+data\mailabs\es_ES\by_book\female\karen_savage
+data\mailabs\es_ES\by_book\female\karen_savage\angelina (json files)
+data\mailabs\es_ES\by_book\female\karen_savage\angelina\wavs (wav files)
+data\mailabs\es_ES\by_book\male
+data\mailabs\es_ES\by_book\male\tux
+data\mailabs\es_ES\by_book\male\tux\bailen (json files)
+data\mailabs\es_ES\by_book\male\tux\bailen\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\el_19_de_marzo_y_el_2_de_nayo (json files)
+data\mailabs\es_ES\by_book\male\tux\el_19_de_marzo_y_el_2_de_nayo\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\eneida (json files)
+data\mailabs\es_ES\by_book\male\tux\eneida\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\la_batalla_de_los_arapiles (json files)
+data\mailabs\es_ES\by_book\male\tux\la_batalla_de_los_arapiles\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\la_corte_de_carlos_iv (json files)
+data\mailabs\es_ES\by_book\male\tux\la_corte_de_carlos_iv\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\napoleon_en_chamartin (json files)
+data\mailabs\es_ES\by_book\male\tux\napoleon_en_chamartin\wavs (wav files)
+data\mailabs\es_ES\by_book\male\tux\trafalgar (json files)
+data\mailabs\es_ES\by_book\male\tux\trafalgar\wavs (wav files)
+data\mailabs\es_ES\by_book\male\victor_villarraza
+data\mailabs\es_ES\by_book\male\victor_villarraza\cuentos_clasicos_del_norte (json files)
+data\mailabs\es_ES\by_book\male\victor_villarraza\cuentos_clasicos_del_norte\wavs (wav files)
+data\mailabs\es_ES\by_book\male\victor_villarraza\la_dama_de_las_camelias (json files)
+data\mailabs\es_ES\by_book\male\victor_villarraza\la_dama_de_las_camelias\wavs (wav files)
+data\mailabs\es_ES\by_book\mix
+data\mailabs\es_ES\by_book\mix\don_quijote (json files)
+data\mailabs\es_ES\by_book\mix\don_quijote\wavs (wav files)
+data\mailabs\es_ES\by_book\mix\la_condenada (json files)
+data\mailabs\es_ES\by_book\mix\la_condenada\wavs (wav files)
+data\mailabs\fr_FR
+data\mailabs\fr_FR\female
+data\mailabs\fr_FR\female\ezwa
+data\mailabs\fr_FR\female\ezwa\keraban_le_tetu (json files)
+data\mailabs\fr_FR\female\ezwa\keraban_le_tetu\wavs (wav files)
+data\mailabs\fr_FR\female\ezwa\l_epouvante (json files)
+data\mailabs\fr_FR\female\ezwa\l_epouvante\wavs (wav files)
+data\mailabs\fr_FR\female\ezwa\la_fabrique_de_crimes (json files)
+data\mailabs\fr_FR\female\ezwa\la_fabrique_de_crimes\wavs (wav files)
+data\mailabs\fr_FR\female\ezwa\la_mare_au_diable (json files)
+data\mailabs\fr_FR\female\ezwa\la_mare_au_diable\wavs (wav files)
+data\mailabs\fr_FR\female\ezwa\monsieur_lecoq (json files)
+data\mailabs\fr_FR\female\ezwa\monsieur_lecoq\wavs (wav files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet
+data\mailabs\fr_FR\female\nadine_eckert_boulet\la_vampire (json files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\la_vampire\wavs (wav files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_mysteres_de_paris (json files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_mysteres_de_paris\wavs (wav files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_tribulations_dun_chinoise (json files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_tribulations_dun_chinoise\wavs (wav files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\madame_bovary (json files)
+data\mailabs\fr_FR\female\nadine_eckert_boulet\madame_bovary\wavs (wav files)
+data\mailabs\fr_FR\male
+data\mailabs\fr_FR\male\bernard
+data\mailabs\fr_FR\male\bernard\le_dernier_des_mohicans (json files)
+data\mailabs\fr_FR\male\bernard\le_dernier_des_mohicans\wavs (wav files)
+data\mailabs\fr_FR\male\bernard\le_pays_des_fourrures (json files)
+data\mailabs\fr_FR\male\bernard\le_pays_des_fourrures\wavs (wav files)
+data\mailabs\fr_FR\male\gilles_g_le_blanc
+data\mailabs\fr_FR\male\gilles_g_le_blanc\les_miserables_tome_5 (json files)
+data\mailabs\fr_FR\male\gilles_g_le_blanc\les_miserables_tome_5\wavs (wav files)
+data\mailabs\fr_FR\male\gilles_g_le_blanc\lupin_contre_holmes (json files)
+data\mailabs\fr_FR\male\gilles_g_le_blanc\lupin_contre_holmes\wavs (wav files)
+data\mailabs\fr_FR\male\zeckou
+data\mailabs\fr_FR\male\zeckou\l_ile_mysterieuse (json files)
+data\mailabs\fr_FR\male\zeckou\l_ile_mysterieuse\wavs (wav files)
+data\mailabs\fr_FR\mix
+data\mailabs\fr_FR\mix\sous_les_mers (json files)
+data\mailabs\fr_FR\mix\sous_les_mers\wavs (wav files)
+data\mailabs\it_IT
+data\mailabs\it_IT\by_book
+data\mailabs\it_IT\by_book\female
+data\mailabs\it_IT\by_book\female\lisa_caputo
+data\mailabs\it_IT\by_book\female\lisa_caputo\malavoglia (json files)
+data\mailabs\it_IT\by_book\female\lisa_caputo\malavoglia\wavs (wav files)
+data\mailabs\it_IT\by_book\male
+data\mailabs\it_IT\by_book\male\riccardo_fasol
+data\mailabs\it_IT\by_book\male\riccardo_fasol\galatea (json files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\galatea\wavs (wav files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_fu_mattia_pascal (json files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_fu_mattia_pascal\wavs (wav files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_ritratto_del_diavolo (json files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_ritratto_del_diavolo\wavs (wav files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\la_contessa_di_karolystria (json files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\la_contessa_di_karolystria\wavs (wav files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\le_meraviglie_del_duemila (json files)
+data\mailabs\it_IT\by_book\male\riccardo_fasol\le_meraviglie_del_duemila\wavs (wav files)
+data\mailabs\it_IT\by_book\mix
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_00 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_00\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_01 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_01\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_02 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_02\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_03 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_03\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_04 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_04\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_05 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_05\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_06 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_06\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_07 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_07\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_08 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_08\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_09 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_09\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_10 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_10\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_11 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_11\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_12 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_12\wavs (wav files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_13 (json files)
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_13\wavs (wav files)
+data\mailabs\pl_PL
+data\mailabs\pl_PL\by_book
+data\mailabs\pl_PL\by_book\female
+data\mailabs\pl_PL\by_book\female\nina_brown
+data\mailabs\pl_PL\by_book\female\nina_brown\saragossie (json files)
+data\mailabs\pl_PL\by_book\female\nina_brown\saragossie\wavs (wav files)
+data\mailabs\pl_PL\by_book\male
+data\mailabs\pl_PL\by_book\male\piotr_nater
+data\mailabs\pl_PL\by_book\male\piotr_nater\lalka (json files)
+data\mailabs\pl_PL\by_book\male\piotr_nater\lalka\wavs (wav files)
+data\mailabs\ru_RU
+data\mailabs\ru_RU\by_book
+data\mailabs\ru_RU\by_book\female
+data\mailabs\ru_RU\by_book\female\hajdurova
+data\mailabs\ru_RU\by_book\female\hajdurova\chetvero_nischih (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\chetvero_nischih\wavs (wav files)
+data\mailabs\ru_RU\by_book\female\hajdurova\falshiviy_kupon (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\falshiviy_kupon\wavs (wav files)
+data\mailabs\ru_RU\by_book\female\hajdurova\jizn_gnora (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\jizn_gnora\wavs (wav files)
+data\mailabs\ru_RU\by_book\female\hajdurova\mnogo_shuma_iz_nichego (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\mnogo_shuma_iz_nichego\wavs (wav files)
+data\mailabs\ru_RU\by_book\female\hajdurova\strashnaya_minuta (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\strashnaya_minuta\wavs (wav files)
+data\mailabs\ru_RU\by_book\female\hajdurova\sulamif (json files)
+data\mailabs\ru_RU\by_book\female\hajdurova\sulamif\wavs (wav files)
+data\mailabs\ru_RU\by_book\male
+data\mailabs\ru_RU\by_book\male\minaev
+data\mailabs\ru_RU\by_book\male\minaev\oblomov (json files)
+data\mailabs\ru_RU\by_book\male\minaev\oblomov\wavs (wav files)
+data\mailabs\ru_RU\by_book\male\nikolaev
+data\mailabs\ru_RU\by_book\male\nikolaev\argentinetz (json files)
+data\mailabs\ru_RU\by_book\male\nikolaev\argentinetz\wavs (wav files)
+data\mailabs\uk_UK
+data\mailabs\uk_UK\by_book
+data\mailabs\uk_UK\by_book\female
+data\mailabs\uk_UK\by_book\female\sumska
+data\mailabs\uk_UK\by_book\female\sumska\kaydasheva (json files)
+data\mailabs\uk_UK\by_book\female\sumska\kaydasheva\wavs (wav files)
+data\mailabs\uk_UK\by_book\female\sumska\mykola_djerya (json files)
+data\mailabs\uk_UK\by_book\female\sumska\mykola_djerya\wavs (wav files)
+data\mailabs\uk_UK\by_book\male
+data\mailabs\uk_UK\by_book\male\loboda
+data\mailabs\uk_UK\by_book\male\loboda\chorna_rada (json files)
+data\mailabs\uk_UK\by_book\male\loboda\chorna_rada\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\loboda\ukradene_schastja (json files)
+data\mailabs\uk_UK\by_book\male\loboda\ukradene_schastja\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\loboda\zahar_berkut (json files)
+data\mailabs\uk_UK\by_book\male\loboda\zahar_berkut\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\miskun
+data\mailabs\uk_UK\by_book\male\miskun\15_y_o_capitan (json files)
+data\mailabs\uk_UK\by_book\male\miskun\15_y_o_capitan\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\obruchov
+data\mailabs\uk_UK\by_book\male\obruchov\dorogoyu_tsinoyu (json files)
+data\mailabs\uk_UK\by_book\male\obruchov\dorogoyu_tsinoyu\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\obruchov\fata_morgana (json files)
+data\mailabs\uk_UK\by_book\male\obruchov\fata_morgana\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\obruchov\koni_nevynni (json files)
+data\mailabs\uk_UK\by_book\male\obruchov\koni_nevynni\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\obruchov\tini_zabutyh_predkiv (json files)
+data\mailabs\uk_UK\by_book\male\obruchov\tini_zabutyh_predkiv\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\obruchov\voly (json files)
+data\mailabs\uk_UK\by_book\male\obruchov\voly\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\pysariev
+data\mailabs\uk_UK\by_book\male\pysariev\minestreli (json files)
+data\mailabs\uk_UK\by_book\male\pysariev\minestreli\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\pysariev\transformations (json files)
+data\mailabs\uk_UK\by_book\male\pysariev\transformations\wavs (wav files)
+data\mailabs\uk_UK\by_book\male\shepel
+data\mailabs\uk_UK\by_book\male\shepel\zvirobij (json files)
+data\mailabs\uk_UK\by_book\male\shepel\zvirobij\wavs (wav files)
+data\mlaad
+data\mlaad\fake
+data\mlaad\fake\am
+data\mlaad\fake\am\Edge-TTS (wav files)
+data\mlaad\fake\ar
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\bg
+data\mlaad\fake\bg\tts_models_bg_cv_vits (wav files)
+data\mlaad\fake\bg\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\bn
+data\mlaad\fake\bn\IndicF5 (wav files)
+data\mlaad\fake\bn\tts_models_bn_custom_vits-female (wav files)
+data\mlaad\fake\bn\tts_models_bn_custom_vits-male (wav files)
+data\mlaad\fake\bn\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\cs
+data\mlaad\fake\cs\tts_models_cs_cv_vits (wav files)
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\da
+data\mlaad\fake\da\tts_models_da_cv_vits (wav files)
+data\mlaad\fake\da\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\de
+data\mlaad\fake\de\CaroTTS (wav files)
+data\mlaad\fake\de\Cartesia.ai (Sonic-3) (wav files)
+data\mlaad\fake\de\Chatterbox Multilingual (wav files)
+data\mlaad\fake\de\Edge-TTS (wav files)
+data\mlaad\fake\de\facebook_mms-tts-deu (wav files)
+data\mlaad\fake\de\FishTTS (wav files)
+data\mlaad\fake\de\griffin_lim (wav files)
+data\mlaad\fake\de\Higgs-Audio-V2 (wav files)
+data\mlaad\fake\de\Kani-TTS-370M (wav files)
+data\mlaad\fake\de\Kartoffelbox (wav files)
+data\mlaad\fake\de\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\de\NVidia Magpie-TTS Multilingual (wav files)
+data\mlaad\fake\de\OuteTTS (wav files)
+data\mlaad\fake\de\Resemble.ai (April 12th, 2025) (wav files)
+data\mlaad\fake\de\RVC (wav files)
+data\mlaad\fake\de\tts_models_de_css10_vits-neon (wav files)
+data\mlaad\fake\de\tts_models_de_thorsten_tacotron2-DCA (wav files)
+data\mlaad\fake\de\tts_models_de_thorsten_tacotron2-DDC (wav files)
+data\mlaad\fake\de\tts_models_de_thorsten_vits (wav files)
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\el
+data\mlaad\fake\el\tts_models_el_cv_vits (wav files)
+data\mlaad\fake\el\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\en
+data\mlaad\fake\en\Cartesia.ai (Sonic-3) (wav files)
+data\mlaad\fake\en\Chatterbox (wav files)
+data\mlaad\fake\en\DeepGram (wav files)
+data\mlaad\fake\en\e2-tts (wav files)
+data\mlaad\fake\en\Edge-TTS (wav files)
+data\mlaad\fake\en\f5-tts (wav files)
+data\mlaad\fake\en\facebook_mms-tts-eng (wav files)
+data\mlaad\fake\en\FireRedTTS-2.0 (wav files)
+data\mlaad\fake\en\FishTTS (wav files)
+data\mlaad\fake\en\griffin_lim (wav files)
+data\mlaad\fake\en\Higgs-Audio-V2 (wav files)
+data\mlaad\fake\en\Index-TTS-1.5 (wav files)
+data\mlaad\fake\en\Index-TTS-2.0 (wav files)
+data\mlaad\fake\en\Indri-TTS-0.1 (wav files)
+data\mlaad\fake\en\Kani-TTS-370M (wav files)
+data\mlaad\fake\en\Kitten-TTS-Nano-0.1 (wav files)
+data\mlaad\fake\en\Kitten-TTS-Nano-0.2 (wav files)
+data\mlaad\fake\en\kokoro (wav files)
+data\mlaad\fake\en\Kyutai-TTS (wav files)
+data\mlaad\fake\en\Llasa-1B (wav files)
+data\mlaad\fake\en\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\en\Llasa-3B (wav files)
+data\mlaad\fake\en\Llasa-8B (wav files)
+data\mlaad\fake\en\Mars5 (wav files)
+data\mlaad\fake\en\Marvis-TTS (wav files)
+data\mlaad\fake\en\MatchaTTS (wav files)
+data\mlaad\fake\en\Maya1 TTS (wav files)
+data\mlaad\fake\en\MegaTTS3 (wav files)
+data\mlaad\fake\en\MeloTTS (wav files)
+data\mlaad\fake\en\Metavoice-1B (wav files)
+data\mlaad\fake\en\Microsoft VibeVoice 1.5B (wav files)
+data\mlaad\fake\en\Microsoft VibeVoice Large (wav files)
+data\mlaad\fake\en\microsoft_speecht5_tts (wav files)
+data\mlaad\fake\en\MiniCPM-o-2.6 (wav files)
+data\mlaad\fake\en\minimax_speech-02-turbo (wav files)
+data\mlaad\fake\en\minimax_speech-2.6-hd (wav files)
+data\mlaad\fake\en\Nari Dia-1.6B (wav files)
+data\mlaad\fake\en\Nari Dia2 (wav files)
+data\mlaad\fake\en\NeuTTS-Air (wav files)
+data\mlaad\fake\en\Openaudio-S1-Mini (wav files)
+data\mlaad\fake\en\OpenVoiceV2 (wav files)
+data\mlaad\fake\en\optispeech (wav files)
+data\mlaad\fake\en\orpheus-tts-0.1-finetune (wav files)
+data\mlaad\fake\en\OuteTTS (wav files)
+data\mlaad\fake\en\parler_tts_large_v1 (wav files)
+data\mlaad\fake\en\parler_tts_mini_v0.1 (wav files)
+data\mlaad\fake\en\parler_tts_mini_v1 (wav files)
+data\mlaad\fake\en\Qwen2.5-Omni (wav files)
+data\mlaad\fake\en\Resemble.ai (April 12th, 2025) (wav files)
+data\mlaad\fake\en\Ringg Squirrel TTS v1.0 (wav files)
+data\mlaad\fake\en\RVC (wav files)
+data\mlaad\fake\en\sesame_csm (wav files)
+data\mlaad\fake\en\SoulX-Podcast (wav files)
+data\mlaad\fake\en\Spark-TTS-0.5B (wav files)
+data\mlaad\fake\en\Step-Audio-EditX (wav files)
+data\mlaad\fake\en\suno_bark (wav files)
+data\mlaad\fake\en\suno_bark-small (wav files)
+data\mlaad\fake\en\Supertonic (wav files)
+data\mlaad\fake\en\tts_models_en_blizzard2013_capacitron-t2-c50 (wav files)
+data\mlaad\fake\en\tts_models_en_ek1_tacotron2 (wav files)
+data\mlaad\fake\en\tts_models_en_jenny_jenny (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_fast_pitch (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_glow-tts (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_neural_hmm (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_overflow (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_speedy-speech (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DCA (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DDC (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DDC_ph (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_vits (wav files)
+data\mlaad\fake\en\tts_models_en_ljspeech_vits--neon (wav files)
+data\mlaad\fake\en\tts_models_en_multi-dataset_tortoise-v2 (wav files)
+data\mlaad\fake\en\tts_models_en_sam_tacotron-DDC (wav files)
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\en\Veena (wav files)
+data\mlaad\fake\en\vixTTS (wav files)
+data\mlaad\fake\en\VoxCPM-0.5B (wav files)
+data\mlaad\fake\en\VoxCPM-1.5 (wav files)
+data\mlaad\fake\en\Voxtream (wav files)
+data\mlaad\fake\en\WhisperSpeech (wav files)
+data\mlaad\fake\en\ZipVoice (wav files)
+data\mlaad\fake\en\zonosTTS-v0.1 (wav files)
+data\mlaad\fake\es
+data\mlaad\fake\es\Chatterbox Multilingual (wav files)
+data\mlaad\fake\es\DeepGram (wav files)
+data\mlaad\fake\es\Edge-TTS (wav files)
+data\mlaad\fake\es\griffin_lim (wav files)
+data\mlaad\fake\es\Higgs-Audio-V2 (wav files)
+data\mlaad\fake\es\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\es\minimax_speech-02-turbo (wav files)
+data\mlaad\fake\es\OpenVoiceV2 (wav files)
+data\mlaad\fake\es\OuteTTS (wav files)
+data\mlaad\fake\es\Resemble.ai (April 12th, 2025) (wav files)
+data\mlaad\fake\es\RVC (wav files)
+data\mlaad\fake\es\tts_models_es_css10_vits (wav files)
+data\mlaad\fake\es\tts_models_es_mai_tacotron2-DDC (wav files)
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\et
+data\mlaad\fake\et\tts_models_et_cv_vits (wav files)
+data\mlaad\fake\et\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\fa
+data\mlaad\fake\fa\tts_models_fa_custom_glow-tts (wav files)
+data\mlaad\fake\fa\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\fi
+data\mlaad\fake\fi\facebook_mms-tts-fin (wav files)
+data\mlaad\fake\fi\tts_models_fi_css10_vits (wav files)
+data\mlaad\fake\fi\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\fr
+data\mlaad\fake\fr\Chatterbox Multilingual (wav files)
+data\mlaad\fake\fr\Edge-TTS (wav files)
+data\mlaad\fake\fr\facebook_mms-tts-fra (wav files)
+data\mlaad\fake\fr\FireRedTTS-2.0 (wav files)
+data\mlaad\fake\fr\FishTTS (wav files)
+data\mlaad\fake\fr\griffin_lim (wav files)
+data\mlaad\fake\fr\kokoro (wav files)
+data\mlaad\fake\fr\Kyutai-TTS (wav files)
+data\mlaad\fake\fr\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\fr\NVidia Magpie-TTS Multilingual (wav files)
+data\mlaad\fake\fr\Openaudio-S1-Mini (wav files)
+data\mlaad\fake\fr\OpenVoiceV2 (wav files)
+data\mlaad\fake\fr\OuteTTS (wav files)
+data\mlaad\fake\fr\Resemble.ai (April 12th, 2025) (wav files)
+data\mlaad\fake\fr\RVC (wav files)
+data\mlaad\fake\fr\tts_models_fr_css10_vits (wav files)
+data\mlaad\fake\fr\tts_models_fr_mai_tacotron2-DDC (wav files)
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\fr\zonosTTS-v0.1 (wav files)
+data\mlaad\fake\ga
+data\mlaad\fake\ga\tts_models_ga_cv_vits (wav files)
+data\mlaad\fake\ga\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ha
+data\mlaad\fake\ha\YarnGPT (wav files)
+data\mlaad\fake\he
+data\mlaad\fake\he\Edge-TTS (wav files)
+data\mlaad\fake\hi
+data\mlaad\fake\hi\IndicF5 (wav files)
+data\mlaad\fake\hi\Indri-TTS-0.1 (wav files)
+data\mlaad\fake\hi\Ringg Squirrel TTS v1.0 (wav files)
+data\mlaad\fake\hi\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\hi\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\hi\Veena (wav files)
+data\mlaad\fake\hr
+data\mlaad\fake\hr\tts_models_hr_cv_vits (wav files)
+data\mlaad\fake\hu
+data\mlaad\fake\hu\facebook_mms-tts-hun (wav files)
+data\mlaad\fake\hu\tts_models_hu_css10_vits (wav files)
+data\mlaad\fake\hu\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\hu\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\ig
+data\mlaad\fake\ig\YarnGPT (wav files)
+data\mlaad\fake\it
+data\mlaad\fake\it\Azzurra-Voice (wav files)
+data\mlaad\fake\it\Chatterbox Multilingual (wav files)
+data\mlaad\fake\it\Edge-TTS (wav files)
+data\mlaad\fake\it\griffin_lim (wav files)
+data\mlaad\fake\it\kokoro (wav files)
+data\mlaad\fake\it\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\it\Openaudio-S1-Mini (wav files)
+data\mlaad\fake\it\OuteTTS (wav files)
+data\mlaad\fake\it\Resemble.ai (April 12th, 2025) (wav files)
+data\mlaad\fake\it\RVC (wav files)
+data\mlaad\fake\it\tts_models_it_mai_female_glow-tts (wav files)
+data\mlaad\fake\it\tts_models_it_mai_female_vits (wav files)
+data\mlaad\fake\it\tts_models_it_mai_male_glow-tts (wav files)
+data\mlaad\fake\it\tts_models_it_mai_male_vits (wav files)
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\ja
+data\mlaad\fake\ja\kokoro (wav files)
+data\mlaad\fake\ja\Tsukasa_Speech (wav files)
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\ja\VoiceCore (wav files)
+data\mlaad\fake\jv
+data\mlaad\fake\jv\Edge-TTS (wav files)
+data\mlaad\fake\kn
+data\mlaad\fake\kn\Edge-TTS (wav files)
+data\mlaad\fake\ko
+data\mlaad\fake\ko\Chatterbox Multilingual (wav files)
+data\mlaad\fake\ko\Higgs-Audio-V2 (wav files)
+data\mlaad\fake\ko\minimax_speech-02-turbo (wav files)
+data\mlaad\fake\ko\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ko\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\lt
+data\mlaad\fake\lt\tts_models_lt_cv_vits (wav files)
+data\mlaad\fake\lv
+data\mlaad\fake\lv\tts_models_lv_cv_vits (wav files)
+data\mlaad\fake\ml
+data\mlaad\fake\ml\Edge-TTS (wav files)
+data\mlaad\fake\mr
+data\mlaad\fake\mr\IndicF5 (wav files)
+data\mlaad\fake\ms
+data\mlaad\fake\ms\Edge-TTS (wav files)
+data\mlaad\fake\mt
+data\mlaad\fake\mt\Edge-TTS (wav files)
+data\mlaad\fake\mt\tts_models_mt_cv_vits (wav files)
+data\mlaad\fake\mt\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\nl
+data\mlaad\fake\nl\facebook_mms-tts-nld (wav files)
+data\mlaad\fake\nl\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\pl
+data\mlaad\fake\pl\Edge-TTS (wav files)
+data\mlaad\fake\pl\griffin_lim (wav files)
+data\mlaad\fake\pl\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\pl\OuteTTS (wav files)
+data\mlaad\fake\pl\RVC (wav files)
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\pl\tts_models_pl_mai_female_vits (wav files)
+data\mlaad\fake\pl\WhisperSpeech (wav files)
+data\mlaad\fake\pt
+data\mlaad\fake\pt\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\pt\tts_models_pt_cv_vits (wav files)
+data\mlaad\fake\ro
+data\mlaad\fake\ro\Edge-TTS (wav files)
+data\mlaad\fake\ro\facebook_mms-tts-ron (wav files)
+data\mlaad\fake\ro\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ro\tts_models_ro_cv_vits (wav files)
+data\mlaad\fake\ru
+data\mlaad\fake\ru\Chatterbox Multilingual (wav files)
+data\mlaad\fake\ru\Edge-TTS (wav files)
+data\mlaad\fake\ru\facebook_mms-tts-rus (wav files)
+data\mlaad\fake\ru\griffin_lim (wav files)
+data\mlaad\fake\ru\OuteTTS (wav files)
+data\mlaad\fake\ru\RVC (wav files)
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\si
+data\mlaad\fake\si\Edge-TTS (wav files)
+data\mlaad\fake\sk
+data\mlaad\fake\sk\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\sk\tts_models_sk_cv_vits (wav files)
+data\mlaad\fake\sl
+data\mlaad\fake\sl\tts_models_sl_cv_vits (wav files)
+data\mlaad\fake\sv
+data\mlaad\fake\sv\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\sv\tts_models_sv_cv_vits (wav files)
+data\mlaad\fake\sw
+data\mlaad\fake\sw\facebook_mms-tts-swe (wav files)
+data\mlaad\fake\ta
+data\mlaad\fake\ta\IndicF5 (wav files)
+data\mlaad\fake\th
+data\mlaad\fake\th\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\tk
+data\mlaad\fake\tk\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\tr
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\tr\tts_models_tr_common-voice_glow-tts (wav files)
+data\mlaad\fake\uk
+data\mlaad\fake\uk\Edge-TTS (wav files)
+data\mlaad\fake\uk\facebook_mms-tts-ukr (wav files)
+data\mlaad\fake\uk\griffin_lim (wav files)
+data\mlaad\fake\uk\OuteTTS (wav files)
+data\mlaad\fake\uk\RVC (wav files)
+data\mlaad\fake\uk\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\uk\tts_models_uk_mai_glow-tts (wav files)
+data\mlaad\fake\uk\tts_models_uk_mai_vits (wav files)
+data\mlaad\fake\ur
+data\mlaad\fake\ur\Edge-TTS (wav files)
+data\mlaad\fake\vi
+data\mlaad\fake\vi\VieNeu-TTS (wav files)
+data\mlaad\fake\vi\vixTTS (wav files)
+data\mlaad\fake\yo
+data\mlaad\fake\yo\YarnGPT (wav files)
+data\mlaad\fake\zh-cn
+data\mlaad\fake\zh-cn\Index-TTS-1.5 (wav files)
+data\mlaad\fake\zh-cn\Index-TTS-2.0 (wav files)
+data\mlaad\fake\zh-cn\kokoro (wav files)
+data\mlaad\fake\zh-cn\Llasa-1B-Multilingual (wav files)
+data\mlaad\fake\zh-cn\MegaTTS3 (wav files)
+data\mlaad\fake\zh-cn\Microsoft VibeVoice 1.5B (wav files)
+data\mlaad\fake\zh-cn\Microsoft VibeVoice Large (wav files)
+data\mlaad\fake\zh-cn\MiniCPM-o-2.6 (wav files)
+data\mlaad\fake\zh-cn\OpenVoiceV2 (wav files)
+data\mlaad\fake\zh-cn\Step-Audio-EditX (wav files)
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_bark (wav files)
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_xtts_v1.1 (wav files)
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_xtts_v2 (wav files)
+data\mlaad\fake\zh-cn\tts_models_zh-CN_baker_tacotron2-DDC-GST (wav files)
+data\mlaad\fake\zh-cn\VoxCPM-0.5B (wav files)
+data\mlaad\fake\zh-cn\VoxCPM-1.5 (wav files)
+data\mlaad\fake\zh-cn\ZipVoice (wav files)
+data\speechfake
+data\speechfake\MD
+data\speechfake\MD\CosyVoice
+data\speechfake\MD\CosyVoice\ko (wav files)
+data\speechfake\MD\EdgeTTS
+data\speechfake\MD\EdgeTTS\ko-KR-HyunsuNeural (wav files)
+data\speechfake\MD\EdgeTTS\ko-KR-SunHiNeural (wav files)
+data\speechfake\MD\MeloTTS
+data\speechfake\MD\MeloTTS\ko (wav files)
+data\speechfake\MD\OpenVoice
+data\speechfake\MD\OpenVoice\ko (wav files)
+data\speechfake\MD\SeedVC
+data\speechfake\MD\SeedVC\ko (wav files)
+data\speechfake\metadata
+data\speechfake\metadata\MD
+data\speechfake\metadata\Real
+data\speechfake\Real
+data\speechfake\Real\CommonVoice
+data\speechfake\Real\CommonVoice\ko
+data\speechfake\Real\CommonVoice\ko\dev
+data\speechfake\Real\CommonVoice\ko\dev\ko_dev_0 (wav files)
+data\speechfake\Real\CommonVoice\ko\invalidated
+data\speechfake\Real\CommonVoice\ko\invalidated\ko_invalidated_0 (wav files)
+data\speechfake\Real\CommonVoice\ko\other
+data\speechfake\Real\CommonVoice\ko\other\ko_other_0 (wav files)
+data\speechfake\Real\CommonVoice\ko\test
+data\speechfake\Real\CommonVoice\ko\test\ko_test_0 (wav files)
+data\speechfake\Real\CommonVoice\ko\train
+data\speechfake\Real\CommonVoice\ko\train\ko_train_0 (wav files)
+
+[파일 — *.json, *.mp3, *.wav 제외]
+------------------------------------------------------------
+data\mailabs\de_DE\by_book\._info.txt
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\._info.txt
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\._merkel_metadata.txt
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\._metadata.csv
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\info.txt
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\merkel_metadata.txt
+data\mailabs\de_DE\by_book\female\angela_merkel\merkel_alone\metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\._info.txt
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus\._grune_haus_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus\._metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus\grune_haus_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\grune_haus\metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\info.txt
+data\mailabs\de_DE\by_book\female\eva_k\kleine_lord\._kleine_lord_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\kleine_lord\kleine_lord_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\kleine_lord\metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\toten_seelen\._toten_seelen_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\toten_seelen\metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\toten_seelen\toten_seelen_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\werde_die_du_bist\._werde_die_du_bist_metadata.txt
+data\mailabs\de_DE\by_book\female\eva_k\werde_die_du_bist\metadata.csv
+data\mailabs\de_DE\by_book\female\eva_k\werde_die_du_bist\werde_die_du_bist_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\._info.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\alter_afrikaner\._alter_afrikaner_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\alter_afrikaner\alter_afrikaner_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\alter_afrikaner\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\caspar\._caspar_hauser_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\caspar\caspar_hauser_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\caspar\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\frankenstein\._frankenstein_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\frankenstein\frankenstein_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\frankenstein\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\grune_gesicht\._grune_gesicht_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\grune_gesicht\grune_gesicht_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\grune_gesicht\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\info.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\menschenhasser\._menschenhasser_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\menschenhasser\menschenhasser_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\menschenhasser\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\sterben\._sterben_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\sterben\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\sterben\sterben_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\tom_sawyer\._tom_sawyer_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\tom_sawyer\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\tom_sawyer\tom_sawyer_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\tschun\._tschun_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\tschun\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\tschun\tschun_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\weihnachtsabend\._weihnachtsabend_metadata.txt
+data\mailabs\de_DE\by_book\female\ramona_deininger\weihnachtsabend\metadata.csv
+data\mailabs\de_DE\by_book\female\ramona_deininger\weihnachtsabend\weihnachtsabend_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\._info.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\das_letzte_marchen\._das_letzte_marchen_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\das_letzte_marchen\das_letzte_marchen_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\das_letzte_marchen\metadata.csv
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\ferien_vom_ich\._ferien_vom_ich_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\ferien_vom_ich\ferien_vom_ich_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\ferien_vom_ich\metadata.csv
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\info.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\maerchen\._maerchen_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\maerchen\maerchen_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\maerchen\metadata.csv
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\mein_weg_als_deutscher_und_jude\._mein_weg_als_deutscher_und_jude_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\mein_weg_als_deutscher_und_jude\mein_weg_als_deutscher_und_jude_metadata.txt
+data\mailabs\de_DE\by_book\female\rebecca_braunert_plunkett\mein_weg_als_deutscher_und_jude\metadata.csv
+data\mailabs\de_DE\by_book\info.txt
+data\mailabs\de_DE\by_book\male\karlsson\._info.txt
+data\mailabs\de_DE\by_book\male\karlsson\altehous\._altehous_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\altehous\altehous_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\altehous\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\herrnarnesschatz\._herrnarnesschatz_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\herrnarnesschatz\herrnarnesschatz_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\herrnarnesschatz\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\info.txt
+data\mailabs\de_DE\by_book\male\karlsson\kammmacher\._kammmacher_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\kammmacher\kammmacher_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\kammmacher\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\kleinzaches\._kleinzaches_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\kleinzaches\kleinzaches_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\kleinzaches\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\koenigsgaukler\._koenigsgaukler_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\koenigsgaukler\koenigsgaukler_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\koenigsgaukler\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\liebesbriefe\._liebesbriefe_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\liebesbriefe\liebesbriefe_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\liebesbriefe\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\maedchen_von_moorhof\._maedchen_von_moorhof_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\maedchen_von_moorhof\maedchen_von_moorhof_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\maedchen_von_moorhof\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\odysseus\._odysseus_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\odysseus\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\odysseus\odysseus_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\reise_tilsit\._reise_tilsit_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\reise_tilsit\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\reise_tilsit\reise_tilsit_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\sandmann\._sandmann_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\sandmann\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\sandmann\sandmann_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\schmied_seines_glueckes\._schmied_seines_glueckes_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\schmied_seines_glueckes\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\schmied_seines_glueckes\schmied_seines_glueckes_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\spiegel_kaetzchen\._spiegel_kaetzchen_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\spiegel_kaetzchen\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\spiegel_kaetzchen\spiegel_kaetzchen_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\undine\._undine_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\undine\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\undine\undine_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\unterm_birnbaum\._unterm_birnbaum_metadata.txt
+data\mailabs\de_DE\by_book\male\karlsson\unterm_birnbaum\metadata.csv
+data\mailabs\de_DE\by_book\male\karlsson\unterm_birnbaum\unterm_birnbaum_metadata.txt
+data\mailabs\de_DE\by_book\mix\auf_zwei_planeten\._auf_zwei_planeten_metadata.txt
+data\mailabs\de_DE\by_book\mix\auf_zwei_planeten\auf_zwei_planeten_metadata.txt
+data\mailabs\de_DE\by_book\mix\auf_zwei_planeten\metadata.csv
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe\._erzaehlungen_poe_metadata.txt
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe\._metadata.csv
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe\erzaehlungen_poe_metadata.txt
+data\mailabs\de_DE\by_book\mix\erzaehlungen_poe\metadata.csv
+data\mailabs\de_DE\by_book\mix\info.txt
+data\mailabs\en_UK\by_book\._info.txt
+data\mailabs\en_UK\by_book\female\elizabeth_klett\._info.txt
+data\mailabs\en_UK\by_book\female\elizabeth_klett\info.txt
+data\mailabs\en_UK\by_book\female\elizabeth_klett\jane_eyre\metadata.csv
+data\mailabs\en_UK\by_book\female\elizabeth_klett\wives_and_daughters\metadata.csv
+data\mailabs\en_UK\by_book\info.txt
+data\mailabs\en_US\by_book\._info.txt
+data\mailabs\en_US\by_book\female\judy_bieber\._info.txt
+data\mailabs\en_US\by_book\female\judy_bieber\dorothy_and_wizard_oz\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\emerald_city_of_oz\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\info.txt
+data\mailabs\en_US\by_book\female\judy_bieber\ozma_of_oz\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\rinkitink_in_oz\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\sky_island\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\the_master_key\metadata.csv
+data\mailabs\en_US\by_book\female\judy_bieber\the_sea_fairies\metadata.csv
+data\mailabs\en_US\by_book\female\mary_ann\midnight_passenger\metadata.csv
+data\mailabs\en_US\by_book\female\mary_ann\northandsouth\metadata.csv
+data\mailabs\en_US\by_book\info.txt
+data\mailabs\en_US\by_book\male\elliot_miller\._info.txt
+data\mailabs\en_US\by_book\male\elliot_miller\hunters_space\metadata.csv
+data\mailabs\en_US\by_book\male\elliot_miller\info.txt
+data\mailabs\en_US\by_book\male\elliot_miller\pink_fairy_book\metadata.csv
+data\mailabs\en_US\by_book\male\elliot_miller\pirates_of_ersatz\metadata.csv
+data\mailabs\en_US\by_book\male\elliot_miller\poisoned_pen\metadata.csv
+data\mailabs\en_US\by_book\male\elliot_miller\silent_bullet\metadata.csv
+data\mailabs\es_ES\by_book\._info.txt
+data\mailabs\es_ES\by_book\female\karen_savage\angelina\metadata.csv
+data\mailabs\es_ES\by_book\female\karen_savage\info.txt
+data\mailabs\es_ES\by_book\info.txt
+data\mailabs\es_ES\by_book\male\tux\bailen\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\el_19_de_marzo_y_el_2_de_nayo\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\eneida\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\info.txt
+data\mailabs\es_ES\by_book\male\tux\la_batalla_de_los_arapiles\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\la_corte_de_carlos_iv\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\napoleon_en_chamartin\metadata.csv
+data\mailabs\es_ES\by_book\male\tux\trafalgar\metadata.csv
+data\mailabs\es_ES\by_book\male\victor_villarraza\cuentos_clasicos_del_norte\metadata.csv
+data\mailabs\es_ES\by_book\male\victor_villarraza\info.txt
+data\mailabs\es_ES\by_book\male\victor_villarraza\la_dama_de_las_camelias\metadata.csv
+data\mailabs\es_ES\by_book\mix\._info.txt
+data\mailabs\es_ES\by_book\mix\don_quijote\metadata.csv
+data\mailabs\es_ES\by_book\mix\info.txt
+data\mailabs\es_ES\by_book\mix\la_condenada\metadata.csv
+data\mailabs\fr_FR\female\ezwa\info.txt
+data\mailabs\fr_FR\female\ezwa\keraban_le_tetu\info.txt
+data\mailabs\fr_FR\female\ezwa\keraban_le_tetu\metadata.csv
+data\mailabs\fr_FR\female\ezwa\l_epouvante\info.txt
+data\mailabs\fr_FR\female\ezwa\l_epouvante\metadata.csv
+data\mailabs\fr_FR\female\ezwa\la_fabrique_de_crimes\info.txt
+data\mailabs\fr_FR\female\ezwa\la_fabrique_de_crimes\metadata.csv
+data\mailabs\fr_FR\female\ezwa\la_mare_au_diable\info.txt
+data\mailabs\fr_FR\female\ezwa\la_mare_au_diable\metadata.csv
+data\mailabs\fr_FR\female\ezwa\monsieur_lecoq\info.txt
+data\mailabs\fr_FR\female\ezwa\monsieur_lecoq\metadata.csv
+data\mailabs\fr_FR\female\nadine_eckert_boulet\info.txt
+data\mailabs\fr_FR\female\nadine_eckert_boulet\la_vampire\info.txt
+data\mailabs\fr_FR\female\nadine_eckert_boulet\la_vampire\metadata.csv
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_mysteres_de_paris\info.txt
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_mysteres_de_paris\metadata.csv
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_tribulations_dun_chinoise\info.txt
+data\mailabs\fr_FR\female\nadine_eckert_boulet\les_tribulations_dun_chinoise\metadata.csv
+data\mailabs\fr_FR\female\nadine_eckert_boulet\madame_bovary\info.txt
+data\mailabs\fr_FR\female\nadine_eckert_boulet\madame_bovary\metadata.csv
+data\mailabs\fr_FR\info.txt
+data\mailabs\fr_FR\male\bernard\info.txt
+data\mailabs\fr_FR\male\bernard\le_dernier_des_mohicans\info.txt
+data\mailabs\fr_FR\male\bernard\le_dernier_des_mohicans\metadata.csv
+data\mailabs\fr_FR\male\bernard\le_pays_des_fourrures\info.txt
+data\mailabs\fr_FR\male\bernard\le_pays_des_fourrures\metadata.csv
+data\mailabs\fr_FR\male\gilles_g_le_blanc\info.txt
+data\mailabs\fr_FR\male\gilles_g_le_blanc\les_miserables_tome_5\info.txt
+data\mailabs\fr_FR\male\gilles_g_le_blanc\les_miserables_tome_5\metadata.csv
+data\mailabs\fr_FR\male\gilles_g_le_blanc\lupin_contre_holmes\info.txt
+data\mailabs\fr_FR\male\gilles_g_le_blanc\lupin_contre_holmes\metadata.csv
+data\mailabs\fr_FR\male\zeckou\info.txt
+data\mailabs\fr_FR\male\zeckou\l_ile_mysterieuse\info.txt
+data\mailabs\fr_FR\male\zeckou\l_ile_mysterieuse\metadata.csv
+data\mailabs\fr_FR\mix\info.txt
+data\mailabs\fr_FR\mix\sous_les_mers\metadata.csv
+data\mailabs\it_IT\by_book\._info.txt
+data\mailabs\it_IT\by_book\female\lisa_caputo\info.txt
+data\mailabs\it_IT\by_book\female\lisa_caputo\malavoglia\metadata.csv
+data\mailabs\it_IT\by_book\info.txt
+data\mailabs\it_IT\by_book\male\riccardo_fasol\galatea\metadata.csv
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_fu_mattia_pascal\metadata.csv
+data\mailabs\it_IT\by_book\male\riccardo_fasol\il_ritratto_del_diavolo\metadata.csv
+data\mailabs\it_IT\by_book\male\riccardo_fasol\info.txt
+data\mailabs\it_IT\by_book\male\riccardo_fasol\la_contessa_di_karolystria\metadata.csv
+data\mailabs\it_IT\by_book\male\riccardo_fasol\le_meraviglie_del_duemila\metadata.csv
+data\mailabs\it_IT\by_book\mix\info.txt
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_00\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_01\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_02\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_03\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_04\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_05\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_06\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_07\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_08\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_09\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_10\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_11\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_12\metadata.csv
+data\mailabs\it_IT\by_book\mix\novelle_per_un_anno_13\metadata.csv
+data\mailabs\pl_PL\by_book\female\nina_brown\saragossie\Info.txt
+data\mailabs\pl_PL\by_book\female\nina_brown\saragossie\metadata.csv
+data\mailabs\pl_PL\by_book\info.txt
+data\mailabs\pl_PL\by_book\male\piotr_nater\lalka\Info.txt
+data\mailabs\pl_PL\by_book\male\piotr_nater\lalka\metadata.csv
+data\mailabs\ru_RU\by_book\._info.txt
+data\mailabs\ru_RU\by_book\female\hajdurova\._Info.txt
+data\mailabs\ru_RU\by_book\female\hajdurova\chetvero_nischih\metadata.csv
+data\mailabs\ru_RU\by_book\female\hajdurova\falshiviy_kupon\metadata.csv
+data\mailabs\ru_RU\by_book\female\hajdurova\Info.txt
+data\mailabs\ru_RU\by_book\female\hajdurova\jizn_gnora\metadata.csv
+data\mailabs\ru_RU\by_book\female\hajdurova\mnogo_shuma_iz_nichego\metadata.csv
+data\mailabs\ru_RU\by_book\female\hajdurova\strashnaya_minuta\metadata.csv
+data\mailabs\ru_RU\by_book\female\hajdurova\sulamif\metadata.csv
+data\mailabs\ru_RU\by_book\info.txt
+data\mailabs\ru_RU\by_book\male\minaev\._Info.txt
+data\mailabs\ru_RU\by_book\male\minaev\Info.txt
+data\mailabs\ru_RU\by_book\male\minaev\oblomov\metadata.csv
+data\mailabs\ru_RU\by_book\male\nikolaev\._Info.txt
+data\mailabs\ru_RU\by_book\male\nikolaev\argentinetz\metadata.csv
+data\mailabs\ru_RU\by_book\male\nikolaev\Info.txt
+data\mailabs\uk_UK\by_book\._info.txt
+data\mailabs\uk_UK\by_book\female\sumska\._info.txt
+data\mailabs\uk_UK\by_book\female\sumska\info.txt
+data\mailabs\uk_UK\by_book\female\sumska\kaydasheva\._metadata.csv
+data\mailabs\uk_UK\by_book\female\sumska\kaydasheva\metadata.csv
+data\mailabs\uk_UK\by_book\female\sumska\mykola_djerya\metadata.csv
+data\mailabs\uk_UK\by_book\info.txt
+data\mailabs\uk_UK\by_book\male\loboda\._info.txt
+data\mailabs\uk_UK\by_book\male\loboda\chorna_rada\metadata.csv
+data\mailabs\uk_UK\by_book\male\loboda\info.txt
+data\mailabs\uk_UK\by_book\male\loboda\ukradene_schastja\metadata.csv
+data\mailabs\uk_UK\by_book\male\loboda\zahar_berkut\metadata.csv
+data\mailabs\uk_UK\by_book\male\miskun\._info.txt
+data\mailabs\uk_UK\by_book\male\miskun\15_y_o_capitan\._metadata copy.txt
+data\mailabs\uk_UK\by_book\male\miskun\15_y_o_capitan\metadata copy.txt
+data\mailabs\uk_UK\by_book\male\miskun\15_y_o_capitan\metadata.csv
+data\mailabs\uk_UK\by_book\male\miskun\info.txt
+data\mailabs\uk_UK\by_book\male\obruchov\._info.txt
+data\mailabs\uk_UK\by_book\male\obruchov\dorogoyu_tsinoyu\metadata.csv
+data\mailabs\uk_UK\by_book\male\obruchov\fata_morgana\metadata.csv
+data\mailabs\uk_UK\by_book\male\obruchov\info.txt
+data\mailabs\uk_UK\by_book\male\obruchov\koni_nevynni\metadata.csv
+data\mailabs\uk_UK\by_book\male\obruchov\tini_zabutyh_predkiv\metadata.csv
+data\mailabs\uk_UK\by_book\male\obruchov\voly\metadata.csv
+data\mailabs\uk_UK\by_book\male\pysariev\._info.txt
+data\mailabs\uk_UK\by_book\male\pysariev\info.txt
+data\mailabs\uk_UK\by_book\male\pysariev\minestreli\metadata.csv
+data\mailabs\uk_UK\by_book\male\pysariev\transformations\metadata.csv
+data\mailabs\uk_UK\by_book\male\shepel\._info.txt
+data\mailabs\uk_UK\by_book\male\shepel\info.txt
+data\mailabs\uk_UK\by_book\male\shepel\zvirobij\metadata.csv
+data\mlaad\.gitattributes
+data\mlaad\fake\am\Edge-TTS\meta.csv
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\ar\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\bg\tts_models_bg_cv_vits\meta.csv
+data\mlaad\fake\bg\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\bn\IndicF5\meta.csv
+data\mlaad\fake\bn\tts_models_bn_custom_vits-female\meta.csv
+data\mlaad\fake\bn\tts_models_bn_custom_vits-male\meta.csv
+data\mlaad\fake\bn\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\cs\tts_models_cs_cv_vits\meta.csv
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\cs\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\da\tts_models_da_cv_vits\meta.csv
+data\mlaad\fake\da\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\de\CaroTTS\meta.csv
+data\mlaad\fake\de\Cartesia.ai (Sonic-3)\meta.csv
+data\mlaad\fake\de\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\de\Edge-TTS\meta.csv
+data\mlaad\fake\de\facebook_mms-tts-deu\meta.csv
+data\mlaad\fake\de\FishTTS\meta.csv
+data\mlaad\fake\de\griffin_lim\meta.csv
+data\mlaad\fake\de\Higgs-Audio-V2\meta.csv
+data\mlaad\fake\de\Kani-TTS-370M\meta.csv
+data\mlaad\fake\de\Kartoffelbox\meta.csv
+data\mlaad\fake\de\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\de\NVidia Magpie-TTS Multilingual\meta.csv
+data\mlaad\fake\de\OuteTTS\meta.csv
+data\mlaad\fake\de\Resemble.ai (April 12th, 2025)\meta.csv
+data\mlaad\fake\de\RVC\meta.csv
+data\mlaad\fake\de\tts_models_de_css10_vits-neon\meta.csv
+data\mlaad\fake\de\tts_models_de_thorsten_tacotron2-DCA\meta.csv
+data\mlaad\fake\de\tts_models_de_thorsten_tacotron2-DDC\meta.csv
+data\mlaad\fake\de\tts_models_de_thorsten_vits\meta.csv
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\de\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\el\tts_models_el_cv_vits\meta.csv
+data\mlaad\fake\el\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\en\Cartesia.ai (Sonic-3)\meta.csv
+data\mlaad\fake\en\Chatterbox\meta.csv
+data\mlaad\fake\en\DeepGram\meta.csv
+data\mlaad\fake\en\e2-tts\meta.csv
+data\mlaad\fake\en\Edge-TTS\meta.csv
+data\mlaad\fake\en\f5-tts\meta.csv
+data\mlaad\fake\en\facebook_mms-tts-eng\meta.csv
+data\mlaad\fake\en\FireRedTTS-2.0\meta.csv
+data\mlaad\fake\en\FishTTS\meta.csv
+data\mlaad\fake\en\griffin_lim\.meta.csv.swp
+data\mlaad\fake\en\griffin_lim\meta.csv
+data\mlaad\fake\en\Higgs-Audio-V2\meta.csv
+data\mlaad\fake\en\Index-TTS-1.5\meta.csv
+data\mlaad\fake\en\Index-TTS-2.0\meta.csv
+data\mlaad\fake\en\Indri-TTS-0.1\meta.csv
+data\mlaad\fake\en\Kani-TTS-370M\meta.csv
+data\mlaad\fake\en\Kitten-TTS-Nano-0.1\meta.csv
+data\mlaad\fake\en\Kitten-TTS-Nano-0.2\meta.csv
+data\mlaad\fake\en\kokoro\meta.csv
+data\mlaad\fake\en\Kyutai-TTS\meta.csv
+data\mlaad\fake\en\Llasa-1B\meta.csv
+data\mlaad\fake\en\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\en\Llasa-3B\meta.csv
+data\mlaad\fake\en\Llasa-8B\meta.csv
+data\mlaad\fake\en\Mars5\meta.csv
+data\mlaad\fake\en\Marvis-TTS\meta.csv
+data\mlaad\fake\en\MatchaTTS\meta.csv
+data\mlaad\fake\en\Maya1 TTS\meta.csv
+data\mlaad\fake\en\MegaTTS3\meta.csv
+data\mlaad\fake\en\MeloTTS\meta.csv
+data\mlaad\fake\en\Metavoice-1B\meta.csv
+data\mlaad\fake\en\Microsoft VibeVoice 1.5B\meta.csv
+data\mlaad\fake\en\Microsoft VibeVoice Large\meta.csv
+data\mlaad\fake\en\microsoft_speecht5_tts\meta.csv
+data\mlaad\fake\en\MiniCPM-o-2.6\meta.csv
+data\mlaad\fake\en\minimax_speech-02-turbo\meta.csv
+data\mlaad\fake\en\minimax_speech-2.6-hd\meta.csv
+data\mlaad\fake\en\Nari Dia-1.6B\meta.csv
+data\mlaad\fake\en\Nari Dia2\meta.csv
+data\mlaad\fake\en\NeuTTS-Air\meta.csv
+data\mlaad\fake\en\Openaudio-S1-Mini\meta.csv
+data\mlaad\fake\en\Openaudio-S1-Mini\meta.csv.bak
+data\mlaad\fake\en\OpenVoiceV2\meta.csv
+data\mlaad\fake\en\optispeech\meta.csv
+data\mlaad\fake\en\orpheus-tts-0.1-finetune\meta.csv
+data\mlaad\fake\en\OuteTTS\meta.csv
+data\mlaad\fake\en\parler_tts_large_v1\meta.csv
+data\mlaad\fake\en\parler_tts_mini_v0.1\meta.csv
+data\mlaad\fake\en\parler_tts_mini_v1\meta.csv
+data\mlaad\fake\en\Qwen2.5-Omni\meta.csv
+data\mlaad\fake\en\Resemble.ai (April 12th, 2025)\meta.csv
+data\mlaad\fake\en\Ringg Squirrel TTS v1.0\meta.csv
+data\mlaad\fake\en\RVC\meta.csv
+data\mlaad\fake\en\sesame_csm\meta.csv
+data\mlaad\fake\en\SoulX-Podcast\meta.csv
+data\mlaad\fake\en\Spark-TTS-0.5B\meta.csv
+data\mlaad\fake\en\Step-Audio-EditX\meta.csv
+data\mlaad\fake\en\suno_bark\meta.csv
+data\mlaad\fake\en\suno_bark-small\meta.csv
+data\mlaad\fake\en\Supertonic\meta.csv
+data\mlaad\fake\en\tts_models_en_blizzard2013_capacitron-t2-c50\meta.csv
+data\mlaad\fake\en\tts_models_en_ek1_tacotron2\meta.csv
+data\mlaad\fake\en\tts_models_en_jenny_jenny\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_fast_pitch\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_glow-tts\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_neural_hmm\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_overflow\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_speedy-speech\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DCA\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DDC\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_tacotron2-DDC_ph\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_vits\meta.csv
+data\mlaad\fake\en\tts_models_en_ljspeech_vits--neon\meta.csv
+data\mlaad\fake\en\tts_models_en_multi-dataset_tortoise-v2\meta.csv
+data\mlaad\fake\en\tts_models_en_sam_tacotron-DDC\meta.csv
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\en\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\en\Veena\meta.csv
+data\mlaad\fake\en\vixTTS\meta.csv
+data\mlaad\fake\en\VoxCPM-0.5B\meta.csv
+data\mlaad\fake\en\VoxCPM-1.5\meta.csv
+data\mlaad\fake\en\Voxtream\meta.csv
+data\mlaad\fake\en\WhisperSpeech\meta.csv
+data\mlaad\fake\en\ZipVoice\meta.csv
+data\mlaad\fake\en\zonosTTS-v0.1\meta.csv
+data\mlaad\fake\es\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\es\DeepGram\meta.csv
+data\mlaad\fake\es\Edge-TTS\meta.csv
+data\mlaad\fake\es\griffin_lim\meta.csv
+data\mlaad\fake\es\Higgs-Audio-V2\meta.csv
+data\mlaad\fake\es\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\es\minimax_speech-02-turbo\meta.csv
+data\mlaad\fake\es\OpenVoiceV2\meta.csv
+data\mlaad\fake\es\OuteTTS\meta.csv
+data\mlaad\fake\es\Resemble.ai (April 12th, 2025)\meta.csv
+data\mlaad\fake\es\RVC\meta.csv
+data\mlaad\fake\es\tts_models_es_css10_vits\meta.csv
+data\mlaad\fake\es\tts_models_es_mai_tacotron2-DDC\meta.csv
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\es\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\et\tts_models_et_cv_vits\meta.csv
+data\mlaad\fake\et\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\fa\tts_models_fa_custom_glow-tts\meta.csv
+data\mlaad\fake\fa\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\fi\facebook_mms-tts-fin\meta.csv
+data\mlaad\fake\fi\tts_models_fi_css10_vits\meta.csv
+data\mlaad\fake\fi\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\fr\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\fr\Edge-TTS\meta.csv
+data\mlaad\fake\fr\facebook_mms-tts-fra\meta.csv
+data\mlaad\fake\fr\FireRedTTS-2.0\meta.csv
+data\mlaad\fake\fr\FishTTS\meta.csv
+data\mlaad\fake\fr\griffin_lim\meta.csv
+data\mlaad\fake\fr\kokoro\meta.csv
+data\mlaad\fake\fr\Kyutai-TTS\meta.csv
+data\mlaad\fake\fr\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\fr\NVidia Magpie-TTS Multilingual\meta.csv
+data\mlaad\fake\fr\Openaudio-S1-Mini\meta.csv
+data\mlaad\fake\fr\Openaudio-S1-Mini\meta.csv.bak
+data\mlaad\fake\fr\OpenVoiceV2\meta.csv
+data\mlaad\fake\fr\OuteTTS\meta.csv
+data\mlaad\fake\fr\Resemble.ai (April 12th, 2025)\meta.csv
+data\mlaad\fake\fr\RVC\meta.csv
+data\mlaad\fake\fr\tts_models_fr_css10_vits\meta.csv
+data\mlaad\fake\fr\tts_models_fr_mai_tacotron2-DDC\meta.csv
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\fr\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\fr\zonosTTS-v0.1\meta.csv
+data\mlaad\fake\ga\tts_models_ga_cv_vits\meta.csv
+data\mlaad\fake\ga\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ha\YarnGPT\meta.csv
+data\mlaad\fake\he\Edge-TTS\meta.csv
+data\mlaad\fake\hi\IndicF5\meta.csv
+data\mlaad\fake\hi\Indri-TTS-0.1\meta.csv
+data\mlaad\fake\hi\Ringg Squirrel TTS v1.0\meta.csv
+data\mlaad\fake\hi\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\hi\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\hi\Veena\meta.csv
+data\mlaad\fake\hr\tts_models_hr_cv_vits\meta.csv
+data\mlaad\fake\hu\facebook_mms-tts-hun\meta.csv
+data\mlaad\fake\hu\tts_models_hu_css10_vits\meta.csv
+data\mlaad\fake\hu\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\hu\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\ig\YarnGPT\meta.csv
+data\mlaad\fake\it\Azzurra-Voice\meta.csv
+data\mlaad\fake\it\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\it\Edge-TTS\meta.csv
+data\mlaad\fake\it\griffin_lim\meta.csv
+data\mlaad\fake\it\kokoro\meta.csv
+data\mlaad\fake\it\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\it\Openaudio-S1-Mini\meta.csv
+data\mlaad\fake\it\Openaudio-S1-Mini\meta.csv.bak
+data\mlaad\fake\it\OuteTTS\meta.csv
+data\mlaad\fake\it\Resemble.ai (April 12th, 2025)\meta.csv
+data\mlaad\fake\it\RVC\meta.csv
+data\mlaad\fake\it\tts_models_it_mai_female_glow-tts\meta.csv
+data\mlaad\fake\it\tts_models_it_mai_female_vits\meta.csv
+data\mlaad\fake\it\tts_models_it_mai_male_glow-tts\meta.csv
+data\mlaad\fake\it\tts_models_it_mai_male_vits\meta.csv
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\it\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\ja\kokoro\meta.csv
+data\mlaad\fake\ja\Tsukasa_Speech\meta.csv
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\ja\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\ja\VoiceCore\meta.csv
+data\mlaad\fake\jv\Edge-TTS\meta.csv
+data\mlaad\fake\kn\Edge-TTS\meta.csv
+data\mlaad\fake\ko\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\ko\Higgs-Audio-V2\meta.csv
+data\mlaad\fake\ko\minimax_speech-02-turbo\meta.csv
+data\mlaad\fake\ko\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ko\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\lt\tts_models_lt_cv_vits\meta.csv
+data\mlaad\fake\lv\tts_models_lv_cv_vits\meta.csv
+data\mlaad\fake\ml\Edge-TTS\meta.csv
+data\mlaad\fake\mr\IndicF5\meta.csv
+data\mlaad\fake\ms\Edge-TTS\meta.csv
+data\mlaad\fake\mt\Edge-TTS\meta.csv
+data\mlaad\fake\mt\tts_models_mt_cv_vits\meta.csv
+data\mlaad\fake\mt\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\nl\facebook_mms-tts-nld\meta.csv
+data\mlaad\fake\nl\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\nl\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\pl\Edge-TTS\meta.csv
+data\mlaad\fake\pl\griffin_lim\meta.csv
+data\mlaad\fake\pl\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\pl\OuteTTS\meta.csv
+data\mlaad\fake\pl\RVC\meta.csv
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\pl\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\pl\tts_models_pl_mai_female_vits\meta.csv
+data\mlaad\fake\pl\WhisperSpeech\meta.csv
+data\mlaad\fake\pt\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\pt\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\pt\tts_models_pt_cv_vits\meta.csv
+data\mlaad\fake\ro\Edge-TTS\meta.csv
+data\mlaad\fake\ro\facebook_mms-tts-ron\meta.csv
+data\mlaad\fake\ro\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ro\tts_models_ro_cv_vits\meta.csv
+data\mlaad\fake\ru\Chatterbox Multilingual\meta.csv
+data\mlaad\fake\ru\Edge-TTS\meta.csv
+data\mlaad\fake\ru\facebook_mms-tts-rus\meta.csv
+data\mlaad\fake\ru\griffin_lim\meta.csv
+data\mlaad\fake\ru\OuteTTS\meta.csv
+data\mlaad\fake\ru\RVC\meta.csv
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\ru\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\si\Edge-TTS\meta.csv
+data\mlaad\fake\sk\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\sk\tts_models_sk_cv_vits\meta.csv
+data\mlaad\fake\sl\tts_models_sl_cv_vits\meta.csv
+data\mlaad\fake\sv\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\sv\tts_models_sv_cv_vits\meta.csv
+data\mlaad\fake\sw\facebook_mms-tts-swe\meta.csv
+data\mlaad\fake\ta\IndicF5\meta.csv
+data\mlaad\fake\th\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\tk\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\tr\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\tr\tts_models_tr_common-voice_glow-tts\meta.csv
+data\mlaad\fake\uk\Edge-TTS\meta.csv
+data\mlaad\fake\uk\facebook_mms-tts-ukr\meta.csv
+data\mlaad\fake\uk\griffin_lim\meta.csv
+data\mlaad\fake\uk\OuteTTS\meta.csv
+data\mlaad\fake\uk\RVC\meta.csv
+data\mlaad\fake\uk\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\uk\tts_models_uk_mai_glow-tts\meta.csv
+data\mlaad\fake\uk\tts_models_uk_mai_vits\meta.csv
+data\mlaad\fake\ur\Edge-TTS\meta.csv
+data\mlaad\fake\vi\VieNeu-TTS\meta.csv
+data\mlaad\fake\vi\vixTTS\meta.csv
+data\mlaad\fake\yo\YarnGPT\meta.csv
+data\mlaad\fake\zh-cn\Index-TTS-1.5\meta.csv
+data\mlaad\fake\zh-cn\Index-TTS-2.0\meta.csv
+data\mlaad\fake\zh-cn\kokoro\meta.csv
+data\mlaad\fake\zh-cn\Llasa-1B-Multilingual\meta.csv
+data\mlaad\fake\zh-cn\MegaTTS3\meta.csv
+data\mlaad\fake\zh-cn\Microsoft VibeVoice 1.5B\meta.csv
+data\mlaad\fake\zh-cn\Microsoft VibeVoice Large\meta.csv
+data\mlaad\fake\zh-cn\MiniCPM-o-2.6\meta.csv
+data\mlaad\fake\zh-cn\OpenVoiceV2\meta.csv
+data\mlaad\fake\zh-cn\Step-Audio-EditX\meta.csv
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_bark\meta.csv
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_xtts_v1.1\meta.csv
+data\mlaad\fake\zh-cn\tts_models_multilingual_multi-dataset_xtts_v2\meta.csv
+data\mlaad\fake\zh-cn\tts_models_zh-CN_baker_tacotron2-DDC-GST\meta.csv
+data\mlaad\fake\zh-cn\VoxCPM-0.5B\meta.csv
+data\mlaad\fake\zh-cn\VoxCPM-1.5\meta.csv
+data\mlaad\fake\zh-cn\ZipVoice\meta.csv
+data\mlaad\LICENSE
+data\mlaad\NOTICE_NO_COMMERCIAL_USE.txt
+data\mlaad\README.md
+data\speechfake\.gitattributes
+data\speechfake\.msc
+data\speechfake\.mv
+data\speechfake\LICENSE.txt
+data\speechfake\metadata\MD\TTS_CosyVoice_en.csv
+data\speechfake\metadata\MD\TTS_CosyVoice_ja.csv
+data\speechfake\metadata\MD\TTS_CosyVoice_ko.csv
+data\speechfake\metadata\MD\TTS_CosyVoice_yue.csv
+data\speechfake\metadata\MD\TTS_CosyVoice_zh.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_af.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ar.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_az.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_bg.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_bn.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ca.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_cs.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_cy.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_da.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_de.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_el.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_en.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_es.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_et.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_fa.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_fi.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_fr.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_gl.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_he.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_hi.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_hu.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_id.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_is.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_it.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ja.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ka.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ko.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_lv.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_mk.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ml.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_mr.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_nl.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_pt.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ru.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_sk.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_sl.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_sq.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_sr.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_sw.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_ta.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_th.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_tr.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_uk.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_uz.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_vi.csv
+data\speechfake\metadata\MD\TTS_EdgeTTS_zh.csv
+data\speechfake\metadata\MD\TTS_FishSpeech_en.csv
+data\speechfake\metadata\MD\TTS_FishSpeech_zh.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_en.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_es.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_fr.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_ja.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_ko.csv
+data\speechfake\metadata\MD\TTS_MeloTTS_zh.csv
+data\speechfake\metadata\MD\VC_FishSpeech_ja.csv
+data\speechfake\metadata\MD\VC_GPTSoVITS_en.csv
+data\speechfake\metadata\MD\VC_GPTSoVITS_ja.csv
+data\speechfake\metadata\MD\VC_GPTSoVITS_zh.csv
+data\speechfake\metadata\MD\VC_OpenVoice_en.csv
+data\speechfake\metadata\MD\VC_OpenVoice_ja.csv
+data\speechfake\metadata\MD\VC_OpenVoice_ko.csv
+data\speechfake\metadata\MD\VC_OpenVoice_zh.csv
+data\speechfake\metadata\MD\VC_SeedVC_en.csv
+data\speechfake\metadata\MD\VC_SeedVC_es.csv
+data\speechfake\metadata\MD\VC_SeedVC_et.csv
+data\speechfake\metadata\MD\VC_SeedVC_fa.csv
+data\speechfake\metadata\MD\VC_SeedVC_fi.csv
+data\speechfake\metadata\MD\VC_SeedVC_fr.csv
+data\speechfake\metadata\MD\VC_SeedVC_gl.csv
+data\speechfake\metadata\MD\VC_SeedVC_he.csv
+data\speechfake\metadata\MD\VC_SeedVC_hi.csv
+data\speechfake\metadata\MD\VC_SeedVC_hu.csv
+data\speechfake\metadata\MD\VC_SeedVC_id.csv
+data\speechfake\metadata\MD\VC_SeedVC_is.csv
+data\speechfake\metadata\MD\VC_SeedVC_it.csv
+data\speechfake\metadata\MD\VC_SeedVC_ja.csv
+data\speechfake\metadata\MD\VC_SeedVC_ka.csv
+data\speechfake\metadata\MD\VC_SeedVC_ko.csv
+data\speechfake\metadata\MD\VC_SeedVC_lv.csv
+data\speechfake\metadata\MD\VC_SeedVC_zh.csv
+data\speechfake\metadata\Real\Aishell1.csv
+data\speechfake\metadata\Real\Aishell3.csv
+data\speechfake\metadata\Real\CommonVoice.csv
+data\speechfake\metadata\Real\LibriTTS.csv
+data\speechfake\metadata\Real\VCTK.csv
+data\speechfake\README.md
+
+============================================================
+요약: 디렉토리 2061개 / 비제외 파일 677개 / 제외된 파일 1525502개
