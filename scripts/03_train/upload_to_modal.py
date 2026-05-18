@@ -31,39 +31,36 @@ def upload_manifests() -> None:
     run_cmd(["modal", "volume", "put", VOLUME, "manifests", "manifests", "--force"])
 
 
+BATCH_SIZE = 20
+
+
 def upload_dataset(dataset: str, processed_root: Path) -> None:
     dataset_dir = processed_root / dataset
     if not dataset_dir.exists():
         print(f"  Skip {dataset} (not found: {dataset_dir})")
         return
 
-    n_files = sum(1 for _ in dataset_dir.rglob("*.wav"))
-    print(f"\n=== {dataset}: {n_files} files ===")
-
-    # Try dataset-level upload first (fast)
-    print(f"  Trying bulk upload...")
-    ok = run_cmd([
-        "modal", "volume", "put", VOLUME,
-        str(dataset_dir), f"processed/{dataset}", "--force",
-    ])
-    if ok:
-        print(f"  Done: {dataset}")
+    subdirs = sorted([d for d in dataset_dir.iterdir() if d.is_dir()])
+    if not subdirs:
+        print(f"  Skip {dataset} (no subdirectories)")
         return
 
-    # Fallback: upload speaker dirs one by one
-    subdirs = sorted([d for d in dataset_dir.iterdir() if d.is_dir()])
-    print(f"  Bulk failed — falling back to {len(subdirs)} speaker dirs")
+    total_batches = (len(subdirs) + BATCH_SIZE - 1) // BATCH_SIZE
+    print(f"\n=== {dataset}: {len(subdirs)} speaker dirs, {total_batches} batches (×{BATCH_SIZE}) ===")
 
-    for i, speaker_dir in enumerate(subdirs, 1):
-        n = sum(1 for _ in speaker_dir.rglob("*.wav"))
-        print(f"  [{i}/{len(subdirs)}] {speaker_dir.name} ({n} files)")
-        ok = run_cmd([
-            "modal", "volume", "put", VOLUME,
-            str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
-        ])
-        if not ok:
-            print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
-            return
+    for b in range(total_batches):
+        batch = subdirs[b * BATCH_SIZE : (b + 1) * BATCH_SIZE]
+        names = [d.name for d in batch]
+        print(f"  [batch {b+1}/{total_batches}] {names[0]} ~ {names[-1]}")
+
+        for speaker_dir in batch:
+            ok = run_cmd([
+                "modal", "volume", "put", VOLUME,
+                str(speaker_dir), f"processed/{dataset}/{speaker_dir.name}", "--force",
+            ])
+            if not ok:
+                print(f"  ERROR on {speaker_dir.name} — stopping {dataset}")
+                return
 
     print(f"  Done: {dataset}")
 
