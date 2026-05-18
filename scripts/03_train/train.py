@@ -35,6 +35,7 @@ def set_seed(seed: int) -> None:
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.benchmark = True
 
 
 def train_one_epoch(
@@ -43,18 +44,26 @@ def train_one_epoch(
     optimizer: torch.optim.Optimizer,
     criterion: nn.Module,
     device: torch.device,
+    scaler: torch.amp.GradScaler | None = None,
     epoch: int = 0,
 ) -> float:
     model.train()
     total_loss = 0.0
+    use_amp = scaler is not None
     pbar = tqdm(loader, desc=f"  Train ep{epoch}", leave=False, ncols=80)
     for wav, label in pbar:
         wav, label = wav.to(device), label.to(device)
         optimizer.zero_grad()
-        logits = model(wav)
-        loss = criterion(logits, label)
-        loss.backward()
-        optimizer.step()
+        with torch.amp.autocast("cuda", enabled=use_amp):
+            logits = model(wav)
+            loss = criterion(logits, label)
+        if use_amp:
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+        else:
+            loss.backward()
+            optimizer.step()
         total_loss += loss.item() * wav.size(0)
         pbar.set_postfix(loss=f"{loss.item():.4f}")
     return total_loss / len(loader.dataset)
@@ -70,8 +79,9 @@ def evaluate(
     all_labels, all_scores = [], []
     for wav, label in tqdm(loader, desc="  Eval", leave=False, ncols=80):
         wav = wav.to(device)
-        logits = model(wav)
-        probs = torch.softmax(logits, dim=1)[:, 1].cpu().numpy()
+        with torch.amp.autocast("cuda", enabled=(device.type == "cuda")):
+            logits = model(wav)
+        probs = torch.softmax(logits, dim=1)[:, 1].cpu().float().numpy()
         all_scores.extend(probs)
         all_labels.extend(label.numpy())
 
@@ -149,13 +159,16 @@ def main() -> int:
     train_ds = AudioDataset(cfg["data"]["train_manifest"], num_samples, is_train=True, seed=seed)
     dev_ds = AudioDataset(cfg["data"]["dev_manifest"], num_samples, is_train=False, seed=seed)
 
+    persistent = num_workers > 0
     train_loader = DataLoader(
         train_ds, batch_size=batch_size, shuffle=True,
         num_workers=num_workers, pin_memory=True, drop_last=True,
+        persistent_workers=persistent,
     )
     dev_loader = DataLoader(
         dev_ds, batch_size=batch_size, shuffle=False,
         num_workers=num_workers, pin_memory=True,
+        persistent_workers=persistent,
     )
 
     print(f"  Train: {len(train_ds):,} samples")
@@ -170,6 +183,7 @@ def main() -> int:
     criterion = nn.CrossEntropyLoss(
         weight=torch.tensor(cfg["training"].get("class_weights", [1.0, 1.0]), device=device)
     )
+    scaler = torch.amp.GradScaler("cuda") if device.type == "cuda" else None
 
     # --- training loop ---
     best_eer = 1.0
@@ -181,7 +195,7 @@ def main() -> int:
     print(f"  {'-'*45}")
 
     for epoch in range(1, max_epochs + 1):
-        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, scaler, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
         dev_acc = dev_metrics["accuracy"]
