@@ -12,12 +12,12 @@ data:
     T2: manifests/T2_koaad_holdout.csv
     T3: manifests/T3_mlaad_test.csv
   num_samples: 64000
-  num_workers: 8
+  num_workers: 4
 
 training:
   optimizer: adam
   lr: 0.0001
-  batch_size: 320
+  batch_size: 16
   epochs: 50
   early_stopping_patience: 10
   weight_decay: 0.0001
