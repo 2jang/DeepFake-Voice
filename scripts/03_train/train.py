@@ -178,10 +178,12 @@ def main() -> int:
     print(f"  Params: {n_params:,}")
 
     if device.type == "cuda":
-        model = torch.compile(model)
-        print(f"  torch.compile enabled (bf16 + tf32)")
+        model = model.to(memory_format=torch.channels_last)
+        model = torch.compile(model, mode="max-autotune")
+        print(f"  torch.compile(max-autotune) + channels_last + bf16 + tf32")
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=cfg["training"].get("weight_decay", 1e-4))
+    fused = device.type == "cuda"
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=cfg["training"].get("weight_decay", 1e-4), fused=fused)
     criterion = nn.CrossEntropyLoss(
         weight=torch.tensor(cfg["training"].get("class_weights", [1.0, 1.0]), device=device)
     )
