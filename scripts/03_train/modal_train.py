@@ -35,7 +35,7 @@ volume = modal.Volume.from_name("deepfake-voice-data", create_if_missing=True)
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("libsndfile1")
-    .pip_install("torch", extra_index_url="https://download.pytorch.org/whl/cu121")
+    .pip_install("torch", extra_index_url="https://download.pytorch.org/whl/cu130")
     .pip_install(
         "soundfile", "numpy", "pandas",
         "scikit-learn", "scipy", "pyyaml", "tqdm",
@@ -48,11 +48,11 @@ ALL_CONFIGS = [
     "rawnet2_c1", "rawnet2_c2", "rawnet2_c3",
 ]
 
-# A10G (24GB VRAM) batch sizes — larger than local 8GB GPU
+# H100 (80GB HBM3) batch sizes
 MODAL_BATCH_SIZES = {
-    "aasist": 128,
-    "lcnn": 256,
-    "rawnet2": 128,
+    "aasist": 256,
+    "lcnn": 512,
+    "rawnet2": 256,
 }
 
 

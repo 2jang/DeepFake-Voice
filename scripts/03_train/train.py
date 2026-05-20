@@ -36,6 +36,8 @@ def set_seed(seed: int) -> None:
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
         torch.backends.cudnn.benchmark = True
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
 
 
 def train_one_epoch(
@@ -44,26 +46,21 @@ def train_one_epoch(
     optimizer: torch.optim.Optimizer,
     criterion: nn.Module,
     device: torch.device,
-    scaler: torch.amp.GradScaler | None = None,
     epoch: int = 0,
 ) -> float:
     model.train()
     total_loss = 0.0
-    use_amp = scaler is not None
+    use_amp = device.type == "cuda"
     pbar = tqdm(loader, desc=f"  Train ep{epoch}", leave=False, ncols=80)
     for wav, label in pbar:
-        wav, label = wav.to(device), label.to(device)
-        optimizer.zero_grad()
-        with torch.amp.autocast("cuda", enabled=use_amp):
+        wav = wav.to(device, non_blocking=True)
+        label = label.to(device, non_blocking=True)
+        optimizer.zero_grad(set_to_none=True)
+        with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=use_amp):
             logits = model(wav)
             loss = criterion(logits, label)
-        if use_amp:
-            scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
-        else:
-            loss.backward()
-            optimizer.step()
+        loss.backward()
+        optimizer.step()
         total_loss += loss.item() * wav.size(0)
         pbar.set_postfix(loss=f"{loss.item():.4f}")
     return total_loss / len(loader.dataset)
@@ -79,7 +76,7 @@ def evaluate(
     all_labels, all_scores = [], []
     for wav, label in tqdm(loader, desc="  Eval", leave=False, ncols=80):
         wav = wav.to(device)
-        with torch.amp.autocast("cuda", enabled=(device.type == "cuda")):
+        with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
             logits = model(wav)
         probs = torch.softmax(logits, dim=1)[:, 1].cpu().float().numpy()
         all_scores.extend(probs)
@@ -99,14 +96,14 @@ def measure_inference_time(
 ) -> float:
     model.eval()
     dummy = torch.randn(1, num_samples, device=device)
-    with torch.no_grad():
+    with torch.no_grad(), torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
         for _ in range(10):
             model(dummy)
     if device.type == "cuda":
         torch.cuda.synchronize()
 
     times = []
-    with torch.no_grad():
+    with torch.no_grad(), torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
         for _ in range(runs - 10):
             start = time.perf_counter()
             model(dummy)
@@ -140,7 +137,7 @@ def main() -> int:
     num_samples = cfg["data"]["num_samples"]
     batch_size = cfg["training"]["batch_size"]
     lr = cfg["training"]["lr"]
-    num_workers = cfg["data"].get("num_workers", 4)
+    num_workers = cfg["data"].get("num_workers", 8)
     experiment_name = cfg["experiment"]
 
     # --- output dirs ---
@@ -160,15 +157,16 @@ def main() -> int:
     dev_ds = AudioDataset(cfg["data"]["dev_manifest"], num_samples, is_train=False, seed=seed)
 
     persistent = num_workers > 0
+    prefetch = 4 if num_workers > 0 else None
     train_loader = DataLoader(
         train_ds, batch_size=batch_size, shuffle=True,
         num_workers=num_workers, pin_memory=True, drop_last=True,
-        persistent_workers=persistent,
+        persistent_workers=persistent, prefetch_factor=prefetch,
     )
     dev_loader = DataLoader(
         dev_ds, batch_size=batch_size, shuffle=False,
         num_workers=num_workers, pin_memory=True,
-        persistent_workers=persistent,
+        persistent_workers=persistent, prefetch_factor=prefetch,
     )
 
     print(f"  Train: {len(train_ds):,} samples")
@@ -179,11 +177,14 @@ def main() -> int:
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"  Params: {n_params:,}")
 
+    if device.type == "cuda":
+        model = torch.compile(model)
+        print(f"  torch.compile enabled (bf16 + tf32)")
+
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=cfg["training"].get("weight_decay", 1e-4))
     criterion = nn.CrossEntropyLoss(
         weight=torch.tensor(cfg["training"].get("class_weights", [1.0, 1.0]), device=device)
     )
-    scaler = torch.amp.GradScaler("cuda") if device.type == "cuda" else None
 
     # --- training loop ---
     best_eer = 1.0
@@ -195,7 +196,7 @@ def main() -> int:
     print(f"  {'-'*45}")
 
     for epoch in range(1, max_epochs + 1):
-        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, scaler, epoch)
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
         dev_acc = dev_metrics["accuracy"]
