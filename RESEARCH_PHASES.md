@@ -139,17 +139,32 @@ RawNet2 (Exp 7→8→9)  ~24시간
 - T2 (KoAAD): 한국어 cross-dataset 일반화
 - T3 (MLAAD): 다국어 성능 유지 여부
 
-### 3.4 경량 지표 (모델별 1회)
+### 3.4 탐지 성능 지표
 
-| 지표 | 측정 |
+| 지표 | 정의 |
 |------|------|
-| Inference Time (ms) | 100회 평균 (warm-up 10회 제외) |
-| Model Size (MB) | 파일 크기 |
+| EER | FAR=FRR 교차점. 딥페이크 탐지 표준 지표 |
+| Accuracy | 임계값 0.5 기준 정확도 |
+| F1 Score | Precision과 Recall의 조화평균 |
+| Precision | 양성 예측 중 실제 양성 비율 |
+| Recall | 실제 양성 중 탐지 비율 |
+| AUC | ROC 곡선 아래 면적 |
 
-### 3.5 검증 기준
+### 3.5 경량화 성능 지표 (모델별 1회)
+
+| 지표 | 단위 | 측정 방법 |
+|------|------|---------|
+| Inference Time | ms | 100회 평균 (warm-up 10회 제외) |
+| Throughput | samples/sec | 1000 / Inference Time |
+| FLOPs | M | `torch.utils.flop_counter` |
+| Model Size | MB | 파라미터 수 × 4B |
+| Peak Memory | MB | `torch.cuda.max_memory_allocated()` |
+| Parameters | 개 | 학습 가능 파라미터 수 |
+
+### 3.6 검증 기준
 
 - [ ] 9회 실험 완료
-- [ ] results.csv 작성 (9행 × Acc/EER per T1/T2/T3 + Inference Time + Model Size)
+- [ ] results.csv 작성 (9행 × 탐지 지표 6개 per T1/T2/T3 + 경량화 지표 5개)
 - [ ] 학습 곡선 정상 수렴 확인
 - [ ] 체크포인트 저장
 
