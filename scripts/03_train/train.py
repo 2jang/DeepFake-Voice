@@ -3,7 +3,9 @@
 
 사용법:
     python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml
-    python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml --epochs 5  # 시범 학습
+    python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml --epochs 5
+    python scripts/03_train/train.py --all
+    python scripts/03_train/train.py --all --epochs 5
 """
 
 from __future__ import annotations
@@ -26,8 +28,9 @@ from tqdm import tqdm
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from dataset import AudioDataset
-from metrics import compute_accuracy, compute_eer
+from metrics import compute_all
 from models import get_model
+from sota import SOTA
 
 
 def set_seed(seed: int) -> None:
@@ -84,11 +87,7 @@ def evaluate(
 
     labels = np.array(all_labels)
     scores = np.array(all_scores)
-    preds = (scores >= 0.5).astype(int)
-
-    eer = compute_eer(labels, scores)
-    acc = compute_accuracy(labels, preds)
-    return {"eer": eer, "accuracy": acc}
+    return compute_all(labels, scores)
 
 
 def measure_inference_time(
@@ -113,26 +112,44 @@ def measure_inference_time(
     return float(np.mean(times))
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Anti-spoofing training")
-    parser.add_argument("--config", required=True, help="YAML config path")
-    parser.add_argument("--epochs", type=int, help="Override max epochs")
-    parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
-    args = parser.parse_args()
+def measure_flops(model: nn.Module, device: torch.device, num_samples: int = 64_000) -> int:
+    dummy = torch.randn(1, num_samples, device=device)
+    from torch.utils.flop_counter import FlopCounterMode
+    flop_counter = FlopCounterMode(display=False)
+    with flop_counter, torch.no_grad():
+        model(dummy)
+    return flop_counter.get_total_flops()
 
-    with open(args.config) as f:
+
+def measure_peak_memory(model: nn.Module, device: torch.device, num_samples: int = 64_000) -> float:
+    if device.type != "cuda":
+        return 0.0
+    torch.cuda.reset_peak_memory_stats(device)
+    dummy = torch.randn(1, num_samples, device=device)
+    with torch.no_grad():
+        model(dummy)
+    return torch.cuda.max_memory_allocated(device) / (1024 * 1024)
+
+
+CONFIGS_DIR = Path(__file__).resolve().parent / "configs"
+
+ALL_CONFIGS = sorted(CONFIGS_DIR.glob("*.yaml"))
+
+
+def run_experiment(config_path: str, epochs_override: int | None, device_str: str) -> int:
+    with open(config_path) as f:
         cfg = yaml.safe_load(f)
 
     seed = cfg.get("seed", 42)
     set_seed(seed)
 
-    if args.device == "auto":
+    if device_str == "auto":
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
-        device = torch.device(args.device)
+        device = torch.device(device_str)
     print(f"Device: {device}")
 
-    max_epochs = args.epochs or cfg["training"]["epochs"]
+    max_epochs = epochs_override or cfg["training"]["epochs"]
     patience = cfg["training"]["early_stopping_patience"]
     num_samples = cfg["data"]["num_samples"]
     batch_size = cfg["training"]["batch_size"]
@@ -192,14 +209,13 @@ def main() -> int:
     wait = 0
     log_path = log_dir / f"{experiment_name}.jsonl"
 
-    print(f"\n  {'Epoch':>5}  {'Train Loss':>10}  {'Dev EER':>8}  {'Dev Acc':>8}  {'Best':>5}")
-    print(f"  {'-'*45}")
+    print(f"\n  {'Epoch':>5}  {'Loss':>10}  {'EER':>8}  {'Acc':>8}  {'F1':>8}  {'AUC':>8}  {'Best':>5}")
+    print(f"  {'-'*61}")
 
     for epoch in range(1, max_epochs + 1):
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
-        dev_acc = dev_metrics["accuracy"]
 
         is_best = dev_eer < best_eer
         if is_best:
@@ -211,10 +227,10 @@ def main() -> int:
             wait += 1
 
         mark = "*" if is_best else ""
-        print(f"  {epoch:5d}  {train_loss:10.4f}  {dev_eer:8.4f}  {dev_acc:8.4f}  {mark:>5}")
+        print(f"  {epoch:5d}  {train_loss:10.4f}  {dev_eer:8.4f}  {dev_metrics['accuracy']:8.4f}  {dev_metrics['f1']:8.4f}  {dev_metrics['auc']:8.4f}  {mark:>5}")
 
         with open(log_path, "a") as f:
-            json.dump({"epoch": epoch, "train_loss": train_loss, "dev_eer": dev_eer, "dev_acc": dev_acc}, f)
+            json.dump({"epoch": epoch, "train_loss": train_loss, **dev_metrics}, f)
             f.write("\n")
 
         if wait >= patience:
@@ -243,16 +259,30 @@ def main() -> int:
         eval_ds = AudioDataset(eval_path, num_samples, is_train=False, seed=seed)
         eval_loader = DataLoader(eval_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=True)
         m = evaluate(model, eval_loader, device)
-        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}")
-        results_row[f"{eval_name}_eer"] = f"{m['eer']:.6f}"
-        results_row[f"{eval_name}_acc"] = f"{m['accuracy']:.6f}"
+        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  Prec={m['precision']:.4f}  Rec={m['recall']:.4f}  AUC={m['auc']:.4f}")
+        for metric_name, metric_val in m.items():
+            results_row[f"{eval_name}_{metric_name}"] = f"{metric_val:.6f}"
 
-    # --- inference time ---
+    # --- efficiency metrics ---
     inf_ms = measure_inference_time(model, device, num_samples)
+    throughput = 1000.0 / inf_ms if inf_ms > 0 else 0.0
     model_mb = n_params * 4 / (1024 * 1024)
+    flops = measure_flops(model, device, num_samples)
+    peak_mem_mb = measure_peak_memory(model, device, num_samples)
+
     results_row["inference_ms"] = f"{inf_ms:.2f}"
+    results_row["throughput_sps"] = f"{throughput:.1f}"
     results_row["model_mb"] = f"{model_mb:.2f}"
-    print(f"\n  Inference: {inf_ms:.2f} ms/sample, Model: {model_mb:.2f} MB")
+    results_row["flops_m"] = f"{flops / 1e6:.1f}"
+    results_row["peak_mem_mb"] = f"{peak_mem_mb:.1f}"
+
+    print(f"\n  ── Efficiency ──")
+    print(f"    Inference:  {inf_ms:.2f} ms/sample")
+    print(f"    Throughput: {throughput:.1f} samples/sec")
+    print(f"    Model Size: {model_mb:.2f} MB ({n_params:,} params)")
+    print(f"    FLOPs:      {flops / 1e6:.1f} M")
+    if peak_mem_mb > 0:
+        print(f"    Peak Memory:{peak_mem_mb:.1f} MB")
 
     # --- append to results CSV ---
     results_csv = out_root / "results.csv"
@@ -264,8 +294,54 @@ def main() -> int:
         writer.writerow(results_row)
 
     print(f"\n  Results appended to {results_csv}")
+
+    # --- SOTA comparison ---
+    model_name = cfg["model"]["name"].lower()
+    if model_name in SOTA:
+        ref = SOTA[model_name]
+        print(f"\n  ── SOTA 비교 (참고: {ref['dataset']}) ──")
+        print(f"  {'':15s} {'SOTA':>8s}  {'Dev':>8s}", end="")
+        eval_names = list(cfg["data"]["eval_manifests"].keys())
+        for en in eval_names:
+            print(f"  {en:>8s}", end="")
+        print()
+        print(f"  {'EER (%)':15s} {ref['eer']:8.2f}", end="")
+        print(f"  {best_eer * 100:8.2f}", end="")
+        for en in eval_names:
+            key = f"{en}_eer"
+            if key in results_row:
+                print(f"  {float(results_row[key]) * 100:8.2f}", end="")
+            else:
+                print(f"  {'N/A':>8s}", end="")
+        print()
+        print(f"  {'Paper':15s} {ref['paper']}")
+
     print(f"{'='*60}\n")
     return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Anti-spoofing training")
+    parser.add_argument("--config", help="YAML config path")
+    parser.add_argument("--all", action="store_true", help="Run all configs in configs/")
+    parser.add_argument("--epochs", type=int, help="Override max epochs")
+    parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
+    args = parser.parse_args()
+
+    if args.all:
+        print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
+        for i, cfg_path in enumerate(ALL_CONFIGS, 1):
+            print(f"\n{'#'*60}")
+            print(f"  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem}")
+            print(f"{'#'*60}")
+            run_experiment(str(cfg_path), args.epochs, args.device)
+        print(f"\nAll {len(ALL_CONFIGS)} experiments complete.")
+        return 0
+    elif args.config:
+        return run_experiment(args.config, args.epochs, args.device)
+    else:
+        parser.print_help()
+        return 1
 
 
 if __name__ == "__main__":
