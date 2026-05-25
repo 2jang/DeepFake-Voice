@@ -6,6 +6,7 @@
     python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml --epochs 5
     python scripts/03_train/train.py --all
     python scripts/03_train/train.py --all --epochs 5
+    python scripts/03_train/train.py --all --resume
 """
 
 from __future__ import annotations
@@ -13,6 +14,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -23,6 +25,7 @@ import torch
 import torch.nn as nn
 import yaml
 from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -136,7 +139,7 @@ CONFIGS_DIR = Path(__file__).resolve().parent / "configs"
 ALL_CONFIGS = sorted(CONFIGS_DIR.glob("*.yaml"))
 
 
-def run_experiment(config_path: str, epochs_override: int | None, device_str: str) -> int:
+def run_experiment(config_path: str, epochs_override: int | None, device_str: str, resume: bool = False) -> int:
     with open(config_path) as f:
         cfg = yaml.safe_load(f)
 
@@ -163,6 +166,9 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     log_dir = out_root / "logs"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     log_dir.mkdir(parents=True, exist_ok=True)
+
+    tb_dir = out_root / "tb_logs" / experiment_name
+    writer = SummaryWriter(log_dir=str(tb_dir))
 
     # --- data ---
     print(f"\n{'='*60}")
@@ -207,12 +213,24 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     best_eer = 1.0
     best_epoch = -1
     wait = 0
+    start_epoch = 1
+    resume_path = ckpt_dir / f"{experiment_name}_resume.pt"
     log_path = log_dir / f"{experiment_name}.jsonl"
+
+    if resume and resume_path.exists():
+        ckpt = torch.load(resume_path, weights_only=False)
+        model.load_state_dict(ckpt["model"])
+        optimizer.load_state_dict(ckpt["optimizer"])
+        start_epoch = ckpt["epoch"] + 1
+        best_eer = ckpt["best_eer"]
+        best_epoch = ckpt["best_epoch"]
+        wait = ckpt["wait"]
+        print(f"  Resumed from epoch {ckpt['epoch']} (best EER: {best_eer:.4f})")
 
     print(f"\n  {'Epoch':>5}  {'Loss':>10}  {'EER':>8}  {'Acc':>8}  {'F1':>8}  {'AUC':>8}  {'Best':>5}")
     print(f"  {'-'*61}")
 
-    for epoch in range(1, max_epochs + 1):
+    for epoch in range(start_epoch, max_epochs + 1):
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
@@ -232,6 +250,24 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         with open(log_path, "a") as f:
             json.dump({"epoch": epoch, "train_loss": train_loss, **dev_metrics}, f)
             f.write("\n")
+
+        writer.add_scalar("Loss/train", train_loss, epoch)
+        writer.add_scalar("Metrics/eer", dev_eer, epoch)
+        writer.add_scalar("Metrics/accuracy", dev_metrics["accuracy"], epoch)
+        writer.add_scalar("Metrics/f1", dev_metrics["f1"], epoch)
+        writer.add_scalar("Metrics/precision", dev_metrics["precision"], epoch)
+        writer.add_scalar("Metrics/recall", dev_metrics["recall"], epoch)
+        writer.add_scalar("Metrics/auc", dev_metrics["auc"], epoch)
+        writer.flush()
+
+        torch.save({
+            "epoch": epoch,
+            "model": model.state_dict(),
+            "optimizer": optimizer.state_dict(),
+            "best_eer": best_eer,
+            "best_epoch": best_epoch,
+            "wait": wait,
+        }, resume_path)
 
         if wait >= patience:
             print(f"  Early stopping at epoch {epoch} (patience={patience})")
@@ -262,12 +298,17 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  Prec={m['precision']:.4f}  Rec={m['recall']:.4f}  AUC={m['auc']:.4f}")
         for metric_name, metric_val in m.items():
             results_row[f"{eval_name}_{metric_name}"] = f"{metric_val:.6f}"
+        writer.add_scalar(f"Eval_{eval_name}/eer", m["eer"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/accuracy", m["accuracy"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/f1", m["f1"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/auc", m["auc"], 0)
 
     # --- efficiency metrics ---
     inf_ms = measure_inference_time(model, device, num_samples)
     throughput = 1000.0 / inf_ms if inf_ms > 0 else 0.0
     model_mb = n_params * 4 / (1024 * 1024)
-    flops = measure_flops(model, device, num_samples)
+    raw_model = model._orig_mod if hasattr(model, "_orig_mod") else model
+    flops = measure_flops(raw_model, device, num_samples)
     peak_mem_mb = measure_peak_memory(model, device, num_samples)
 
     results_row["inference_ms"] = f"{inf_ms:.2f}"
@@ -283,6 +324,14 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     print(f"    FLOPs:      {flops / 1e6:.1f} M")
     if peak_mem_mb > 0:
         print(f"    Peak Memory:{peak_mem_mb:.1f} MB")
+
+    writer.add_scalar("Efficiency/inference_ms", inf_ms, 0)
+    writer.add_scalar("Efficiency/throughput_sps", throughput, 0)
+    writer.add_scalar("Efficiency/model_mb", model_mb, 0)
+    writer.add_scalar("Efficiency/flops_m", flops / 1e6, 0)
+    if peak_mem_mb > 0:
+        writer.add_scalar("Efficiency/peak_mem_mb", peak_mem_mb, 0)
+    writer.close()
 
     # --- append to results CSV ---
     results_csv = out_root / "results.csv"
@@ -317,6 +366,7 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         print(f"  {'Paper':15s} {ref['paper']}")
 
     print(f"{'='*60}\n")
+    resume_path.unlink(missing_ok=True)
     return 0
 
 
@@ -326,19 +376,43 @@ def main() -> int:
     parser.add_argument("--all", action="store_true", help="Run all configs in configs/")
     parser.add_argument("--epochs", type=int, help="Override max epochs")
     parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
+    parser.add_argument("--tb-port", type=int, default=6006, help="TensorBoard port (0 to disable)")
+    parser.add_argument("--resume", action="store_true", help="Resume interrupted training")
     args = parser.parse_args()
+
+    if args.tb_port > 0 and (args.all or args.config):
+        tb_log_dir = Path("experiments") / "tb_logs"
+        tb_log_dir.mkdir(parents=True, exist_ok=True)
+        subprocess.Popen(
+            [sys.executable, "-m", "tensorboard",
+             "--logdir", str(tb_log_dir),
+             "--host", "0.0.0.0",
+             "--port", str(args.tb_port)],
+            stdout=subprocess.DEVNULL,
+        )
+        print(f"TensorBoard: http://0.0.0.0:{args.tb_port}")
 
     if args.all:
         print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
         for i, cfg_path in enumerate(ALL_CONFIGS, 1):
+            if args.resume:
+                with open(cfg_path) as f:
+                    _cfg = yaml.safe_load(f)
+                _out = Path(_cfg.get("output_root", "experiments"))
+                _name = _cfg["experiment"]
+                _resume_exists = (_out / "checkpoints" / f"{_name}_resume.pt").exists()
+                _best_exists = (_out / "checkpoints" / f"{_name}_best.pt").exists()
+                if _best_exists and not _resume_exists:
+                    print(f"\n  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem} — skipped (completed)")
+                    continue
             print(f"\n{'#'*60}")
             print(f"  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem}")
             print(f"{'#'*60}")
-            run_experiment(str(cfg_path), args.epochs, args.device)
+            run_experiment(str(cfg_path), args.epochs, args.device, args.resume)
         print(f"\nAll {len(ALL_CONFIGS)} experiments complete.")
         return 0
     elif args.config:
-        return run_experiment(args.config, args.epochs, args.device)
+        return run_experiment(args.config, args.epochs, args.device, args.resume)
     else:
         parser.print_help()
         return 1
