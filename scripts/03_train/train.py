@@ -285,7 +285,8 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     inf_ms = measure_inference_time(model, device, num_samples)
     throughput = 1000.0 / inf_ms if inf_ms > 0 else 0.0
     model_mb = n_params * 4 / (1024 * 1024)
-    flops = measure_flops(model, device, num_samples)
+    raw_model = model._orig_mod if hasattr(model, "_orig_mod") else model
+    flops = measure_flops(raw_model, device, num_samples)
     peak_mem_mb = measure_peak_memory(model, device, num_samples)
 
     results_row["inference_ms"] = f"{inf_ms:.2f}"
