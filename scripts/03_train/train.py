@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -23,6 +24,7 @@ import torch
 import torch.nn as nn
 import yaml
 from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -164,6 +166,9 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     log_dir.mkdir(parents=True, exist_ok=True)
 
+    tb_dir = out_root / "tb_logs" / experiment_name
+    writer = SummaryWriter(log_dir=str(tb_dir))
+
     # --- data ---
     print(f"\n{'='*60}")
     print(f"  Experiment: {experiment_name}")
@@ -233,6 +238,15 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
             json.dump({"epoch": epoch, "train_loss": train_loss, **dev_metrics}, f)
             f.write("\n")
 
+        writer.add_scalar("Loss/train", train_loss, epoch)
+        writer.add_scalar("Metrics/eer", dev_eer, epoch)
+        writer.add_scalar("Metrics/accuracy", dev_metrics["accuracy"], epoch)
+        writer.add_scalar("Metrics/f1", dev_metrics["f1"], epoch)
+        writer.add_scalar("Metrics/precision", dev_metrics["precision"], epoch)
+        writer.add_scalar("Metrics/recall", dev_metrics["recall"], epoch)
+        writer.add_scalar("Metrics/auc", dev_metrics["auc"], epoch)
+        writer.flush()
+
         if wait >= patience:
             print(f"  Early stopping at epoch {epoch} (patience={patience})")
             break
@@ -262,6 +276,10 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  Prec={m['precision']:.4f}  Rec={m['recall']:.4f}  AUC={m['auc']:.4f}")
         for metric_name, metric_val in m.items():
             results_row[f"{eval_name}_{metric_name}"] = f"{metric_val:.6f}"
+        writer.add_scalar(f"Eval_{eval_name}/eer", m["eer"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/accuracy", m["accuracy"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/f1", m["f1"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/auc", m["auc"], 0)
 
     # --- efficiency metrics ---
     inf_ms = measure_inference_time(model, device, num_samples)
@@ -283,6 +301,14 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     print(f"    FLOPs:      {flops / 1e6:.1f} M")
     if peak_mem_mb > 0:
         print(f"    Peak Memory:{peak_mem_mb:.1f} MB")
+
+    writer.add_scalar("Efficiency/inference_ms", inf_ms, 0)
+    writer.add_scalar("Efficiency/throughput_sps", throughput, 0)
+    writer.add_scalar("Efficiency/model_mb", model_mb, 0)
+    writer.add_scalar("Efficiency/flops_m", flops / 1e6, 0)
+    if peak_mem_mb > 0:
+        writer.add_scalar("Efficiency/peak_mem_mb", peak_mem_mb, 0)
+    writer.close()
 
     # --- append to results CSV ---
     results_csv = out_root / "results.csv"
@@ -326,7 +352,20 @@ def main() -> int:
     parser.add_argument("--all", action="store_true", help="Run all configs in configs/")
     parser.add_argument("--epochs", type=int, help="Override max epochs")
     parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
+    parser.add_argument("--tb-port", type=int, default=6006, help="TensorBoard port (0 to disable)")
     args = parser.parse_args()
+
+    if args.tb_port > 0 and (args.all or args.config):
+        tb_log_dir = Path("experiments") / "tb_logs"
+        tb_log_dir.mkdir(parents=True, exist_ok=True)
+        subprocess.Popen(
+            [sys.executable, "-m", "tensorboard",
+             "--logdir", str(tb_log_dir),
+             "--host", "0.0.0.0",
+             "--port", str(args.tb_port)],
+            stdout=subprocess.DEVNULL,
+        )
+        print(f"TensorBoard: http://0.0.0.0:{args.tb_port}")
 
     if args.all:
         print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
