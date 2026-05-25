@@ -119,7 +119,7 @@ def measure_flops(model: nn.Module, device: torch.device, num_samples: int = 64_
     dummy = torch.randn(1, num_samples, device=device)
     from torch.utils.flop_counter import FlopCounterMode
     flop_counter = FlopCounterMode(display=False)
-    with flop_counter, torch.no_grad():
+    with flop_counter:
         model(dummy)
     return flop_counter.get_total_flops()
 
