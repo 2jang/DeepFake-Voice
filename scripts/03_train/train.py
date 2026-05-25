@@ -6,6 +6,7 @@
     python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml --epochs 5
     python scripts/03_train/train.py --all
     python scripts/03_train/train.py --all --epochs 5
+    python scripts/03_train/train.py --all --resume
 """
 
 from __future__ import annotations
@@ -138,7 +139,7 @@ CONFIGS_DIR = Path(__file__).resolve().parent / "configs"
 ALL_CONFIGS = sorted(CONFIGS_DIR.glob("*.yaml"))
 
 
-def run_experiment(config_path: str, epochs_override: int | None, device_str: str) -> int:
+def run_experiment(config_path: str, epochs_override: int | None, device_str: str, resume: bool = False) -> int:
     with open(config_path) as f:
         cfg = yaml.safe_load(f)
 
@@ -212,12 +213,24 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     best_eer = 1.0
     best_epoch = -1
     wait = 0
+    start_epoch = 1
+    resume_path = ckpt_dir / f"{experiment_name}_resume.pt"
     log_path = log_dir / f"{experiment_name}.jsonl"
+
+    if resume and resume_path.exists():
+        ckpt = torch.load(resume_path, weights_only=False)
+        model.load_state_dict(ckpt["model"])
+        optimizer.load_state_dict(ckpt["optimizer"])
+        start_epoch = ckpt["epoch"] + 1
+        best_eer = ckpt["best_eer"]
+        best_epoch = ckpt["best_epoch"]
+        wait = ckpt["wait"]
+        print(f"  Resumed from epoch {ckpt['epoch']} (best EER: {best_eer:.4f})")
 
     print(f"\n  {'Epoch':>5}  {'Loss':>10}  {'EER':>8}  {'Acc':>8}  {'F1':>8}  {'AUC':>8}  {'Best':>5}")
     print(f"  {'-'*61}")
 
-    for epoch in range(1, max_epochs + 1):
+    for epoch in range(start_epoch, max_epochs + 1):
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device, epoch)
         dev_metrics = evaluate(model, dev_loader, device)
         dev_eer = dev_metrics["eer"]
@@ -246,6 +259,15 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         writer.add_scalar("Metrics/recall", dev_metrics["recall"], epoch)
         writer.add_scalar("Metrics/auc", dev_metrics["auc"], epoch)
         writer.flush()
+
+        torch.save({
+            "epoch": epoch,
+            "model": model.state_dict(),
+            "optimizer": optimizer.state_dict(),
+            "best_eer": best_eer,
+            "best_epoch": best_epoch,
+            "wait": wait,
+        }, resume_path)
 
         if wait >= patience:
             print(f"  Early stopping at epoch {epoch} (patience={patience})")
@@ -344,6 +366,7 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         print(f"  {'Paper':15s} {ref['paper']}")
 
     print(f"{'='*60}\n")
+    resume_path.unlink(missing_ok=True)
     return 0
 
 
@@ -354,6 +377,7 @@ def main() -> int:
     parser.add_argument("--epochs", type=int, help="Override max epochs")
     parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
     parser.add_argument("--tb-port", type=int, default=6006, help="TensorBoard port (0 to disable)")
+    parser.add_argument("--resume", action="store_true", help="Resume interrupted training")
     args = parser.parse_args()
 
     if args.tb_port > 0 and (args.all or args.config):
@@ -371,14 +395,24 @@ def main() -> int:
     if args.all:
         print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
         for i, cfg_path in enumerate(ALL_CONFIGS, 1):
+            if args.resume:
+                with open(cfg_path) as f:
+                    _cfg = yaml.safe_load(f)
+                _out = Path(_cfg.get("output_root", "experiments"))
+                _name = _cfg["experiment"]
+                _resume_exists = (_out / "checkpoints" / f"{_name}_resume.pt").exists()
+                _best_exists = (_out / "checkpoints" / f"{_name}_best.pt").exists()
+                if _best_exists and not _resume_exists:
+                    print(f"\n  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem} — skipped (completed)")
+                    continue
             print(f"\n{'#'*60}")
             print(f"  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem}")
             print(f"{'#'*60}")
-            run_experiment(str(cfg_path), args.epochs, args.device)
+            run_experiment(str(cfg_path), args.epochs, args.device, args.resume)
         print(f"\nAll {len(ALL_CONFIGS)} experiments complete.")
         return 0
     elif args.config:
-        return run_experiment(args.config, args.epochs, args.device)
+        return run_experiment(args.config, args.epochs, args.device, args.resume)
     else:
         parser.print_help()
         return 1
