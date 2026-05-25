@@ -389,6 +389,7 @@ def main() -> int:
              "--host", "0.0.0.0",
              "--port", str(args.tb_port)],
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
         )
         print(f"TensorBoard: http://0.0.0.0:{args.tb_port}")
 
