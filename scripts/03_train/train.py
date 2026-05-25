@@ -384,7 +384,7 @@ def main() -> int:
         tb_log_dir = Path("experiments") / "tb_logs"
         tb_log_dir.mkdir(parents=True, exist_ok=True)
         subprocess.Popen(
-            [sys.executable, "-m", "tensorboard",
+            [sys.executable, "-m", "tensorboard.main",
              "--logdir", str(tb_log_dir),
              "--host", "0.0.0.0",
              "--port", str(args.tb_port)],
