@@ -244,6 +244,8 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         else:
             wait += 1
 
+        torch.save(model.state_dict(), ckpt_dir / f"{experiment_name}_ep{epoch:03d}.pt")
+
         mark = "*" if is_best else ""
         print(f"  {epoch:5d}  {train_loss:10.4f}  {dev_eer:8.4f}  {dev_metrics['accuracy']:8.4f}  {dev_metrics['f1']:8.4f}  {dev_metrics['auc']:8.4f}  {mark:>5}")
 
