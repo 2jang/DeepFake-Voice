@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from models import get_model
 
-MODELS = ["aasist", "lcnn", "rawnet2"]
+MODELS = ["aasist", "lcnn", "rawnet2", "specrnet"]
 NUM_SAMPLES = 64_000
 BATCH_SIZE = 4
 
