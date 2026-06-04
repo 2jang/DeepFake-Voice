@@ -2,8 +2,8 @@
 """실험 결과 분석: results.csv를 읽어 SOTA 대비 비교 테이블 출력.
 
 사용법:
-    python scripts/03_train/analyze.py
-    python scripts/03_train/analyze.py --results experiments/results.csv
+    python scripts/04_analyze/analyze.py
+    python scripts/04_analyze/analyze.py --results experiments/results.csv
 """
 
 from __future__ import annotations
@@ -14,7 +14,8 @@ from pathlib import Path
 
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+# 03_train의 공유 모듈 (sota.py) 참조
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "03_train"))
 from sota import SOTA
 
 
