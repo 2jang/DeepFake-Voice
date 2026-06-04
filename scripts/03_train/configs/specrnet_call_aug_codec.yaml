@@ -1,0 +1,34 @@
+# 실험 B-3: SpecRNet + C_all + Codec 증강
+# 학습 시 MP3 64kbps 코덱 압축을 30% 확률 적용
+experiment: specrnet_call_aug_codec
+data_combo: C_all
+
+model:
+  name: specrnet
+
+data:
+  train_manifest: manifests/C_all/train.csv
+  dev_manifest: manifests/C_all/dev.csv
+  eval_manifests:
+    T1: manifests/T1_speechfake_ko_test.csv
+    T2: manifests/T2_koaad_holdout.csv
+    T3: manifests/T3_mlaad_test.csv
+  num_samples: 64000
+  num_workers: 4
+
+training:
+  optimizer: adam
+  lr: 0.0001
+  batch_size: 64
+  epochs: 50
+  early_stopping_patience: 10
+  weight_decay: 0.0001
+  class_weights: [1.0, 1.0]
+
+augmentation:
+  codec: mp3
+  codec_bitrate: "64k"
+  codec_prob: 0.3
+
+seed: 42
+output_root: experiments
