@@ -40,6 +40,8 @@ from models import get_model
 
 NOISE_CONDITIONS = {
     "clean":        {"type": "none"},
+    # α=0.001 → 실효 SNR ~50dB로 거의 clean. 임동훈(2024) Table 3 조건 재현용이며,
+    # 강건성 '하락'을 보기보다 동일 조건 재현이 목적 (결과는 clean과 비슷하게 나옴).
     "gaussian_001": {"type": "gaussian", "alpha": 0.001},
     "musan_20db":   {"type": "musan", "snr_db": 20},
     "musan_10db":   {"type": "musan", "snr_db": 10},
@@ -74,6 +76,7 @@ class NoisyAudioDataset(Dataset):
         self.base = AudioDataset(manifest_path, num_samples, is_train=False, seed=seed)
         self.noise_config = noise_config
         self.musan_pool = musan_pool
+        self.seed = seed
 
     def __len__(self) -> int:
         return len(self.base)
@@ -83,14 +86,21 @@ class NoisyAudioDataset(Dataset):
         wav = wav_tensor.numpy()
 
         ntype = self.noise_config["type"]
+        if ntype == "none":  # 원본 유지
+            return torch.from_numpy(wav), label
+
+        # 샘플 인덱스 기반 결정적 RNG: DataLoader 워커 수·모델·실행 순서와
+        # 무관하게 동일 인덱스엔 항상 동일한 노이즈가 적용된다.
+        #   → 재현 가능한 강건성 표 + SpecRNet/LCNN이 동일 입력으로 평가됨.
+        rng = np.random.default_rng(self.seed + idx)
+
         if ntype == "gaussian":
-            wav = add_gaussian_noise(wav, alpha=self.noise_config["alpha"])
+            wav = add_gaussian_noise(wav, alpha=self.noise_config["alpha"], rng=rng)
         elif ntype == "musan":
             if self.musan_pool is None:
                 raise RuntimeError("MUSAN pool이 필요합니다 (--musan-dir 지정)")
-            noise = self.musan_pool.sample(len(wav))
+            noise = self.musan_pool.sample(len(wav), rng=rng)
             wav = add_noise_snr(wav, noise, self.noise_config["snr_db"])
-        # type == "none": 원본 유지
 
         return torch.from_numpy(wav), label
 
@@ -100,6 +110,7 @@ class NoisyAudioDataset(Dataset):
 # ---------------------------------------------------------------------------
 
 from train import evaluate as evaluate_model
+from train import load_checkpoint
 
 
 # ---------------------------------------------------------------------------
@@ -160,7 +171,7 @@ def main() -> int:
 
         # 모델 로드
         model = get_model(cfg["model"]["name"]).to(device)
-        model.load_state_dict(torch.load(ckpt_path, weights_only=True))
+        load_checkpoint(model, ckpt_path)
         if device.type == "cuda":
             model = torch.compile(model)
 
