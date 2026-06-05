@@ -1,0 +1,29 @@
+# 실험 C-3: SpecRNet + C_all + 8초 입력
+# 황규한(2025) 최적 길이 기준 테스트
+experiment: specrnet_call_8sec
+data_combo: C_all
+
+model:
+  name: specrnet
+
+data:
+  train_manifest: manifests/C_all/train.csv
+  dev_manifest: manifests/C_all/dev.csv
+  eval_manifests:
+    T1: manifests/T1_speechfake_ko_test.csv
+    T2: manifests/T2_koaad_holdout.csv
+    T3: manifests/T3_mlaad_test.csv
+  num_samples: 128000   # 8초 × 16kHz
+  num_workers: 4
+
+training:
+  optimizer: adam
+  lr: 0.0001
+  batch_size: 32        # 8초는 메모리 증가 → batch 축소
+  epochs: 50
+  early_stopping_patience: 10
+  weight_decay: 0.0001
+  class_weights: [1.0, 1.0]
+
+seed: 42
+output_root: experiments

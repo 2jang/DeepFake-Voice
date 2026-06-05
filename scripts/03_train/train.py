@@ -176,7 +176,8 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     print(f"  Model: {cfg['model']['name']}, Epochs: {max_epochs}, LR: {lr}")
     print(f"{'='*60}")
 
-    train_ds = AudioDataset(cfg["data"]["train_manifest"], num_samples, is_train=True, seed=seed)
+    augment_config = cfg.get("augmentation", None)
+    train_ds = AudioDataset(cfg["data"]["train_manifest"], num_samples, is_train=True, seed=seed, augment_config=augment_config)
     dev_ds = AudioDataset(cfg["data"]["dev_manifest"], num_samples, is_train=False, seed=seed)
 
     persistent = num_workers > 0
@@ -255,11 +256,14 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
 
         writer.add_scalar("Loss/train", train_loss, epoch)
         writer.add_scalar("Metrics/eer", dev_eer, epoch)
+        writer.add_scalar("Metrics/mindcf", dev_metrics["mindcf"], epoch)
         writer.add_scalar("Metrics/accuracy", dev_metrics["accuracy"], epoch)
         writer.add_scalar("Metrics/f1", dev_metrics["f1"], epoch)
         writer.add_scalar("Metrics/precision", dev_metrics["precision"], epoch)
         writer.add_scalar("Metrics/recall", dev_metrics["recall"], epoch)
         writer.add_scalar("Metrics/auc", dev_metrics["auc"], epoch)
+        writer.add_scalar("Metrics/fpr", dev_metrics["fpr"], epoch)
+        writer.add_scalar("Metrics/fnr", dev_metrics["fnr"], epoch)
         writer.flush()
 
         torch.save({
@@ -297,13 +301,16 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
         eval_ds = AudioDataset(eval_path, num_samples, is_train=False, seed=seed)
         eval_loader = DataLoader(eval_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=True)
         m = evaluate(model, eval_loader, device)
-        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  Prec={m['precision']:.4f}  Rec={m['recall']:.4f}  AUC={m['auc']:.4f}")
+        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  minDCF={m['mindcf']:.4f}  Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  AUC={m['auc']:.4f}  FPR={m['fpr']:.4f}  FNR={m['fnr']:.4f}")
         for metric_name, metric_val in m.items():
             results_row[f"{eval_name}_{metric_name}"] = f"{metric_val:.6f}"
         writer.add_scalar(f"Eval_{eval_name}/eer", m["eer"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/mindcf", m["mindcf"], 0)
         writer.add_scalar(f"Eval_{eval_name}/accuracy", m["accuracy"], 0)
         writer.add_scalar(f"Eval_{eval_name}/f1", m["f1"], 0)
         writer.add_scalar(f"Eval_{eval_name}/auc", m["auc"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/fpr", m["fpr"], 0)
+        writer.add_scalar(f"Eval_{eval_name}/fnr", m["fnr"], 0)
 
     # --- efficiency metrics ---
     inf_ms = measure_inference_time(model, device, num_samples)
