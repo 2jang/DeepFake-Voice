@@ -83,17 +83,18 @@ def load_our_results(results_path: str) -> dict[str, dict]:
         entry = {"experiment": row["experiment"]}
 
         # T2 (KoAAD) 지표
+        # 모든 비율 지표를 % 변환하여 임동훈(2024) Table 4/5와 단위 통일
         for metric in ["eer", "mindcf", "accuracy", "f1", "fpr", "fnr", "auc"]:
             key = f"T2_{metric}"
             if key in row and pd.notna(row[key]):
                 val = float(row[key])
-                # EER/FPR/FNR은 0-1 범위를 % 변환
-                if metric in ("eer", "fpr", "fnr"):
+                if metric in ("eer", "fpr", "fnr", "accuracy", "f1"):
+                    # 0-1 범위 → % 변환 (임동훈 Table 4: accuracy 52.46%, f1 42.09%)
                     entry[f"T2_{metric}_pct"] = val * 100
                 else:
                     entry[f"T2_{metric}"] = val
             else:
-                entry[f"T2_{metric}_pct" if metric in ("eer", "fpr", "fnr") else f"T2_{metric}"] = None
+                entry[f"T2_{metric}_pct" if metric in ("eer", "fpr", "fnr", "accuracy", "f1") else f"T2_{metric}"] = None
 
         results[model] = entry
 
@@ -193,8 +194,8 @@ def save_comparison_csv(our: dict[str, dict], output_path: str) -> None:
             "training_data": "C_all (1,067,960)",
             "korean_training": "Y",
             "T2_eer_pct": entry.get("T2_eer_pct"),
-            "T2_accuracy": entry.get("T2_accuracy"),
-            "T2_f1": entry.get("T2_f1"),
+            "T2_accuracy": entry.get("T2_accuracy_pct"),
+            "T2_f1": entry.get("T2_f1_pct"),
             "T2_fpr_pct": entry.get("T2_fpr_pct"),
             "note": entry.get("experiment", ""),
         }

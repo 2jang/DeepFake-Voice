@@ -80,14 +80,39 @@ def compute_fpr_fnr(
     return {"fpr": fpr, "fnr": fnr}
 
 
+def compute_eer_threshold(labels: np.ndarray, scores: np.ndarray) -> float:
+    """EER 지점의 threshold를 반환."""
+    fpr, tpr, thresholds = roc_curve(labels, scores, pos_label=1)
+    fnr = 1.0 - tpr
+    idx = np.argmin(np.abs(fpr - fnr))
+    return float(thresholds[min(idx, len(thresholds) - 1)])
+
+
+def compute_fpr_fnr_at_eer(labels: np.ndarray, scores: np.ndarray) -> dict[str, float]:
+    """EER 임계값에서의 FPR/FNR 분리 반환.
+
+    ASVspoof 학술 관례에 따른 분석. EER threshold에서는
+    이론적으로 FPR ≈ FNR ≈ EER이지만, 이산 데이터에서는
+    약간 차이날 수 있으며, 그 차이 자체가 데이터 분포 정보를 담는다.
+    """
+    eer_thr = compute_eer_threshold(labels, scores)
+    return compute_fpr_fnr(labels, scores, threshold=eer_thr)
+
+
 def compute_accuracy(labels: np.ndarray, preds: np.ndarray) -> float:
     return float((labels == preds).mean())
 
 
 def compute_all(labels: np.ndarray, scores: np.ndarray) -> dict[str, float]:
-    """모든 평가 지표를 한 번에 계산하여 반환."""
+    """모든 평가 지표를 한 번에 계산하여 반환.
+
+    FPR/FNR은 두 가지 기준으로 보고:
+      - fpr, fnr: threshold=0.5 (실용적 배포 기준)
+      - fpr_eer, fnr_eer: EER threshold (학술 비교 기준)
+    """
     preds = (scores >= 0.5).astype(int)
-    fpr_fnr = compute_fpr_fnr(labels, scores, threshold=0.5)
+    fpr_fnr_05 = compute_fpr_fnr(labels, scores, threshold=0.5)
+    fpr_fnr_eer = compute_fpr_fnr_at_eer(labels, scores)
     return {
         "eer": compute_eer(labels, scores),
         "mindcf": compute_mindcf(labels, scores),
@@ -96,6 +121,8 @@ def compute_all(labels: np.ndarray, scores: np.ndarray) -> dict[str, float]:
         "precision": float(precision_score(labels, preds)),
         "recall": float(recall_score(labels, preds)),
         "auc": float(roc_auc_score(labels, scores)),
-        "fpr": fpr_fnr["fpr"],
-        "fnr": fpr_fnr["fnr"],
+        "fpr": fpr_fnr_05["fpr"],
+        "fnr": fpr_fnr_05["fnr"],
+        "fpr_eer": fpr_fnr_eer["fpr"],
+        "fnr_eer": fpr_fnr_eer["fnr"],
     }
