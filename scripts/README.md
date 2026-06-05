@@ -19,7 +19,7 @@ scripts/
 │
 ├── 03_train/                       ← 학습 및 평가
 │   ├── train.py                        학습 + 평가 메인 스크립트
-│   ├── build_results.py                체크포인트 재평가 → results.csv
+│   ├── build_results.py                체크포인트 재평가 → results_v2.csv
 │   ├── eval_noise.py                   테스트 시 노이즈 강건성 평가
 │   ├── dataset.py                      AudioDataset (증강 지원)
 │   ├── metrics.py                      EER, minDCF, FPR/FNR, FPR/FNR@EER, Accuracy, F1, AUC
@@ -51,19 +51,14 @@ scripts/
 
 ## 필요 패키지
 
+루트 `requirements.txt` 하나로 전체 파이프라인(다운로드·전처리·학습·시각화) 의존성을 설치한다.
+
 ```bash
-# 다운로드
-pip install requests tqdm huggingface_hub gdown modelscope
-
-# 전처리
-pip install soundfile librosa numpy tqdm pandas scikit-learn
-
-# 학습/평가
-pip install torch torchaudio tensorboard pyyaml scipy
-
-# 시각화
-pip install matplotlib
+pip install -r requirements.txt
 ```
+
+> - GPU(CUDA) 환경에서는 `torch`를 [PyTorch 공식 안내](https://pytorch.org/get-started/locally/)에 따라 CUDA 빌드로 먼저 설치한 뒤 나머지를 설치하는 것을 권장한다.
+> - 코덱 증강은 PyAV(`av`)가 ffmpeg를 번들하므로 별도 시스템 ffmpeg 설치가 필요 없다.
 
 ---
 
@@ -152,11 +147,14 @@ python scripts/03_train/verify_models.py
 # 단일 실험
 python scripts/03_train/train.py --config scripts/03_train/configs/aasist_c1.yaml
 
-# 전체 실행 (13개 순차)
+# 전체 실행 (configs/ 전체 순차 — 이미 완료된 실험은 자동 skip)
 python scripts/03_train/train.py --all
 
-# 중단 후 재개
+# 중단된 실험만 이어서 재개
 python scripts/03_train/train.py --all --resume
+
+# 완료된 실험도 강제 재학습
+python scripts/03_train/train.py --all --force
 ```
 
 **Phase 3-1**: 3개 모델 × 3개 조합 = 9개 실험

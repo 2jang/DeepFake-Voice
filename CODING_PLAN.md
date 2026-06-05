@@ -196,12 +196,11 @@ LIM_TABLE5 = {
   4. 조합 증강
 """
 
+import io
 import numpy as np
 import soundfile as sf
 from pathlib import Path
-import random
-import subprocess
-import tempfile
+# av(PyAV)는 apply_codec 내부에서 lazy import
 
 
 class MUSANNoisePool:
@@ -235,28 +234,22 @@ def add_musan_noise(wav: np.ndarray, noise: np.ndarray, snr_db: float) -> np.nda
     return wav + noise * scale
 
 
-def apply_codec(wav: np.ndarray, sr: int = 16000, codec: str = "mp3", bitrate: str = "64k") -> np.ndarray:
-    """ffmpeg를 이용한 코덱 압축 시뮬레이션.
-    
-    wav → temp.wav → ffmpeg encode → temp.{codec} → ffmpeg decode → wav
+def apply_codec(wav, sr=16000, codec="mp3", bitrate="64k"):
+    """PyAV in-memory 코덱 압축/복원 시뮬레이션.
+
+    wav → (메모리) mp3 encode → decode → wav. subprocess/임시파일 없음 →
+    빠르고(학습 중 on-the-fly 적합), Windows 안전, ffmpeg 버전 비의존
+    (PyAV가 ffmpeg 번들).
     """
-    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f_in:
-        sf.write(f_in.name, wav, sr)
-        with tempfile.NamedTemporaryFile(suffix=f".{codec}", delete=False) as f_enc:
-            # encode
-            subprocess.run([
-                "ffmpeg", "-y", "-i", f_in.name,
-                "-b:a", bitrate, f_enc.name
-            ], capture_output=True)
-            # decode back
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f_out:
-                subprocess.run([
-                    "ffmpeg", "-y", "-i", f_enc.name,
-                    "-ar", str(sr), "-ac", "1", f_out.name
-                ], capture_output=True)
-                result, _ = sf.read(f_out.name, dtype="float32")
-    return result[:len(wav)]  # 길이 맞춤
+    import av  # lazy import (codec 쓸 때만 — gaussian/musan 경로엔 불필요)
+    # 1) encode: AudioFrame(wav, fltp, mono) → libmp3lame(bit_rate) → BytesIO
+    # 2) decode: BytesIO → AudioResampler(fltp, mono, sr) → ndarray
+    # 3) 출력 길이를 입력에 맞춰 반환 (mp3 priming 지연은 무시 가능)
 ```
+
+> **주의**: 초기 설계는 ffmpeg subprocess+임시파일 방식이었으나, (1) 샘플마다 프로세스
+> spawn으로 학습 병목, (2) Windows `NamedTemporaryFile` 잠금 버그, (3) 시스템 ffmpeg
+> 버전 의존 문제로 **PyAV in-memory 방식으로 재작성**했다 (`requirements.txt`에 `av` 추가).
 
 ### 5-B. dataset.py 확장 — 학습 시 증강 지원
 
@@ -717,6 +710,25 @@ Step 12 (선택): SSL 베이스라인
 |---|------|------|------|
 | 1 | augment.py 리샘플링 조잡 | 사소 | MUSAN이 16kHz면 발동 안 함 |
 | 2 | xlsr_head.py (SSL) | 3순위 | 시간 여유 시 구현 |
+
+---
+
+## 후속 검토 및 수정 (2026-06-05, 2차)
+
+1차 검토 이후 추가 코드 리뷰에서 발견·수정한 사항. 전부 검증 완료(metrics 단위테스트 20/20,
+체크포인트 로딩·노이즈 재현성·PyAV codec 동작 확인).
+
+| # | 심각도 | 문제 | 파일 | 수정 |
+|---|--------|------|------|------|
+| 1 | 🔴 치명 | `torch.compile`로 저장된 체크포인트(키에 `_orig_mod.` 접두사)를 raw 모델에 로드 시 실패 → Phase 4 재평가·Phase 5-A 노이즈 평가가 GPU에서 전부 크래시 | train.py, build_results.py, eval_noise.py | `load_checkpoint()` 헬퍼 추가(접두사 자동 제거), 두 로드 지점에 적용 |
+| 2 | 🟠 방법론 | eval_noise 노이즈가 비결정적(gaussian 전역 RNG) + 모델 간 다른 노이즈 → 강건성 표 재현·페어링 불가 | eval_noise.py, augment.py | `NoisyAudioDataset`이 `default_rng(seed+idx)` 사용, `add_gaussian_noise`/`MUSANNoisePool.sample`에 `rng` 인자 추가 → 인덱스별 결정적, 모델 간 동일 입력 |
+| 3 | 🟠 실용 | codec 증강이 샘플마다 ffmpeg subprocess+임시파일 → 학습 병목 + Windows 임시파일 잠금 버그 | augment.py, requirements.txt | `apply_codec` PyAV in-memory 재작성(`_parse_bitrate` 추가), `av` 의존성 추가 |
+| 4 | 🟡 | `train.py --all`이 신규 config 혼재 시 완료된 13개까지 재학습+results.csv 중복 append | train.py | `--all`이 완료 실험 기본 skip, `--force`로 강제 재학습 |
+| 5 | 🟡 | `build_results.py` 기본 출력이 results.csv → 학습 로그 덮어쓸 위험 | build_results.py | 기본 출력을 `results_v2.csv`로 변경 |
+| 6 | 🟡 문서 | "Weighted BCE" 표기가 실제 CrossEntropyLoss(미가중)와 불일치 | 연구제안서_v3.md, RESEARCH_PHASES.md | "CrossEntropyLoss (class_weights [1.0,1.0])"로 정정 |
+| 7 | 🟡 | gaussian α=0.001 near-clean 미주석 / MUSAN noise 카테고리 발견성 / visualize G1 dead code·NaN 막대 | eval_noise.py, dataset.py, visualize.py | 주석 추가(near-clean, `musan_category`), G1 dead code 제거·NaN 막대 미표시 |
+
+신규 헬퍼/함수: `train.load_checkpoint`, `augment._parse_bitrate`. 신규 의존성: `av`(PyAV).
 
 ---
 

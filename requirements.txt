@@ -1,9 +1,33 @@
+# 한국어 딥페이크 음성 탐지 — 전체 파이프라인 의존성
+# 설치: pip install -r requirements.txt
+#
+# GPU(CUDA) 환경에서는 torch를 PyTorch 공식 안내(https://pytorch.org)에 따라
+# CUDA 빌드로 먼저 설치한 뒤 나머지를 설치하는 것을 권장한다.
+# 코덱 증강은 PyAV(av)가 ffmpeg를 번들하므로 시스템 ffmpeg 설치가 불필요하다.
+
+# ── 학습 / 평가 ──
 torch>=2.5
-numpy>=2.1
-pandas>=3.0
-scipy>=1.17
-scikit-learn>=1.8
-soundfile>=0.12
-tqdm>=4.66
-pyyaml>=6.0
 tensorboard>=2.18
+pyyaml>=6.0
+scipy>=1.16
+scikit-learn>=1.6
+tqdm>=4.66
+
+# ── 데이터 처리 / 전처리 ──
+numpy>=2.1
+pandas>=2.2
+soundfile>=0.12
+librosa>=0.11
+
+# ── 증강 (Phase 5 codec) ──
+av>=10.0            # PyAV: in-memory mp3 codec 증강, 자체 ffmpeg 번들
+
+# ── 시각화 (Phase 6) ──
+matplotlib>=3.8
+
+# ── 데이터셋 다운로드 (Phase 1) ──
+requests>=2.31
+huggingface_hub>=0.24
+python-dotenv>=1.0
+gdown>=5.0
+modelscope>=1.9

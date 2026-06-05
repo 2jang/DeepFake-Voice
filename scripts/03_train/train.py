@@ -24,6 +24,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import yaml
+from torch.nn.modules.utils import consume_prefix_in_state_dict_if_present
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
@@ -44,6 +45,18 @@ def set_seed(seed: int) -> None:
         torch.backends.cudnn.benchmark = True
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
+
+
+def load_checkpoint(model: nn.Module, ckpt_path) -> None:
+    """state_dict를 로드하되 torch.compile의 '_orig_mod.' 접두사를 자동 제거.
+
+    train.py는 torch.compile로 감싼 모델의 state_dict를 저장하므로 키에
+    '_orig_mod.' 접두사가 붙는다. raw 모델(컴파일 전)에 로드할 때는 이를
+    제거해야 한다. 접두사가 없는 체크포인트(CPU 학습분 등)에도 안전하다.
+    """
+    state = torch.load(ckpt_path, weights_only=True)
+    consume_prefix_in_state_dict_if_present(state, "_orig_mod.")
+    model.load_state_dict(state)
 
 
 def train_one_epoch(
@@ -392,6 +405,8 @@ def main() -> int:
     parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
     parser.add_argument("--tb-port", type=int, default=6006, help="TensorBoard port (0 to disable)")
     parser.add_argument("--resume", action="store_true", help="Resume interrupted training")
+    parser.add_argument("--force", action="store_true",
+                        help="--all에서 이미 완료된 실험도 강제 재학습 (기본은 건너뜀)")
     args = parser.parse_args()
 
     if args.tb_port > 0 and (args.all or args.config):
@@ -410,16 +425,19 @@ def main() -> int:
     if args.all:
         print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
         for i, cfg_path in enumerate(ALL_CONFIGS, 1):
-            if args.resume:
-                with open(cfg_path) as f:
-                    _cfg = yaml.safe_load(f)
-                _out = Path(_cfg.get("output_root", "experiments"))
-                _name = _cfg["experiment"]
-                _resume_exists = (_out / "checkpoints" / f"{_name}_resume.pt").exists()
-                _best_exists = (_out / "checkpoints" / f"{_name}_best.pt").exists()
-                if _best_exists and not _resume_exists:
-                    print(f"\n  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem} — skipped (completed)")
-                    continue
+            # 완료된 실험(best.pt 존재 & resume.pt 없음)은 기본적으로 건너뛴다.
+            # → configs/에 신규(aug/length) config가 섞여도 신규만 학습되고,
+            #   results.csv 중복 append를 방지한다.
+            #   --force: 완료된 실험도 강제 재학습 / --resume: 중단된 실험 이어서.
+            with open(cfg_path) as f:
+                _cfg = yaml.safe_load(f)
+            _out = Path(_cfg.get("output_root", "experiments"))
+            _name = _cfg["experiment"]
+            _resume_exists = (_out / "checkpoints" / f"{_name}_resume.pt").exists()
+            _best_exists = (_out / "checkpoints" / f"{_name}_best.pt").exists()
+            if _best_exists and not _resume_exists and not args.force:
+                print(f"\n  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem} — skipped (완료됨; --force로 재학습)")
+                continue
             print(f"\n{'#'*60}")
             print(f"  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem}")
             print(f"{'#'*60}")

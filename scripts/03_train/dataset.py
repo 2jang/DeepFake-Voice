@@ -46,6 +46,8 @@ class AudioDataset(Dataset):
         self.noise_pool = None
 
         # MUSAN noise pool 초기화 (학습 시 + config에 musan_dir이 있을 때만)
+        # musan_category로 noise(기본)/speech(babble)/music 선택 가능.
+        # 제안서는 배경음=noise 기준이나, babble을 섞으면 강건성이 더 오를 수 있음.
         if self.augment_config and self.augment_config.get("musan_dir"):
             from augment import MUSANNoisePool
             self.noise_pool = MUSANNoisePool(

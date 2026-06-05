@@ -30,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from dataset import AudioDataset
 from metrics import compute_all
 from models import get_model
-from train import evaluate, measure_inference_time, measure_flops, measure_peak_memory
+from train import evaluate, load_checkpoint, measure_inference_time, measure_flops, measure_peak_memory
 
 
 CONFIGS_DIR = Path(__file__).resolve().parent / "configs"
@@ -79,7 +79,7 @@ def evaluate_experiment(
 
     # --- model ---
     model = get_model(cfg["model"]["name"]).to(device)
-    model.load_state_dict(torch.load(ckpt_path, weights_only=True))
+    load_checkpoint(model, ckpt_path)
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"  Params: {n_params:,}")
 
@@ -148,8 +148,9 @@ def main() -> int:
     parser.add_argument("--all", action="store_true", help="Evaluate all configs")
     parser.add_argument("--checkpoint", help="Specific checkpoint path (default: best)")
     parser.add_argument("--device", default="auto", help="cuda / cpu / auto")
-    parser.add_argument("--output", default="experiments/results.csv",
-                        help="Output CSV path (default: experiments/results.csv)")
+    parser.add_argument("--output", default="experiments/results_v2.csv",
+                        help="Output CSV path (default: experiments/results_v2.csv). "
+                             "train.py의 results.csv(학습 로그)를 덮어쓰지 않도록 분리.")
     args = parser.parse_args()
 
     if not args.all and not args.config:

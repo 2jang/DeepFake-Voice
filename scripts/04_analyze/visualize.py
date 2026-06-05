@@ -124,23 +124,14 @@ def plot_g1(df: pd.DataFrame, output_dir: Path) -> None:
         for m_idx, model in enumerate(all_models):
             eers = []
             for combo in combos:
-                if combo == "C_all":
-                    combo_filter = "C_all"
-                else:
-                    combo_filter = combo
-
-                row = df[(df["model"] == model) & (df["data_combo"] == combo_filter)]
-                if row.empty and combo != "C_all":
-                    # Phase 1에서 specrnet은 C1/C2/C3 미수행
-                    eers.append(np.nan)
-                elif row.empty:
-                    eers.append(np.nan)
-                else:
-                    eers.append(float(row.iloc[0][eer_col]) * 100)
+                # specrnet은 Phase 1(C1/C2/C3) 미수행 → row.empty → NaN
+                row = df[(df["model"] == model) & (df["data_combo"] == combo)]
+                eers.append(float(row.iloc[0][eer_col]) * 100 if not row.empty else np.nan)
 
             style = MODEL_STYLES.get(model, {"color": "gray", "label": model})
-            valid = [e for e in eers if not np.isnan(e)]
-            bars = ax.bar(x + offsets[m_idx], [e if not np.isnan(e) else 0 for e in eers],
+            # NaN(미수행 조합)은 막대를 그리지 않아 실제 0.00% EER과 시각적으로 구분된다.
+            heights = np.array(eers, dtype=float)
+            bars = ax.bar(x + offsets[m_idx], heights,
                           width, label=style["label"], color=style["color"],
                           alpha=0.85, edgecolor="white", linewidth=0.5)
 

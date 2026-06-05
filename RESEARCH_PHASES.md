@@ -90,7 +90,7 @@ epochs: 50
 early_stopping: patience 10 (Dev EER 기준)
 seed: 42
 input: 4초 (64,000 samples), 16kHz mono
-loss: Weighted BCE (class_weights: [1.0, 1.0])
+loss: CrossEntropyLoss (2-class, class_weights: [1.0, 1.0] = 미가중)
 GPU: RTX 4090 (클라우드)
 최적화: torch.compile, bf16, tf32
 ```
