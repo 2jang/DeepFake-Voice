@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import sys
 from pathlib import Path
 
@@ -218,8 +219,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="임동훈(2024) 직접 비교표 생성")
     parser.add_argument("--results", default="experiments/results.csv",
                         help="본 연구 results.csv 경로")
-    parser.add_argument("--output", default="experiments/lim_comparison.csv",
-                        help="비교표 CSV 출력 경로")
+    parser.add_argument("--outdir", default="experiments/analysis",
+                        help="출력 디렉터리 (기본: experiments/analysis)")
     args = parser.parse_args()
 
     results_path = Path(args.results)
@@ -234,8 +235,28 @@ def main() -> int:
         print("  C_all 실험 결과를 찾을 수 없습니다.")
         return 1
 
+    # 콘솔 출력 캡처
+    buf = io.StringIO()
+    old_stdout = sys.stdout
+    sys.stdout = buf
     print_comparison(our)
-    save_comparison_csv(our, args.output)
+    sys.stdout = old_stdout
+    text = buf.getvalue()
+    print(text, end="")
+
+    # 파일 출력
+    outdir = Path(args.outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    report_path = outdir / "lim_comparison_report.txt"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    save_comparison_csv(our, str(outdir / "lim_comparison.csv"))
+
+    print(f"  출력 파일:")
+    print(f"    {report_path}")
+    print(f"    {outdir / 'lim_comparison.csv'}")
 
     return 0
 
