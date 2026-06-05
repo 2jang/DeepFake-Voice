@@ -20,10 +20,15 @@ from sota import SOTA
 
 
 def print_comparison(df: pd.DataFrame) -> None:
-    eer_cols = [c for c in df.columns if c.endswith("_eer")]
+    eer_cols = [c for c in df.columns
+                if c.endswith("_eer") and "_fpr_eer" not in c and "_fnr_eer" not in c]
     eval_names = [c.replace("_eer", "") for c in eer_cols]
 
-    header = f"  {'Experiment':20s} {'Model':10s} {'Combo':6s} {'SOTA':>7s} {'Dev':>7s}"
+    has_dev = "best_dev_eer" in df.columns
+
+    header = f"  {'Experiment':20s} {'Model':10s} {'Combo':6s} {'SOTA':>7s}"
+    if has_dev:
+        header += f" {'Dev':>7s}"
     for en in eval_names:
         header += f" {en:>7s}"
     header += f"  {'Best':>5s}"
@@ -35,16 +40,20 @@ def print_comparison(df: pd.DataFrame) -> None:
     print(f"  {'-'*(len(header)-2)}")
 
     best_exp = None
-    best_dev_eer = 1.0
+    best_eer_val = 1.0
 
     for _, row in df.iterrows():
         model = row["model"].lower()
         sota_eer = SOTA[model]["eer"] if model in SOTA else None
-        dev_eer = float(row["best_dev_eer"]) * 100
+
+        dev_eer = None
+        if has_dev and pd.notna(row.get("best_dev_eer")) and row["best_dev_eer"] != "":
+            dev_eer = float(row["best_dev_eer"]) * 100
 
         line = f"  {row['experiment']:20s} {row['model']:10s} {row.get('data_combo', ''):6s}"
         line += f" {sota_eer:7.2f}" if sota_eer else f" {'N/A':>7s}"
-        line += f" {dev_eer:7.2f}"
+        if has_dev:
+            line += f" {dev_eer:7.2f}" if dev_eer is not None else f" {'N/A':>7s}"
 
         for col in eer_cols:
             if col in row and pd.notna(row[col]):
@@ -52,23 +61,30 @@ def print_comparison(df: pd.DataFrame) -> None:
             else:
                 line += f" {'N/A':>7s}"
 
-        if dev_eer < best_dev_eer:
-            best_dev_eer = dev_eer
+        compare_eer = dev_eer if dev_eer is not None else (float(row[eer_cols[0]]) * 100 if eer_cols and pd.notna(row.get(eer_cols[0])) else None)
+        if compare_eer is not None and compare_eer < best_eer_val:
+            best_eer_val = compare_eer
             best_exp = row["experiment"]
 
         print(line)
 
     print(f"  {'-'*(len(header)-2)}")
     if best_exp:
-        print(f"  Best: {best_exp} (Dev EER {best_dev_eer:.2f}%)")
+        label = "Dev EER" if has_dev else "T1 EER"
+        print(f"  Best: {best_exp} ({label} {best_eer_val:.2f}%)")
     print()
 
 
 def print_delta(df: pd.DataFrame) -> None:
-    eer_cols = [c for c in df.columns if c.endswith("_eer")]
+    eer_cols = [c for c in df.columns
+                if c.endswith("_eer") and "_fpr_eer" not in c and "_fnr_eer" not in c]
     eval_names = [c.replace("_eer", "") for c in eer_cols]
 
-    header = f"  {'Experiment':20s} {'Model':10s} {'Dev-SOTA':>9s}"
+    has_dev = "best_dev_eer" in df.columns
+
+    header = f"  {'Experiment':20s} {'Model':10s}"
+    if has_dev:
+        header += f" {'Dev-SOTA':>9s}"
     for en in eval_names:
         header += f" {en+'-SOTA':>9s}"
 
@@ -82,9 +98,15 @@ def print_delta(df: pd.DataFrame) -> None:
         if model not in SOTA:
             continue
         sota_eer = SOTA[model]["eer"]
-        dev_delta = float(row["best_dev_eer"]) * 100 - sota_eer
 
-        line = f"  {row['experiment']:20s} {row['model']:10s} {dev_delta:+9.2f}"
+        line = f"  {row['experiment']:20s} {row['model']:10s}"
+        if has_dev:
+            if pd.notna(row.get("best_dev_eer")) and row["best_dev_eer"] != "":
+                dev_delta = float(row["best_dev_eer"]) * 100 - sota_eer
+                line += f" {dev_delta:+9.2f}"
+            else:
+                line += f" {'N/A':>9s}"
+
         for col in eer_cols:
             if col in row and pd.notna(row[col]):
                 delta = float(row[col]) * 100 - sota_eer

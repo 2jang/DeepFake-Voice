@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 import time
 from pathlib import Path
@@ -86,6 +87,23 @@ def evaluate_experiment(
     if device.type == "cuda":
         model = torch.compile(model)
 
+    # --- best dev EER from training log ---
+    log_path = out_root / "logs" / f"{experiment_name}.jsonl"
+    best_dev_eer = None
+    best_epoch = None
+    if log_path.exists():
+        best_eer_val = 1.0
+        with open(log_path) as f:
+            for line in f:
+                entry = json.loads(line)
+                if entry.get("eer", 1.0) < best_eer_val:
+                    best_eer_val = entry["eer"]
+                    best_epoch = entry["epoch"]
+        best_dev_eer = best_eer_val
+        print(f"  Best dev EER: {best_dev_eer:.4f} (epoch {best_epoch})")
+    else:
+        print(f"  Training log not found: {log_path} (best_dev_eer unavailable)")
+
     # --- evaluate on test sets ---
     print(f"\n  -- Evaluation on test sets --")
     results_row: dict[str, str | int | float] = {
@@ -93,6 +111,8 @@ def evaluate_experiment(
         "model": cfg["model"]["name"],
         "data_combo": cfg.get("data_combo", ""),
         "checkpoint": ckpt_label,
+        "best_epoch": best_epoch if best_epoch is not None else "",
+        "best_dev_eer": f"{best_dev_eer:.6f}" if best_dev_eer is not None else "",
         "params": n_params,
     }
 
