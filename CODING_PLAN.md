@@ -46,7 +46,7 @@ scripts/02_preprocess/
 ### 4-1. metrics.py 확장
 
 **파일**: `scripts/03_train/metrics.py`
-**변경**: `compute_mindcf`, `compute_fpr_fnr` 함수 추가, `compute_all` 확장
+**변경**: `compute_mindcf`, `compute_fpr_fnr`, `compute_eer_threshold`, `compute_fpr_fnr_at_eer` 함수 추가, `compute_all` 확장 (6→11개 지표)
 
 ```python
 # 추가할 함수 1: minDCF
@@ -100,12 +100,13 @@ def compute_fpr_fnr_at_eer(labels: np.ndarray, scores: np.ndarray) -> dict:
 
 **주의**: label 방향 확인 필요. 현재 코드에서 `LABEL_MAP = {"real": 1, "fake": 0}`. `roc_curve(labels, scores, pos_label=1)` → real이 positive. FPR/FNR 계산 시 방향 일치시켜야 함.
 
-**compute_all 수정**:
+**compute_all 수정** (최종: 11개 지표):
 ```python
 def compute_all(labels, scores) -> dict:
-    # 기존 6개 + minDCF + FPR + FNR = 9개
+    # 기존 6개 + minDCF + FPR/FNR(0.5) + FPR/FNR(EER) = 11개
     preds = (scores >= 0.5).astype(int)
-    fpr_fnr = compute_fpr_fnr_at_eer(labels, scores)
+    fpr_fnr_05 = compute_fpr_fnr(labels, scores, threshold=0.5)
+    fpr_fnr_eer = compute_fpr_fnr_at_eer(labels, scores)
     return {
         "eer": compute_eer(labels, scores),
         "mindcf": compute_mindcf(labels, scores),
@@ -114,8 +115,10 @@ def compute_all(labels, scores) -> dict:
         "precision": float(precision_score(labels, preds)),
         "recall": float(recall_score(labels, preds)),
         "auc": float(roc_auc_score(labels, scores)),
-        "fpr": fpr_fnr["fpr"],
-        "fnr": fpr_fnr["fnr"],
+        "fpr": fpr_fnr_05["fpr"],         # threshold=0.5 (실용적 배포)
+        "fnr": fpr_fnr_05["fnr"],         # threshold=0.5
+        "fpr_eer": fpr_fnr_eer["fpr"],    # EER threshold (학술 비교)
+        "fnr_eer": fpr_fnr_eer["fnr"],    # EER threshold
     }
 ```
 
@@ -664,7 +667,7 @@ Step 12 (선택): SSL 베이스라인
 
 | 파일 | 변경 유형 | 상태 | 내용 |
 |------|----------|:----:|------|
-| `scripts/03_train/metrics.py` | **수정** | ✅ | minDCF, FPR/FNR 함수 추가, compute_all 확장 (9개 지표) |
+| `scripts/03_train/metrics.py` | **수정** | ✅ | minDCF, FPR/FNR, FPR/FNR@EER 함수 추가, compute_all 확장 (11개 지표) |
 | `scripts/03_train/dataset.py` | **수정** | ✅ | augment_config 파라미터, _apply_augmentation 메서드 |
 | `scripts/03_train/train.py` | **수정** | ✅ | augmentation config 연동, TensorBoard에 minDCF/FPR/FNR 로깅, 평가 출력 포맷 |
 | `scripts/03_train/augment.py` | **신규** | ✅ | MUSANNoisePool, add_gaussian_noise, add_noise_snr, apply_codec |
@@ -681,9 +684,39 @@ Step 12 (선택): SSL 베이스라인
 | `configs/lcnn_call_2sec.yaml` | **신규** | ✅ | C-1: LCNN 2초 |
 | `configs/specrnet_call_8sec.yaml` | **신규** | ✅ | C-3: SpecRNet 8초 |
 | `configs/lcnn_call_8sec.yaml` | **신규** | ✅ | C-3: LCNN 8초 |
+| `scripts/03_train/test_metrics.py` | **신규** | ✅ | metrics.py 단위 테스트 20개 (EER, minDCF, FPR/FNR, compute_all) |
 | `scripts/03_train/models/xlsr_head.py` | **신규 (선택)** | 미구현 | SSL 베이스라인 (3순위) |
 
-**기존 코드 변경 최소화**: 3개 파일만 수정 (metrics.py, dataset.py, train.py). 나머지는 전부 신규 파일.
+**기존 코드 변경 최소화**: 4개 파일만 수정 (metrics.py, dataset.py, train.py, build_results.py). 나머지는 전부 신규 파일.
+
+---
+
+## 코드 검토 결과 (2026-06-05)
+
+### 수정 완료
+
+| # | 문제 | 파일 | 수정 |
+|---|------|------|------|
+| 1 | build_results.py 콘솔 출력에 minDCF/FPR/FNR 누락 | build_results.py L109 | 포맷 통일 |
+| 2 | eval_noise.py에 evaluate() 함수 중복 복사 | eval_noise.py L104-123 | `from train import evaluate` 로 변경 |
+| 3 | compare_lim.py accuracy/f1 단위 불일치 (소수 vs %) | compare_lim.py L86-96 | 전부 % 변환 통일 |
+| 4 | build_results.py에서 평가 에러 시 전체 크래시 | build_results.py main() | try/except + traceback 추가 |
+| 5 | build_results.py CSV fieldnames 불일치 가능 | build_results.py main() | 키 합집합 방식으로 변경 |
+
+### 추가 수정 완료
+
+| # | 문제 | 파일 | 수정 |
+|---|------|------|------|
+| 6 | FPR/FNR: EER threshold 버전 누락 | metrics.py | `fpr_eer`, `fnr_eer` 추가 (compute_all 11개 지표로 확장) |
+| 7 | test_metrics.py 미작성 | test_metrics.py (신규) | 20개 단위 테스트 작성, 전부 통과 ✅ |
+| 8 | train.py/build_results.py에 fpr_eer/fnr_eer 로깅 누락 | train.py, build_results.py | TB 로깅 + 콘솔 출력 추가 |
+
+### 미해결 (참고)
+
+| # | 항목 | 상태 | 비고 |
+|---|------|------|------|
+| 1 | augment.py 리샘플링 조잡 | 사소 | MUSAN이 16kHz면 발동 안 함 |
+| 2 | xlsr_head.py (SSL) | 3순위 | 시간 여유 시 구현 |
 
 ---
 

@@ -106,9 +106,10 @@ def evaluate_experiment(
             num_workers=num_workers, pin_memory=True,
         )
         m = evaluate(model, eval_loader, device)
-        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  Acc={m['accuracy']:.4f}  "
-              f"F1={m['f1']:.4f}  Prec={m['precision']:.4f}  "
-              f"Rec={m['recall']:.4f}  AUC={m['auc']:.4f}")
+        print(f"    {eval_name:5s}  EER={m['eer']:.4f}  minDCF={m['mindcf']:.4f}  "
+              f"Acc={m['accuracy']:.4f}  F1={m['f1']:.4f}  AUC={m['auc']:.4f}  "
+              f"FPR={m['fpr']:.4f}  FNR={m['fnr']:.4f}  "
+              f"FPR@EER={m['fpr_eer']:.4f}  FNR@EER={m['fnr_eer']:.4f}")
         for metric_name, metric_val in m.items():
             results_row[f"{eval_name}_{metric_name}"] = f"{metric_val:.6f}"
 
@@ -164,21 +165,34 @@ def main() -> int:
             print(f"  [{i}/{len(configs)}] {cfg_path.stem}")
             print(f"{'#'*60}")
 
-        row = evaluate_experiment(str(cfg_path), args.device, args.checkpoint)
-        if row:
-            rows.append(row)
+        try:
+            row = evaluate_experiment(str(cfg_path), args.device, args.checkpoint)
+            if row:
+                rows.append(row)
+        except Exception as e:
+            print(f"  ERROR: {cfg_path.stem} failed: {e}")
+            import traceback
+            traceback.print_exc()
+            continue
 
     if not rows:
         print("No results to write.")
         return 1
 
-    # --- write CSV ---
+    # --- write CSV: 모든 row의 키를 합집합으로 수집 ---
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    fieldnames = list(rows[0].keys())
+    all_keys: list[str] = []
+    seen: set[str] = set()
+    for row in rows:
+        for k in row.keys():
+            if k not in seen:
+                all_keys.append(k)
+                seen.add(k)
+
     with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=all_keys, extrasaction="ignore")
         writer.writeheader()
         for row in rows:
             writer.writerow(row)

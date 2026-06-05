@@ -27,13 +27,11 @@ import numpy as np
 import torch
 import yaml
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from augment import MUSANNoisePool, add_gaussian_noise, add_noise_snr
 from dataset import AudioDataset
-from metrics import compute_all
 from models import get_model
 
 # ---------------------------------------------------------------------------
@@ -98,29 +96,10 @@ class NoisyAudioDataset(Dataset):
 
 
 # ---------------------------------------------------------------------------
-# Evaluate function (재사용)
+# Evaluate function (train.py에서 임포트)
 # ---------------------------------------------------------------------------
 
-@torch.no_grad()
-def evaluate_model(
-    model: torch.nn.Module,
-    loader: DataLoader,
-    device: torch.device,
-) -> dict[str, float]:
-    """모델 평가 — train.py의 evaluate()와 동일 로직."""
-    model.eval()
-    all_labels, all_scores = [], []
-    for wav, label in tqdm(loader, desc="  Eval", leave=False, ncols=80):
-        wav = wav.to(device)
-        with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
-            logits = model(wav)
-        probs = torch.softmax(logits, dim=1)[:, 1].cpu().float().numpy()
-        all_scores.extend(probs)
-        all_labels.extend(label.numpy())
-
-    labels = np.array(all_labels)
-    scores = np.array(all_scores)
-    return compute_all(labels, scores)
+from train import evaluate as evaluate_model
 
 
 # ---------------------------------------------------------------------------

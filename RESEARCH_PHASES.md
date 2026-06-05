@@ -189,10 +189,11 @@ ASVspoof 및 임동훈(2024)이 사용한 표준 지표.
 
 ### 4.3 수행 절차
 
-1. evaluate.py에 minDCF 계산 로직 추가
-2. FPR/FNR 분리 분석 코드 추가
-3. 기존 13개 실험 체크포인트로 일괄 재평가
-4. results.csv에 minDCF, FPR, FNR 컬럼 추가
+1. metrics.py에 minDCF, FPR/FNR(threshold=0.5), FPR/FNR@EER 계산 로직 추가 ✅
+2. compute_all() 확장: 6개 → 11개 지표 ✅
+3. test_metrics.py 단위 테스트 20개 작성 및 통과 ✅
+4. 기존 13개 실험 체크포인트로 일괄 재평가 → results_v2.csv
+5. results.csv에 minDCF, FPR, FNR, FPR@EER, FNR@EER 컬럼 추가
 
 ### 4.4 완료 기준
 

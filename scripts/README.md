@@ -22,7 +22,8 @@ scripts/
 │   ├── build_results.py                체크포인트 재평가 → results.csv
 │   ├── eval_noise.py                   테스트 시 노이즈 강건성 평가
 │   ├── dataset.py                      AudioDataset (증강 지원)
-│   ├── metrics.py                      EER, minDCF, FPR/FNR, Accuracy, F1, AUC
+│   ├── metrics.py                      EER, minDCF, FPR/FNR, FPR/FNR@EER, Accuracy, F1, AUC
+│   ├── test_metrics.py                 metrics.py 단위 테스트 (20개)
 │   ├── augment.py                      노이즈/코덱 증강 유틸리티
 │   ├── sota.py                         ASVspoof 2019 SOTA 레퍼런스
 │   ├── merge_manifests.py              C_all manifest 병합
@@ -191,8 +192,10 @@ python scripts/04_analyze/analyze.py --results experiments/results_v2.csv
 |------|------|----------|
 | EER | FAR=FRR 교차점 | 임동훈, SpeechFake, ASVspoof |
 | minDCF | 비용 가중 오류율 (C_miss=2, C_fa=1) | 임동훈, ASVspoof |
-| FPR | real→fake 오판률 | 임동훈 Table 5 |
-| FNR | fake→real 오판률 | 임동훈 Table 5 |
+| FPR | real→fake 오판률 (threshold=0.5) | 임동훈 Table 5 |
+| FNR | fake→real 오판률 (threshold=0.5) | 임동훈 Table 5 |
+| FPR@EER | real→fake 오판률 (EER threshold) | ASVspoof 학술 관례 |
+| FNR@EER | fake→real 오판률 (EER threshold) | ASVspoof 학술 관례 |
 | Accuracy / F1 / AUC | 표준 분류 지표 | 임동훈 |
 | 추론 시간 / 파라미터 / FLOPs | 경량화 지표 | — |
 
