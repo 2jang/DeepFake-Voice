@@ -1,19 +1,34 @@
 #!/usr/bin/env python3
 """Phase 5-A: 테스트 시 노이즈 강건성 평가.
 
-기존 C_all 체크포인트(specrnet_call, lcnn_call)를 로드하고,
-테스트 데이터에 다양한 노이즈를 추가하여 평가한다.
+clean/noise 학습 모델 모두를 대상으로, 테스트 데이터에 다양한 노이즈를
+추가하여 평가한다 (재학습 없음).
 
-실험 A: 5개 조건 × 2개 모델 × 3개 테스트셋 = 30개 평가 (재학습 없음)
+  학습 조건 × 평가 조건 2×2 매트릭스:
+    clean 학습 + clean 평가  → 기본 성능 (Phase 4에서 이미 측정)
+    clean 학습 + noise 평가  → 강건성 하락 측정
+    noise 학습 + clean 평가  → 증강 효과 (Phase 5-B train.py에서 측정)
+    noise 학습 + noise 평가  → 증강이 실전 노이즈에서 얼마나 도움되는지
+
+노이즈 조건: gaussian, MUSAN(20/10/5dB), codec(MP3 64kbps)
+모델: clean 2개 + augmentation 6개 = 8개 프리셋 + --config로 임의 추가
 
 사용법:
-    # 전체 실행
+    # 전체 실행 (8모델 × 6조건 × 3테스트셋 = 144개 평가)
     python scripts/03_train/eval_noise.py --musan-dir data/musan/musan
 
-    # 특정 조건/모델만
-    python scripts/03_train/eval_noise.py --musan-dir data/musan/musan --conditions clean gaussian_001
-    python scripts/03_train/eval_noise.py --musan-dir data/musan/musan --models specrnet
-    python scripts/03_train/eval_noise.py --musan-dir data/musan/musan --eval-sets T1 T2
+    # clean 학습 모델만
+    python scripts/03_train/eval_noise.py --models specrnet lcnn
+
+    # augmentation 모델만
+    python scripts/03_train/eval_noise.py --models specrnet_aug_musan specrnet_aug_both
+
+    # 임의 config 경로로 평가
+    python scripts/03_train/eval_noise.py --config scripts/03_train/configs/my_model.yaml
+
+    # 특정 조건/테스트셋만
+    python scripts/03_train/eval_noise.py --conditions clean musan_10db codec_mp3_64
+    python scripts/03_train/eval_noise.py --eval-sets T1 T2
 """
 
 from __future__ import annotations
@@ -30,7 +45,7 @@ from torch.utils.data import DataLoader, Dataset
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from augment import MUSANNoisePool, add_gaussian_noise, add_noise_snr
+from augment import MUSANNoisePool, add_gaussian_noise, add_noise_snr, apply_codec
 from dataset import AudioDataset
 from models import get_model
 
@@ -46,12 +61,21 @@ NOISE_CONDITIONS = {
     "musan_20db":   {"type": "musan", "snr_db": 20},
     "musan_10db":   {"type": "musan", "snr_db": 10},
     "musan_5db":    {"type": "musan", "snr_db": 5},
+    "codec_mp3_64": {"type": "codec", "codec": "mp3", "bitrate": "64k"},
 }
 
-# Models to evaluate (config path → checkpoint naming convention)
+# Models to evaluate: clean-trained + augmentation-trained
 MODEL_CONFIGS = {
-    "specrnet": "scripts/03_train/configs/specrnet_call.yaml",
-    "lcnn":     "scripts/03_train/configs/lcnn_call.yaml",
+    # clean 학습
+    "specrnet":           "scripts/03_train/configs/specrnet_call.yaml",
+    "lcnn":               "scripts/03_train/configs/lcnn_call.yaml",
+    # noise 학습 (augmentation)
+    "specrnet_aug_musan": "scripts/03_train/configs/specrnet_call_aug_musan.yaml",
+    "specrnet_aug_codec": "scripts/03_train/configs/specrnet_call_aug_codec.yaml",
+    "specrnet_aug_both":  "scripts/03_train/configs/specrnet_call_aug_both.yaml",
+    "lcnn_aug_musan":     "scripts/03_train/configs/lcnn_call_aug_musan.yaml",
+    "lcnn_aug_codec":     "scripts/03_train/configs/lcnn_call_aug_codec.yaml",
+    "lcnn_aug_both":      "scripts/03_train/configs/lcnn_call_aug_both.yaml",
 }
 
 
@@ -71,11 +95,13 @@ class NoisyAudioDataset(Dataset):
         num_samples: int,
         noise_config: dict,
         musan_pool: MUSANNoisePool | None = None,
+        sr: int = 16_000,
         seed: int = 42,
     ):
         self.base = AudioDataset(manifest_path, num_samples, is_train=False, seed=seed)
         self.noise_config = noise_config
         self.musan_pool = musan_pool
+        self.sr = sr
         self.seed = seed
 
     def __len__(self) -> int:
@@ -101,6 +127,12 @@ class NoisyAudioDataset(Dataset):
                 raise RuntimeError("MUSAN pool이 필요합니다 (--musan-dir 지정)")
             noise = self.musan_pool.sample(len(wav), rng=rng)
             wav = add_noise_snr(wav, noise, self.noise_config["snr_db"])
+        elif ntype == "codec":
+            wav = apply_codec(
+                wav, sr=self.sr,
+                codec=self.noise_config["codec"],
+                bitrate=self.noise_config["bitrate"],
+            )
 
         return torch.from_numpy(wav), label
 
@@ -124,14 +156,21 @@ def main() -> int:
     parser.add_argument("--conditions", nargs="+", default=list(NOISE_CONDITIONS.keys()),
                         choices=list(NOISE_CONDITIONS.keys()),
                         help="평가할 노이즈 조건")
-    parser.add_argument("--models", nargs="+", default=list(MODEL_CONFIGS.keys()),
-                        choices=list(MODEL_CONFIGS.keys()),
-                        help="평가할 모델")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--models", nargs="+", default=None,
+                       choices=list(MODEL_CONFIGS.keys()),
+                       help="평가할 모델 (프리셋)")
+    group.add_argument("--config", nargs="+", type=str,
+                       help="임의 YAML config 경로 (프리셋 외 모델 평가 시)")
     parser.add_argument("--eval-sets", nargs="+", default=["T1", "T2", "T3"],
                         help="평가할 테스트셋")
     parser.add_argument("--device", default="auto")
     parser.add_argument("--output", default="experiments/noise_robustness.csv")
     args = parser.parse_args()
+
+    # --models/--config 모두 미지정 시 전체 프리셋
+    if args.models is None and args.config is None:
+        args.models = list(MODEL_CONFIGS.keys())
 
     device = torch.device(
         "cuda" if args.device == "auto" and torch.cuda.is_available()
@@ -148,8 +187,16 @@ def main() -> int:
 
     all_rows: list[dict] = []
 
-    for model_name in args.models:
-        config_path = MODEL_CONFIGS[model_name]
+    # --config: 임의 경로 → (이름, 경로) 리스트 구성
+    if args.config:
+        config_entries = []
+        for p in args.config:
+            name = Path(p).stem
+            config_entries.append((name, p))
+    else:
+        config_entries = [(name, MODEL_CONFIGS[name]) for name in args.models]
+
+    for model_name, config_path in config_entries:
         with open(config_path) as f:
             cfg = yaml.safe_load(f)
 
@@ -231,7 +278,7 @@ def main() -> int:
 
     # --- 요약 테이블 ---
     print(f"\n  === 노이즈 강건성 요약 (EER %) ===")
-    header = f"  {'Model':12s} {'Condition':15s}"
+    header = f"  {'Model':22s} {'Condition':15s}"
     for es in args.eval_sets:
         header += f" {es:>8s}"
     print(header)
@@ -239,7 +286,7 @@ def main() -> int:
 
     for row in all_rows:
         if row["eval_set"] == args.eval_sets[0]:
-            line = f"  {row['model']:12s} {row['noise_condition']:15s}"
+            line = f"  {row['model']:22s} {row['noise_condition']:15s}"
             for es in args.eval_sets:
                 matched = [r for r in all_rows
                            if r["model"] == row["model"]
