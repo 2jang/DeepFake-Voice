@@ -1,6 +1,6 @@
 # scripts/ — 실행 가이드
 
-한국어 딥페이크 음성 탐지 연구의 전체 파이프라인. Phase 1(다운로드/전처리) → Phase 2(모델 세팅) → Phase 3(핵심 실험) → Phase 4(지표 보강) → Phase 5(강건성 실험) → Phase 6(시각화) 순서로 실행한다.
+한국어 딥페이크 음성 탐지 연구의 전체 파이프라인. Phase 1(다운로드/전처리) → Phase 2(모델 세팅) → Phase 3(핵심 실험) → Phase 4(강건성 실험) → Phase 5(지표 보강) → Phase 6(시각화) 순서로 실행한다.
 
 ## 디렉토리 구조
 
@@ -11,16 +11,21 @@ scripts/
 │   ├── download_mailabs.py             M-AILABS (다국어 real, 9개 언어)
 │   ├── download_speechfake.py          SpeechFake-MD (다국어 fake+real)
 │   ├── download_koaad.py               KoAAD (한국어 fake+real)
-│   └── download_musan.py               MUSAN (노이즈 증강용)
+│   ├── download_musan.py               MUSAN (노이즈 증강용)
+│   ├── download_asvspoof19.py          ASVspoof 2019 LA (T4)
+│   ├── download_asvspoof21.py          ASVspoof 2021 DF+LA (T5, T6)
+│   ├── download_cdadd.py               CD-ADD (T7)
+│   └── download_inthewild.py           InTheWild (T8)
 │
 ├── 02_preprocess/                  ← 전처리 및 데이터 분할
 │   ├── preprocess.py                   스캔 → 샘플링 → 리샘플링 → 품질검증
-│   └── build_splits.py                 C1/C2/C3 조합 + T1/T2/T3 평가셋 생성
+│   ├── build_splits.py                 C1/C2/C3 조합 + T1/T2/T3 평가셋 생성
+│   └── prepare_benchmarks.py           T4~T8 외부 벤치마크 manifest 빌더
 │
 ├── 03_train/                       ← 학습 및 평가
 │   ├── train.py                        학습 + 평가 메인 스크립트
 │   ├── build_results.py                체크포인트 재평가 → results_v2.csv
-│   ├── eval_noise.py                   테스트 시 노이즈 강건성 평가
+│   ├── eval_noise.py                   테스트 시 노이즈 강건성 평가 (2×2 매트릭스)
 │   ├── dataset.py                      AudioDataset (증강 지원)
 │   ├── metrics.py                      EER, minDCF, FPR/FNR, FPR/FNR@EER, Accuracy, F1, AUC
 │   ├── test_metrics.py                 metrics.py 단위 테스트 (20개)
@@ -31,9 +36,9 @@ scripts/
 │   ├── launch_tb.py                    TensorBoard 런처
 │   ├── configs/                        실험별 YAML (25개)
 │   │   ├── {model}_{combo}.yaml            Phase 3 핵심 (13개)
-│   │   ├── {model}_call_aug_{type}.yaml    Phase 5-B 증강 (6개)
-│   │   ├── {model}_call_{length}.yaml      Phase 5-C 길이 (4개)
-│   │   └── xlsr_{head}_call.yaml           Phase 5-D SSL (2개)
+│   │   ├── {model}_call_aug_{type}.yaml    Phase 4-B 증강 (6개)
+│   │   ├── {model}_call_{length}.yaml      Phase 4-C 길이 (4개)
+│   │   └── xlsr_{head}_call.yaml           Phase 4-D SSL (2개)
 │   └── models/                         모델 구현
 │       ├── aasist.py                       AASIST (229K params)
 │       ├── specrnet.py                     SpecRNet (416K params)
@@ -61,7 +66,7 @@ pip install -r requirements.txt
 
 > - GPU(CUDA) 환경에서는 `torch`를 [PyTorch 공식 안내](https://pytorch.org/get-started/locally/)에 따라 CUDA 빌드로 먼저 설치한 뒤 나머지를 설치하는 것을 권장한다.
 > - 코덱 증강은 PyAV(`av`)가 ffmpeg를 번들하므로 별도 시스템 ffmpeg 설치가 필요 없다.
-> - SSL 베이스라인(Phase 5-D)은 `transformers` 패키지가 필요하며, XLS-R 모델(~1.2GB)은 첫 실행 시 자동 다운로드된다.
+> - SSL 베이스라인(Phase 4-D)은 `transformers` 패키지가 필요하며, XLS-R 모델(~1.2GB)은 첫 실행 시 자동 다운로드된다.
 
 ---
 
@@ -87,6 +92,15 @@ python scripts/01_download/download_speechfake.py -o data/speechfake --method mo
 # 1-5. AI-Hub 한국어 real (수동)
 #   → https://www.aihub.or.kr 에서 "감성 및 발화스타일 동시고려 음성합성 데이터" 다운로드
 #   → data/aihub/ 에 배치
+
+# 1-6. MUSAN (노이즈 증강용, ~1GB)
+python scripts/01_download/download_musan.py -o data/musan --categories noise
+
+# 1-7. 외부 벤치마크 (T4~T8)
+python scripts/01_download/download_asvspoof19.py -o data/asvspoof19 --eval-only
+python scripts/01_download/download_asvspoof21.py -o data/asvspoof21
+python scripts/01_download/download_cdadd.py -o data/cdadd
+python scripts/01_download/download_inthewild.py -o data/inthewild
 ```
 
 ### Phase 2: 전처리 및 데이터 분할
@@ -113,6 +127,10 @@ python scripts/02_preprocess/build_splits.py \
 
 # 2-6. C_all manifest 병합
 python scripts/03_train/merge_manifests.py
+
+# 2-7. 외부 벤치마크 manifest 빌더 (T4~T8)
+python scripts/02_preprocess/prepare_benchmarks.py --all
+# 개별: python scripts/02_preprocess/prepare_benchmarks.py asvspoof19 inthewild
 ```
 
 **전처리 파이프라인:**
@@ -133,13 +151,18 @@ python scripts/03_train/merge_manifests.py
 | C3 | SpeechFake ko + KoAAD | O only | 139,068 |
 | C_all | C1 + C2 + C3 통합 | O | 1,067,960 |
 
-**평가셋 (전 실험 고정):**
+**평가셋:**
 
-| 셋 | 내용 | 샘플 수 |
-|----|------|--------:|
-| T1 | SpeechFake ko test | 982 |
-| T2 | KoAAD holdout | 26,977 |
-| T3 | MLAAD test (ko 제외) | 116,544 |
+| 셋 | 내용 | 샘플 수 | 유형 |
+|----|------|--------:|------|
+| T1 | SpeechFake ko test | 982 | 내부 |
+| T2 | KoAAD holdout | 26,977 | 내부 |
+| T3 | MLAAD test (ko 제외) | 116,544 | 내부 |
+| T4 | ASVspoof 2019 LA eval | 71,237 | 외부 벤치마크 |
+| T5 | ASVspoof 2021 DF eval | 593,253 | 외부 벤치마크 |
+| T6 | ASVspoof 2021 LA eval | — | 외부 벤치마크 |
+| T7 | CD-ADD | 300h+ | 외부 벤치마크 |
+| T8 | InTheWild | 37.9h | 외부 벤치마크 |
 
 ### Phase 3: 핵심 실험 (13개) ✅ 완료
 
@@ -158,12 +181,6 @@ python scripts/03_train/train.py --all --resume
 
 # 완료된 실험도 강제 재학습
 python scripts/03_train/train.py --all --force
-
-# Phase 5 실험만 일괄 실행 (증강 6개 + 길이 4개 + SSL 2개 = 12개)
-python scripts/03_train/train.py --phase5
-
-# Phase 5 중단된 실험 이어서
-python scripts/03_train/train.py --phase5 --resume
 ```
 
 **Phase 3-1**: 3개 모델 × 3개 조합 = 9개 실험
@@ -178,75 +195,75 @@ rawnet2_c1, rawnet2_c2, rawnet2_c3
 aasist_call, specrnet_call, lcnn_call, rawnet2_call
 ```
 
-### Phase 4: 평가 지표 보강 ← 현재 단계
-
-기존 13개 체크포인트를 재평가하여 minDCF, FPR/FNR을 추가 산출한다.
+### Phase 4: 강건성 실험 (~20개) ← 현재 단계
 
 ```bash
-# 4-1. 전체 재평가 (minDCF + FPR/FNR 포함)
-python scripts/03_train/build_results.py --all --output experiments/results_v2.csv
+# Phase 4 학습 실험 일괄 (증강 6 + 길이 4 + SSL 2 = 12개)
+python scripts/03_train/train.py --phase4
 
-# 4-2. 임동훈(2024) 비교표 생성
-python scripts/04_analyze/compare_lim.py --results experiments/results_v2.csv
+# 서브셋 선택
+python scripts/03_train/train.py --phase4 aug          # 증강 6개만
+python scripts/03_train/train.py --phase4 len          # 길이 4개만
+python scripts/03_train/train.py --phase4 ssl          # SSL 2개만
+python scripts/03_train/train.py --phase4 aug ssl      # 증강 + SSL
 
-# 4-3. 결과 분석 출력
-python scripts/04_analyze/analyze.py --results experiments/results_v2.csv
+# 중단된 실험 이어서
+python scripts/03_train/train.py --phase4 --resume
+
+# 완료된 실험도 강제 재학습
+python scripts/03_train/train.py --phase4 --force
 ```
 
-**평가 지표:**
-
-| 지표 | 설명 | 비교 대상 |
-|------|------|----------|
-| EER | FAR=FRR 교차점 | 임동훈, SpeechFake, ASVspoof |
-| minDCF | 비용 가중 오류율 (C_miss=2, C_fa=1) | 임동훈, ASVspoof |
-| FPR | real→fake 오판률 (threshold=0.5) | 임동훈 Table 5 |
-| FNR | fake→real 오판률 (threshold=0.5) | 임동훈 Table 5 |
-| FPR@EER | real→fake 오판률 (EER threshold) | ASVspoof 학술 관례 |
-| FNR@EER | fake→real 오판률 (EER threshold) | ASVspoof 학술 관례 |
-| Accuracy / F1 / AUC | 표준 분류 지표 | 임동훈 |
-| 추론 시간 / 파라미터 / FLOPs | 경량화 지표 | — |
-
-### Phase 5: 강건성 실험 (~20개)
-
-```bash
-# Phase 5 학습 실험 일괄 실행 (증강 6개 + 길이 4개 + SSL 2개 = 12개)
-# 실험 A(노이즈 평가)는 eval_noise.py로 별도 수행
-python scripts/03_train/train.py --phase5
-```
-
-#### 5-A. MUSAN 다운로드
+#### 4-A. MUSAN 다운로드
 
 ```bash
 # noise 카테고리만 (~1GB)
 python scripts/01_download/download_musan.py -o data/musan --categories noise
 ```
 
-#### 5-B. 테스트 시 노이즈 평가 (실험 A)
+#### 4-B. 테스트 시 노이즈 평가 (실험 A, 2×2 매트릭스)
 
-기존 체크포인트로 평가만 수행. 재학습 없음.
+기존 체크포인트로 평가만 수행. 재학습 없음. 8모델 × 6조건 × T1~T8.
 
 ```bash
-# 전체 (5조건 × 2모델 × 3테스트셋 = 30개 평가)
+# 전체 (8모델 × 6조건 × T1~T8, missing manifest 자동 skip)
 python scripts/03_train/eval_noise.py --musan-dir data/musan/musan
 
-# 특정 조건/모델만
-python scripts/03_train/eval_noise.py --musan-dir data/musan/musan \
-    --conditions clean gaussian_001 musan_10db \
-    --models specrnet lcnn \
-    --eval-sets T1 T2
+# clean 학습 모델만
+python scripts/03_train/eval_noise.py --models specrnet lcnn
+
+# augmentation 모델만
+python scripts/03_train/eval_noise.py --models specrnet_aug_musan lcnn_aug_both
+
+# 임의 YAML config로 평가 (프리셋 외 모델)
+python scripts/03_train/eval_noise.py --config scripts/03_train/configs/my_model.yaml
+
+# 특정 조건/테스트셋만
+python scripts/03_train/eval_noise.py --conditions clean gaussian_001 musan_10db codec_mp3_64
+python scripts/03_train/eval_noise.py --eval-sets T1 T2 T4
 ```
 
-**노이즈 조건:**
+**노이즈 조건 (6가지):**
 
 | 조건 | 설명 | 비교 대상 |
 |------|------|----------|
 | clean | 원본 (대조군) | — |
-| gaussian_001 | Gaussian α=0.001 | 임동훈 Table 3 |
+| gaussian_001 | Gaussian α=0.001 (~50dB) | 임동훈 Table 3 |
 | musan_20db | MUSAN SNR 20dB | 가벼운 잡음 |
 | musan_10db | MUSAN SNR 10dB | 보통 잡음 |
 | musan_5db | MUSAN SNR 5dB | 악조건 |
+| codec_mp3_64 | MP3 64kbps 코덱 압축 | 실전 코덱 열화 |
 
-#### 5-C. 학습 시 증강 (실험 B)
+**대상 모델 (8개 프리셋):**
+
+| 그룹 | 모델 키 |
+|------|--------|
+| Clean 학습 | `specrnet`, `lcnn` |
+| MUSAN 증강 | `specrnet_aug_musan`, `lcnn_aug_musan` |
+| Codec 증강 | `specrnet_aug_codec`, `lcnn_aug_codec` |
+| MUSAN+Codec | `specrnet_aug_both`, `lcnn_aug_both` |
+
+#### 4-C. 학습 시 증강 (실험 B)
 
 C_all 데이터에 증강을 적용하여 재학습. SpecRNet + LCNN 각각 수행.
 
@@ -262,9 +279,11 @@ python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_aug
 # B-4: MUSAN + Codec (2순위)
 python scripts/03_train/train.py --config scripts/03_train/configs/specrnet_call_aug_both.yaml
 python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_aug_both.yaml
+
+# 또는 한번에: python scripts/03_train/train.py --phase4 aug
 ```
 
-#### 5-D. 발화 길이별 성능 (실험 C, 2순위)
+#### 4-D. 발화 길이별 성능 (실험 C, 2순위)
 
 ```bash
 # C-1: 2초
@@ -274,9 +293,11 @@ python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_2se
 # C-3: 8초
 python scripts/03_train/train.py --config scripts/03_train/configs/specrnet_call_8sec.yaml
 python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_8sec.yaml
+
+# 또는 한번에: python scripts/03_train/train.py --phase4 len
 ```
 
-#### 5-E. SSL 베이스라인 (실험 D, 3순위)
+#### 4-E. SSL 베이스라인 (실험 D, 3순위)
 
 XLS-R(300M frozen) + 경량 head로 SSL 베이스라인 성능 측정. `transformers` 패키지 필요.
 
@@ -290,9 +311,36 @@ python scripts/03_train/train.py --config scripts/03_train/configs/xlsr_aasist_c
 # D-2: XLS-R → FC (~2K trainable)
 python scripts/03_train/train.py --config scripts/03_train/configs/xlsr_fc_call.yaml
 
-# 또는 Phase 5 전체 일괄 실행 (증강 + 길이 + SSL)
-python scripts/03_train/train.py --phase5
+# 또는 한번에: python scripts/03_train/train.py --phase4 ssl
 ```
+
+### Phase 5: 평가 지표 보강
+
+기존 13개 체크포인트를 재평가하여 minDCF, FPR/FNR을 추가 산출한다.
+
+```bash
+# 5-1. 전체 재평가 (minDCF + FPR/FNR 포함)
+python scripts/03_train/build_results.py --all --output experiments/results_v2.csv
+
+# 5-2. 임동훈(2024) 비교표 생성
+python scripts/04_analyze/compare_lim.py --results experiments/results_v2.csv
+
+# 5-3. 결과 분석 출력
+python scripts/04_analyze/analyze.py --results experiments/results_v2.csv
+```
+
+**평가 지표:**
+
+| 지표 | 설명 | 비교 대상 |
+|------|------|----------|
+| EER | FAR=FRR 교차점 | 임동훈, SpeechFake, ASVspoof |
+| minDCF | 비용 가중 오류율 (C_miss=2, C_fa=1) | 임동훈, ASVspoof |
+| FPR | real→fake 오판률 (threshold=0.5) | 임동훈 Table 5 |
+| FNR | fake→real 오판률 (threshold=0.5) | 임동훈 Table 5 |
+| FPR@EER | real→fake 오판률 (EER threshold) | ASVspoof 학술 관례 |
+| FNR@EER | fake→real 오판률 (EER threshold) | ASVspoof 학술 관례 |
+| Accuracy / F1 / AUC | 표준 분류 지표 | 임동훈 |
+| 추론 시간 / 파라미터 / FLOPs | 경량화 지표 | — |
 
 ### Phase 6: 분석 및 시각화
 
@@ -324,7 +372,7 @@ python scripts/04_analyze/visualize.py --tables
 | T1 | 전체 13개 실험 결과 (EER, minDCF) |
 | T2 | C_all 4개 모델 비교 (성능 + 경량화) |
 | T3 | 임동훈(2024) 직접 비교 |
-| T4 | 노이즈 강건성표 |
+| T4 | 노이즈 강건성표 (2×2 매트릭스) |
 
 ---
 
@@ -337,7 +385,11 @@ data/                               ← 원본 데이터
 ├── speechfake/{MD,Real}/...
 ├── koaad/{tts_type}/*.wav
 ├── aihub/...
-└── musan/musan/{noise,speech,music}/*.wav
+├── musan/musan/{noise,speech,music}/*.wav
+├── asvspoof19/                         ← T4
+├── asvspoof21/                         ← T5, T6
+├── cdadd/                              ← T7
+└── inthewild/                          ← T8
 
 metadata/                           ← 전처리 메타데이터
 ├── raw_metadata.csv
@@ -358,15 +410,20 @@ manifests/                          ← 학습/평가 데이터 분할
 ├── C_all/{train,dev}.csv
 ├── T1_speechfake_ko_test.csv
 ├── T2_koaad_holdout.csv
-└── T3_mlaad_test.csv
+├── T3_mlaad_test.csv
+├── T4_asvspoof19_la_eval.csv           ← 외부 벤치마크
+├── T5_asvspoof21_df_eval.csv
+├── T6_asvspoof21_la_eval.csv
+├── T7_cdadd.csv
+└── T8_inthewild.csv
 
 experiments/                        ← 실험 결과
 ├── checkpoints/{experiment}_best.pt
 ├── logs/{experiment}.jsonl
 ├── tb_logs/{experiment}/
 ├── results.csv                         Phase 3 결과
-├── results_v2.csv                      Phase 4 결과 (minDCF/FPR/FNR 포함)
-├── noise_robustness.csv                Phase 5-A 노이즈 강건성
+├── results_v2.csv                      Phase 5 결과 (minDCF/FPR/FNR 포함)
+├── noise_robustness.csv                Phase 4-A 노이즈 강건성
 ├── lim_comparison.csv                  임동훈(2024) 비교표
 ├── figures/G{1,2,3,4}_{name}.pdf       Phase 6 그래프
 └── tables/T{1,2,3,4}_{name}.md         Phase 6 테이블
@@ -390,6 +447,11 @@ data:
     T1: manifests/T1_speechfake_ko_test.csv
     T2: manifests/T2_koaad_holdout.csv
     T3: manifests/T3_mlaad_test.csv
+    T4: manifests/T4_asvspoof19_la_eval.csv
+    T5: manifests/T5_asvspoof21_df_eval.csv
+    T6: manifests/T6_asvspoof21_la_eval.csv
+    T7: manifests/T7_cdadd.csv
+    T8: manifests/T8_inthewild.csv
   num_samples: 64000                 # 4초 × 16kHz (2초=32000, 8초=128000)
   num_workers: 4
 
@@ -421,12 +483,12 @@ output_root: experiments
 |-------|----------|------|--------|------|
 | 3-1 | aasist_c1~c3, lcnn_c1~c3, rawnet2_c1~c3 | 3종 | C1/C2/C3 | 9개 |
 | 3-2 | aasist_call, specrnet_call, lcnn_call, rawnet2_call | 4종 | C_all | 4개 |
-| 5-B | specrnet_call_aug_musan, lcnn_call_aug_musan | 2종 | C_all+MUSAN | 2개 |
-| 5-B | specrnet_call_aug_codec, lcnn_call_aug_codec | 2종 | C_all+Codec | 2개 |
-| 5-B | specrnet_call_aug_both, lcnn_call_aug_both | 2종 | C_all+MUSAN+Codec | 2개 |
-| 5-C | specrnet_call_2sec, lcnn_call_2sec | 2종 | C_all, 2초 | 2개 |
-| 5-C | specrnet_call_8sec, lcnn_call_8sec | 2종 | C_all, 8초 | 2개 |
-| 5-D | xlsr_aasist_call, xlsr_fc_call | 2종 | C_all, SSL | 2개 |
+| 4-B | specrnet_call_aug_musan, lcnn_call_aug_musan | 2종 | C_all+MUSAN | 2개 |
+| 4-B | specrnet_call_aug_codec, lcnn_call_aug_codec | 2종 | C_all+Codec | 2개 |
+| 4-B | specrnet_call_aug_both, lcnn_call_aug_both | 2종 | C_all+MUSAN+Codec | 2개 |
+| 4-C | specrnet_call_2sec, lcnn_call_2sec | 2종 | C_all, 2초 | 2개 |
+| 4-C | specrnet_call_8sec, lcnn_call_8sec | 2종 | C_all, 8초 | 2개 |
+| 4-D | xlsr_aasist_call, xlsr_fc_call | 2종 | C_all, SSL | 2개 |
 
 ## GPU 최적화
 
@@ -445,3 +507,6 @@ output_root: experiments
 | KoAAD | 연구 목적 |
 | AI-Hub | 연구 목적 |
 | MUSAN | CC BY 4.0 |
+| ASVspoof 2019/2021 | CC BY 4.0 |
+| InTheWild | CC BY-SA 4.0 |
+| CD-ADD | 연구 목적 |
