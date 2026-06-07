@@ -6,12 +6,15 @@ from .aasist import AASIST
 from .lcnn import LCNN
 from .rawnet2 import RawNet2
 from .specrnet import SpecRNet
+from .xlsr_head import XLSRAasist, XLSRfc
 
 MODEL_REGISTRY: dict[str, type] = {
     "aasist": AASIST,
     "lcnn": LCNN,
     "rawnet2": RawNet2,
     "specrnet": SpecRNet,
+    "xlsr_aasist": XLSRAasist,
+    "xlsr_fc": XLSRfc,
 }
 
 

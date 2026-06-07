@@ -29,15 +29,17 @@ scripts/
 │   ├── merge_manifests.py              C_all manifest 병합
 │   ├── verify_models.py                모델 forward/backward 검증
 │   ├── launch_tb.py                    TensorBoard 런처
-│   ├── configs/                        실험별 YAML (23개)
+│   ├── configs/                        실험별 YAML (25개)
 │   │   ├── {model}_{combo}.yaml            Phase 3 핵심 (13개)
 │   │   ├── {model}_call_aug_{type}.yaml    Phase 5-B 증강 (6개)
-│   │   └── {model}_call_{length}.yaml      Phase 5-C 길이 (4개)
+│   │   ├── {model}_call_{length}.yaml      Phase 5-C 길이 (4개)
+│   │   └── xlsr_{head}_call.yaml           Phase 5-D SSL (2개)
 │   └── models/                         모델 구현
 │       ├── aasist.py                       AASIST (229K params)
 │       ├── specrnet.py                     SpecRNet (416K params)
 │       ├── lcnn.py                         LCNN (1.37M params)
 │       ├── rawnet2.py                      RawNet2 (18.5M params)
+│       ├── xlsr_head.py                    XLS-R SSL (296K/2K trainable, 300M frozen)
 │       └── sincconv.py                     SincConv (공유 모듈)
 │
 ├── 04_analyze/                     ← 결과 분석 및 시각화
@@ -59,6 +61,7 @@ pip install -r requirements.txt
 
 > - GPU(CUDA) 환경에서는 `torch`를 [PyTorch 공식 안내](https://pytorch.org/get-started/locally/)에 따라 CUDA 빌드로 먼저 설치한 뒤 나머지를 설치하는 것을 권장한다.
 > - 코덱 증강은 PyAV(`av`)가 ffmpeg를 번들하므로 별도 시스템 ffmpeg 설치가 필요 없다.
+> - SSL 베이스라인(Phase 5-D)은 `transformers` 패키지가 필요하며, XLS-R 모델(~1.2GB)은 첫 실행 시 자동 다운로드된다.
 
 ---
 
@@ -155,6 +158,12 @@ python scripts/03_train/train.py --all --resume
 
 # 완료된 실험도 강제 재학습
 python scripts/03_train/train.py --all --force
+
+# Phase 5 실험만 일괄 실행 (증강 6개 + 길이 4개 + SSL 2개 = 12개)
+python scripts/03_train/train.py --phase5
+
+# Phase 5 중단된 실험 이어서
+python scripts/03_train/train.py --phase5 --resume
 ```
 
 **Phase 3-1**: 3개 모델 × 3개 조합 = 9개 실험
@@ -198,6 +207,12 @@ python scripts/04_analyze/analyze.py --results experiments/results_v2.csv
 | 추론 시간 / 파라미터 / FLOPs | 경량화 지표 | — |
 
 ### Phase 5: 강건성 실험 (~20개)
+
+```bash
+# Phase 5 학습 실험 일괄 실행 (증강 6개 + 길이 4개 + SSL 2개 = 12개)
+# 실험 A(노이즈 평가)는 eval_noise.py로 별도 수행
+python scripts/03_train/train.py --phase5
+```
 
 #### 5-A. MUSAN 다운로드
 
@@ -259,6 +274,24 @@ python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_2se
 # C-3: 8초
 python scripts/03_train/train.py --config scripts/03_train/configs/specrnet_call_8sec.yaml
 python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_8sec.yaml
+```
+
+#### 5-E. SSL 베이스라인 (실험 D, 3순위)
+
+XLS-R(300M frozen) + 경량 head로 SSL 베이스라인 성능 측정. `transformers` 패키지 필요.
+
+```bash
+# 사전 설치
+pip install transformers>=4.40
+
+# D-1: XLS-R → AASIST-style attention head (~296K trainable)
+python scripts/03_train/train.py --config scripts/03_train/configs/xlsr_aasist_call.yaml
+
+# D-2: XLS-R → FC (~2K trainable)
+python scripts/03_train/train.py --config scripts/03_train/configs/xlsr_fc_call.yaml
+
+# 또는 Phase 5 전체 일괄 실행 (증강 + 길이 + SSL)
+python scripts/03_train/train.py --phase5
 ```
 
 ### Phase 6: 분석 및 시각화
@@ -348,7 +381,7 @@ experiment: specrnet_call            # 실험 이름 (체크포인트 파일명)
 data_combo: C_all                    # 데이터 조합
 
 model:
-  name: specrnet                     # aasist | specrnet | lcnn | rawnet2
+  name: specrnet                     # aasist | specrnet | lcnn | rawnet2 | xlsr_aasist | xlsr_fc
 
 data:
   train_manifest: manifests/C_all/train.csv
@@ -363,7 +396,7 @@ data:
 training:
   optimizer: adam
   lr: 0.0001
-  batch_size: 64                     # AASIST는 16, 8초는 32
+  batch_size: 64                     # AASIST는 16, XLS-R은 8, 8초는 32
   epochs: 50
   early_stopping_patience: 10
   weight_decay: 0.0001
@@ -382,7 +415,7 @@ seed: 42
 output_root: experiments
 ```
 
-**설정 파일 목록 (23개):**
+**설정 파일 목록 (25개):**
 
 | Phase | 설정 파일 | 모델 | 데이터 | 비고 |
 |-------|----------|------|--------|------|
@@ -393,6 +426,7 @@ output_root: experiments
 | 5-B | specrnet_call_aug_both, lcnn_call_aug_both | 2종 | C_all+MUSAN+Codec | 2개 |
 | 5-C | specrnet_call_2sec, lcnn_call_2sec | 2종 | C_all, 2초 | 2개 |
 | 5-C | specrnet_call_8sec, lcnn_call_8sec | 2종 | C_all, 8초 | 2개 |
+| 5-D | xlsr_aasist_call, xlsr_fc_call | 2종 | C_all, SSL | 2개 |
 
 ## GPU 최적화
 

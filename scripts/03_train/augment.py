@@ -65,12 +65,9 @@ class MUSANNoisePool:
         if noise.ndim > 1:
             noise = noise[:, 0]
 
-        # SR 불일치 시 간단 리샘플 (정수 비율만 지원, 아니면 그냥 사용)
         if sr != self.sr:
-            ratio = self.sr / sr
-            indices = np.arange(0, len(noise), 1.0 / ratio).astype(int)
-            indices = indices[indices < len(noise)]
-            noise = noise[indices]
+            import librosa
+            noise = librosa.resample(noise, orig_sr=sr, target_sr=self.sr)
 
         # 길이 맞추기
         if len(noise) < length:
