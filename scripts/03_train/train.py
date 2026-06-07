@@ -407,9 +407,11 @@ def main() -> int:
     parser.add_argument("--resume", action="store_true", help="Resume interrupted training")
     parser.add_argument("--force", action="store_true",
                         help="--all에서 이미 완료된 실험도 강제 재학습 (기본은 건너뜀)")
+    parser.add_argument("--phase5", action="store_true",
+                        help="Phase 5 실험만 실행 (증강 B-2~B-4 + 발화길이 C-1/C-3 + SSL D-1/D-2)")
     args = parser.parse_args()
 
-    if args.tb_port > 0 and (args.all or args.config):
+    if args.tb_port > 0 and (args.all or args.phase5 or args.config):
         tb_log_dir = Path("experiments") / "tb_logs"
         tb_log_dir.mkdir(parents=True, exist_ok=True)
         subprocess.Popen(
@@ -422,9 +424,14 @@ def main() -> int:
         )
         print(f"TensorBoard: http://0.0.0.0:{args.tb_port}")
 
-    if args.all:
-        print(f"Running all {len(ALL_CONFIGS)} experiments sequentially...")
-        for i, cfg_path in enumerate(ALL_CONFIGS, 1):
+    if args.all or args.phase5:
+        configs = ALL_CONFIGS
+        if args.phase5:
+            configs = [c for c in configs
+                       if "_aug_" in c.stem or c.stem.endswith("_2sec")
+                       or c.stem.endswith("_8sec") or c.stem.startswith("xlsr_")]
+        print(f"Running {'Phase 5' if args.phase5 else 'all'} {len(configs)} experiments sequentially...")
+        for i, cfg_path in enumerate(configs, 1):
             # 완료된 실험(best.pt 존재 & resume.pt 없음)은 기본적으로 건너뛴다.
             # → configs/에 신규(aug/length) config가 섞여도 신규만 학습되고,
             #   results.csv 중복 append를 방지한다.
@@ -436,13 +443,13 @@ def main() -> int:
             _resume_exists = (_out / "checkpoints" / f"{_name}_resume.pt").exists()
             _best_exists = (_out / "checkpoints" / f"{_name}_best.pt").exists()
             if _best_exists and not _resume_exists and not args.force:
-                print(f"\n  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem} — skipped (완료됨; --force로 재학습)")
+                print(f"\n  [{i}/{len(configs)}] {cfg_path.stem} — skipped (완료됨; --force로 재학습)")
                 continue
             print(f"\n{'#'*60}")
-            print(f"  [{i}/{len(ALL_CONFIGS)}] {cfg_path.stem}")
+            print(f"  [{i}/{len(configs)}] {cfg_path.stem}")
             print(f"{'#'*60}")
             run_experiment(str(cfg_path), args.epochs, args.device, args.resume)
-        print(f"\nAll {len(ALL_CONFIGS)} experiments complete.")
+        print(f"\nAll {len(configs)} experiments complete.")
         return 0
     elif args.config:
         return run_experiment(args.config, args.epochs, args.device, args.resume)

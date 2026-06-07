@@ -101,7 +101,7 @@ GPU: RTX 4090 (클라우드)
 scripts/03_train/
 ├── train.py              # 통합 학습/평가 스크립트
 ├── configs/              # 실험별 YAML
-├── models/               # AASIST, LCNN, SpecRNet, RawNet2
+├── models/               # AASIST, LCNN, SpecRNet, RawNet2, XLS-R (SSL)
 └── merge_manifests.py    # C_all manifest 생성
 
 experiments/              # 결과 및 문서
@@ -208,6 +208,12 @@ ASVspoof 및 임동훈(2024)이 사용한 표준 지표.
 
 RQ4(실전 환경 강건성)에 답하기 위한 실험. C_all 최적 모델(SpecRNet, LCNN) 중심 수행.
 
+**일괄 실행**: `--phase5` 플래그로 증강(B) + 발화길이(C) + SSL(D) 12개 실험을 한 번에 실행 가능:
+```bash
+python scripts/03_train/train.py --phase5          # 12개 Phase 5 config 순차 실행
+python scripts/03_train/train.py --phase5 --resume  # 중단된 실험 이어서
+```
+
 ### 5.1 실험 A: 테스트 시 노이즈 강건성
 
 임동훈(2024) Table 3과 직접 비교 가능한 설계. 학습 모델은 변경하지 않고, 테스트 데이터에만 노이즈를 추가한다. **SpecRNet + LCNN 두 모델 모두 평가** (재학습 없음, 기존 체크포인트 사용).
@@ -267,26 +273,28 @@ RQ4(실전 환경 강건성)에 답하기 위한 실험. C_all 최적 모델(Spe
 3. 동일 테스트셋에서 두 모델 모두 평가, 4초 결과와 비교
 4. 모델 간 길이 민감도 차이 분석 (스펙트로그램 vs 스펙트로그램)
 
-### 5.4 실험 D: SSL 베이스라인 (시간 여유 시)
+### 5.4 실험 D: SSL 베이스라인 (코드 구현 완료)
 
-RQ5(SSL 대비 격차) 답변용. 선택적 수행.
+RQ5(SSL 대비 격차) 답변용. 코드 구현 완료, 학습 실행 대기.
 
-| # | 구성 | 학습 대상 | 목적 |
-|---|------|---------|------|
-| D-1 | XLS-R (frozen) → AASIST head | head만 (~0.3M) | SSL vs 비SSL 격차 정량화 |
-| D-2 | XLS-R (frozen) → FC | FC만 | SSL feature 순수 효과 |
+| # | 구성 | 학습 파라미터 | 목적 |
+|---|------|-------------|------|
+| D-1 | XLS-R (frozen) → AASIST head | ~296K | SSL vs 비SSL 격차 정량화 |
+| D-2 | XLS-R (frozen) → FC | ~2K | SSL feature 순수 효과 |
 
 수행 절차:
-1. XLS-R 모델 다운로드, C_all 학습 데이터에 대해 feature 1회 추출 및 저장
-2. 저장된 feature 위에 경량 head 학습
+1. `pip install transformers` (XLS-R 모델 자동 다운로드)
+2. `python scripts/03_train/train.py --phase5` 또는 개별 config 실행
 3. 동일 테스트셋 평가, 비SSL 결과와 비교
+
+구현 방식: XLS-R(wav2vec2-xls-r-300m, 300M frozen)을 on-the-fly feature extractor로 사용. 체크포인트는 head 파라미터만 저장.
 
 ### 5.5 완료 기준
 
 - [ ] 실험 A (5조건 × 2모델 = 10개 평가): 테스트 시 노이즈 강건성 결과표
 - [ ] 실험 B (3조건 × 2모델 = 6개 신규 학습 + 2개 대조군): 학습 시 증강 효과 비교표
 - [ ] 실험 C (2길이 × 2모델 = 4개 신규 학습 + 2개 대조군): 발화 길이별 성능 비교
-- [ ] 실험 D (2개): SSL 베이스라인 (여유 시)
+- [ ] 실험 D (2개): SSL 베이스라인 (코드 구현 완료, `--phase5`로 일괄 실행 가능)
 - [ ] 임동훈(2024) Table 3과 직접 비교표 작성 (LCNN 중심)
 - [ ] SpecRNet vs LCNN 강건성 차이 분석
 
@@ -416,7 +424,7 @@ Phase 7 (2주) ── 논문 집필, 교정
 
 ### 3순위 (여유 시)
 
-- [ ] Phase 5 실험 D: SSL 베이스라인
+- [ ] Phase 5 실험 D: SSL 베이스라인 (코드 구현 완료)
 - [ ] Phase 6: 테이블 T6 (ASVspoof 간접 비교)
 
 ---

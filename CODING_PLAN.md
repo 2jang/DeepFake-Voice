@@ -456,45 +456,22 @@ YAML 차이점: `data.num_samples` 값만 변경
 # 8초: num_samples: 128000
 ```
 
-### 5-F. 실험 D: SSL 베이스라인 (선택)
+### 5-F. 실험 D: SSL 베이스라인 ✅ 구현 완료
 
-**파일**: `scripts/03_train/models/xlsr_head.py` (신규)
+**파일**: `scripts/03_train/models/xlsr_head.py`
 
-```python
-"""XLS-R frozen feature extractor + lightweight head.
+구현 완료. feature 사전 추출 대신 **on-the-fly frozen forward** 방식 채택:
 
-XLS-R (300M) 의 feature를 추출하여 저장한 후,
-그 위에 경량 head를 학습시킨다.
-"""
+- `_XLSRBase`: frozen XLS-R(wav2vec2-xls-r-300m, 300M) + trainable head
+- `XLSRAasist`: attention-pooled head (~296K trainable params) — D-1
+- `XLSRfc`: mean-pool + FC (~2K trainable params) — D-2
+- `state_dict` 오버라이드: head 파라미터만 저장/로드 (체크포인트 ~KB)
+- `train()` 오버라이드: feature_extractor를 항상 eval 모드로 유지
+- `torch.compile` 호환: `_orig_mod.` 접두사 자동 처리
 
-import torch
-import torch.nn as nn
-from transformers import Wav2Vec2Model
-
-
-class XLSRFeatureExtractor:
-    """XLS-R feature를 사전 추출하여 .pt로 저장."""
-    def __init__(self, model_name="facebook/wav2vec2-xls-r-300m"):
-        self.model = Wav2Vec2Model.from_pretrained(model_name)
-        self.model.eval()
-        for p in self.model.parameters():
-            p.requires_grad = False
-
-
-class XLSRHead(nn.Module):
-    """XLS-R feature 위의 경량 분류 head."""
-    def __init__(self, input_dim=1024, num_classes=2, head_type="aasist"):
-        super().__init__()
-        if head_type == "fc":
-            self.head = nn.Sequential(
-                nn.Linear(input_dim, 128),
-                nn.ReLU(),
-                nn.Linear(128, num_classes),
-            )
-        # head_type == "aasist": AASIST의 backend 부분만 사용
-```
-
-**주의**: transformers 라이브러리 필요, GPU 메모리 고려 (feature 사전 추출 방식 권장).
+**YAML**: `configs/xlsr_aasist_call.yaml` (D-1), `configs/xlsr_fc_call.yaml` (D-2)
+**실행**: `python scripts/03_train/train.py --phase5` 또는 개별 config
+**의존성**: `transformers>=4.40` (requirements.txt에 추가 완료)
 
 ### Phase 5 작업량 요약
 
@@ -510,8 +487,8 @@ class XLSRHead(nn.Module):
 | 실험 B 실행 (6개 학습) | train.py | 12~18시간 (GPU) | **필수** |
 | 길이 YAML 4개 생성 | configs/ | 15분 | 2순위 |
 | 실험 C 실행 (4개 학습) | train.py | 8~12시간 (GPU) | 2순위 |
-| SSL 모듈 | xlsr_head.py (신규) | 2시간 | 3순위 |
-| 실험 D 실행 | train.py | 4~6시간 (GPU) | 3순위 |
+| ~~SSL 모듈~~ | ~~xlsr_head.py (신규)~~ | ✅ 완료 | 3순위 |
+| 실험 D 실행 | `train.py --phase5` | 4~6시간 (GPU) | 3순위 |
 
 ---
 
@@ -678,7 +655,9 @@ Step 12 (선택): SSL 베이스라인
 | `configs/specrnet_call_8sec.yaml` | **신규** | ✅ | C-3: SpecRNet 8초 |
 | `configs/lcnn_call_8sec.yaml` | **신규** | ✅ | C-3: LCNN 8초 |
 | `scripts/03_train/test_metrics.py` | **신규** | ✅ | metrics.py 단위 테스트 20개 (EER, minDCF, FPR/FNR, compute_all) |
-| `scripts/03_train/models/xlsr_head.py` | **신규 (선택)** | 미구현 | SSL 베이스라인 (3순위) |
+| `scripts/03_train/models/xlsr_head.py` | **신규** | ✅ | SSL 베이스라인: XLSRAasist (~296K), XLSRfc (~2K) |
+| `configs/xlsr_aasist_call.yaml` | **신규** | ✅ | D-1: XLS-R → AASIST head, C_all |
+| `configs/xlsr_fc_call.yaml` | **신규** | ✅ | D-2: XLS-R → FC, C_all |
 
 **기존 코드 변경 최소화**: 4개 파일만 수정 (metrics.py, dataset.py, train.py, build_results.py). 나머지는 전부 신규 파일.
 
@@ -708,8 +687,8 @@ Step 12 (선택): SSL 베이스라인
 
 | # | 항목 | 상태 | 비고 |
 |---|------|------|------|
-| 1 | augment.py 리샘플링 조잡 | 사소 | MUSAN이 16kHz면 발동 안 함 |
-| 2 | xlsr_head.py (SSL) | 3순위 | 시간 여유 시 구현 |
+| 1 | ~~augment.py 리샘플링 조잡~~ | ✅ 해결 | `librosa.resample` 적용 |
+| 2 | ~~xlsr_head.py (SSL)~~ | ✅ 구현 | XLSRAasist + XLSRfc, YAML 2개, `--phase5` 플래그 추가 |
 
 ---
 
