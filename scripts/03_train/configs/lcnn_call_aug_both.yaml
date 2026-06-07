@@ -13,6 +13,11 @@ data:
     T1: manifests/T1_speechfake_ko_test.csv
     T2: manifests/T2_koaad_holdout.csv
     T3: manifests/T3_mlaad_test.csv
+    T4: manifests/T4_asvspoof19_la_eval.csv
+    T5: manifests/T5_asvspoof21_df_eval.csv
+    T6: manifests/T6_asvspoof21_la_eval.csv
+    T7: manifests/T7_cdadd.csv
+    T8: manifests/T8_inthewild.csv
   num_samples: 64000
   num_workers: 4
 

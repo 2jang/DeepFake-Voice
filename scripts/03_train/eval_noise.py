@@ -162,8 +162,9 @@ def main() -> int:
                        help="평가할 모델 (프리셋)")
     group.add_argument("--config", nargs="+", type=str,
                        help="임의 YAML config 경로 (프리셋 외 모델 평가 시)")
-    parser.add_argument("--eval-sets", nargs="+", default=["T1", "T2", "T3"],
-                        help="평가할 테스트셋")
+    parser.add_argument("--eval-sets", nargs="+",
+                        default=["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"],
+                        help="평가할 테스트셋 (manifest 없으면 자동 건너뜀)")
     parser.add_argument("--device", default="auto")
     parser.add_argument("--output", default="experiments/noise_robustness.csv")
     args = parser.parse_args()
