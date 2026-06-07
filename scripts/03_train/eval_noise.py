@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 5-A: 테스트 시 노이즈 강건성 평가.
+"""Phase 4-A: 테스트 시 노이즈 강건성 평가.
 
 clean/noise 학습 모델 모두를 대상으로, 테스트 데이터에 다양한 노이즈를
 추가하여 평가한다 (재학습 없음).
@@ -7,7 +7,7 @@ clean/noise 학습 모델 모두를 대상으로, 테스트 데이터에 다양�
   학습 조건 × 평가 조건 2×2 매트릭스:
     clean 학습 + clean 평가  → 기본 성능 (Phase 4에서 이미 측정)
     clean 학습 + noise 평가  → 강건성 하락 측정
-    noise 학습 + clean 평가  → 증강 효과 (Phase 5-B train.py에서 측정)
+    noise 학습 + clean 평가  → 증강 효과 (Phase 4-B train.py에서 측정)
     noise 학습 + noise 평가  → 증강이 실전 노이즈에서 얼마나 도움되는지
 
 노이즈 조건: gaussian, MUSAN(20/10/5dB), codec(MP3 64kbps)

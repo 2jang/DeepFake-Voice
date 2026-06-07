@@ -6,14 +6,14 @@
     python scripts/03_train/train.py --all
     python scripts/03_train/train.py --all --resume
 
-    # Phase 5 전체
-    python scripts/03_train/train.py --phase5
-    python scripts/03_train/train.py --phase5 --resume   # 완료된 실험 건너뛰고 이어서
+    # Phase 4 강건성 실험 전체
+    python scripts/03_train/train.py --phase4
+    python scripts/03_train/train.py --phase4 --resume   # 완료된 실험 건너뛰고 이어서
 
-    # Phase 5 서브셋 (aug=증강, len=발화길이, ssl=SSL)
-    python scripts/03_train/train.py --phase5 aug
-    python scripts/03_train/train.py --phase5 aug ssl
-    python scripts/03_train/train.py --phase5 len --resume
+    # Phase 4 서브셋 (aug=증강, len=발화길이, ssl=SSL)
+    python scripts/03_train/train.py --phase4 aug
+    python scripts/03_train/train.py --phase4 aug ssl
+    python scripts/03_train/train.py --phase4 len --resume
 """
 
 from __future__ import annotations
@@ -414,14 +414,14 @@ def main() -> int:
     parser.add_argument("--resume", action="store_true", help="Resume interrupted training")
     parser.add_argument("--force", action="store_true",
                         help="--all에서 이미 완료된 실험도 강제 재학습 (기본은 건너뜀)")
-    parser.add_argument("--phase5", nargs="*", default=None, metavar="SUBSET",
-                        help="Phase 5 실험 실행. 서브셋: aug(증강), len(발화길이), ssl(SSL). "
-                             "미지정 시 전체. 예: --phase5 aug ssl")
+    parser.add_argument("--phase4", nargs="*", default=None, metavar="SUBSET",
+                        help="Phase 4 강건성 실험 실행. 서브셋: aug(증강), len(발화길이), ssl(SSL)."
+                             "미지정 시 전체. 예: --phase4 aug ssl")
     args = parser.parse_args()
 
-    phase5_active = args.phase5 is not None
+    phase4_active = args.phase4 is not None
 
-    if args.tb_port > 0 and (args.all or phase5_active or args.config):
+    if args.tb_port > 0 and (args.all or phase4_active or args.config):
         tb_log_dir = Path("experiments") / "tb_logs"
         tb_log_dir.mkdir(parents=True, exist_ok=True)
         subprocess.Popen(
@@ -434,23 +434,23 @@ def main() -> int:
         )
         print(f"TensorBoard: http://0.0.0.0:{args.tb_port}")
 
-    if args.all or phase5_active:
+    if args.all or phase4_active:
         configs = ALL_CONFIGS
-        if phase5_active:
-            PHASE5_FILTERS = {
+        if phase4_active:
+            PHASE4_FILTERS = {
                 "aug": lambda s: "_aug_" in s,
                 "len": lambda s: s.endswith("_2sec") or s.endswith("_8sec"),
                 "ssl": lambda s: s.startswith("xlsr_"),
             }
-            subsets = args.phase5 if args.phase5 else list(PHASE5_FILTERS.keys())
-            invalid = [s for s in subsets if s not in PHASE5_FILTERS]
+            subsets = args.phase4 if args.phase4 else list(PHASE4_FILTERS.keys())
+            invalid = [s for s in subsets if s not in PHASE4_FILTERS]
             if invalid:
-                print(f"알 수 없는 서브셋: {invalid}. 가능: {list(PHASE5_FILTERS.keys())}")
+                print(f"알 수 없는 서브셋: {invalid}. 가능: {list(PHASE4_FILTERS.keys())}")
                 return 1
             configs = [c for c in configs
-                       if any(PHASE5_FILTERS[s](c.stem) for s in subsets)]
-            subset_label = "+".join(subsets) if args.phase5 else "all"
-            print(f"Phase 5 [{subset_label}]: {len(configs)}개 실험")
+                       if any(PHASE4_FILTERS[s](c.stem) for s in subsets)]
+            subset_label = "+".join(subsets) if args.phase4 else "all"
+            print(f"Phase 4 [{subset_label}]: {len(configs)}개 실험")
         else:
             print(f"Running all {len(configs)} experiments sequentially...")
         for i, cfg_path in enumerate(configs, 1):
