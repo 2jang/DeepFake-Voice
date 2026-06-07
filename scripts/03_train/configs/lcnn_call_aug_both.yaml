@@ -37,6 +37,7 @@ augmentation:
   codec: mp3
   codec_bitrate: "64k"
   codec_prob: 0.3
+  codec_cache_dir: data/codec_cache/mp3_64k
 
 seed: 42
 output_root: experiments
