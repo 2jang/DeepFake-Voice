@@ -222,8 +222,12 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     print(f"  Params: {n_params:,}")
 
     if device.type == "cuda":
-        model = torch.compile(model)
-        print(f"  torch.compile enabled (bf16 + tf32)")
+        from models.xlsr_head import _XLSRBase
+        if isinstance(model, _XLSRBase):
+            print(f"  torch.compile skipped (XLS-R frozen extractor — compile overhead too large)")
+        else:
+            model = torch.compile(model)
+            print(f"  torch.compile enabled (bf16 + tf32)")
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=cfg["training"].get("weight_decay", 1e-4))
     criterion = nn.CrossEntropyLoss(
