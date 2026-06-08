@@ -37,7 +37,7 @@ DEFAULT_CACHE_DIR = "data/codec_cache/mp3_64k"
 
 def cache_path_for(file_path: str, cache_dir: Path) -> Path:
     """원본 파일 경로 → 캐시 경로. 원본의 상대 경로 구조를 유지."""
-    p = Path(file_path)
+    p = Path(file_path.replace("\\", "/"))
     if p.is_absolute():
         rel = p.relative_to(Path.cwd())
     else:
@@ -66,14 +66,19 @@ def main() -> int:
     failed = 0
 
     for fpath in tqdm(files, desc=f"Codec({args.codec} {args.bitrate})"):
-        out_path = cache_path_for(fpath, cache_dir)
+        fpath_norm = fpath.replace("\\", "/")
+        out_path = cache_path_for(fpath_norm, cache_dir)
 
         if args.skip_existing and out_path.exists():
             skipped += 1
             continue
 
+        if not Path(fpath_norm).exists():
+            failed += 1
+            continue
+
         try:
-            wav, sr = sf.read(fpath, dtype="float32")
+            wav, sr = sf.read(fpath_norm, dtype="float32")
             if wav.ndim > 1:
                 wav = wav[:, 0]
 
@@ -82,7 +87,7 @@ def main() -> int:
             out_path.parent.mkdir(parents=True, exist_ok=True)
             sf.write(str(out_path), encoded, args.sr)
         except Exception as e:
-            print(f"\n  실패: {fpath}: {e}")
+            print(f"\n  실패: {fpath_norm}: {e}")
             failed += 1
 
     total = len(files)

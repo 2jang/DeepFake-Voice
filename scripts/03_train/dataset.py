@@ -73,7 +73,7 @@ class AudioDataset(Dataset):
         """캐시 디렉토리에서 codec 사전 계산 파일 경로를 반환. 없으면 None."""
         if self.codec_cache_dir is None:
             return None
-        p = Path(file_path)
+        p = Path(file_path.replace("\\", "/"))
         rel = p.relative_to(Path.cwd()) if p.is_absolute() else p
         cached = self.codec_cache_dir / rel
         return cached if cached.exists() else None
