@@ -268,6 +268,10 @@ python scripts/03_train/eval_noise.py --eval-sets T1 T2 T4
 C_all 데이터에 증강을 적용하여 재학습. SpecRNet + LCNN 각각 수행.
 
 ```bash
+
+# 사전 인코딩 (1회만 실행, C_all 전체)
+python scripts/03_train/precompute_codec.py manifests/C_all/train.csv
+
 # B-2: MUSAN 증강 (1순위)
 python scripts/03_train/train.py --config scripts/03_train/configs/specrnet_call_aug_musan.yaml
 python scripts/03_train/train.py --config scripts/03_train/configs/lcnn_call_aug_musan.yaml
