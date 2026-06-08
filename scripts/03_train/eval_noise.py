@@ -218,10 +218,14 @@ def main() -> int:
         print(f"{'='*60}")
 
         # 모델 로드
-        model = get_model(cfg["model"]["name"]).to(device)
+        model = get_model(cfg["model"]["name"], num_samples=num_samples).to(device)
         load_checkpoint(model, ckpt_path)
         if device.type == "cuda":
-            model = torch.compile(model)
+            from models.xlsr_head import _XLSRBase
+            if isinstance(model, _XLSRBase):
+                pass  # XLS-R: frozen extractor → compile overhead too large, skip
+            else:
+                model = torch.compile(model)
 
         for cond_name in args.conditions:
             cond = NOISE_CONDITIONS[cond_name]

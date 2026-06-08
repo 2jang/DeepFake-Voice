@@ -217,13 +217,17 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     print(f"  Dev:   {len(dev_ds):,} samples")
 
     # --- model ---
-    model = get_model(cfg["model"]["name"]).to(device)
+    model = get_model(cfg["model"]["name"], num_samples=num_samples).to(device)
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"  Params: {n_params:,}")
 
     if device.type == "cuda":
-        model = torch.compile(model)
-        print(f"  torch.compile enabled (bf16 + tf32)")
+        from models.xlsr_head import _XLSRBase
+        if isinstance(model, _XLSRBase):
+            print(f"  torch.compile skipped (XLS-R frozen extractor — compile overhead too large)")
+        else:
+            model = torch.compile(model)
+            print(f"  torch.compile enabled (bf16 + tf32)")
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=cfg["training"].get("weight_decay", 1e-4))
     criterion = nn.CrossEntropyLoss(
@@ -340,7 +344,7 @@ def run_experiment(config_path: str, epochs_override: int | None, device_str: st
     inf_ms = measure_inference_time(model, device, num_samples)
     throughput = 1000.0 / inf_ms if inf_ms > 0 else 0.0
     model_mb = n_params * 4 / (1024 * 1024)
-    flops_model = get_model(cfg["model"]["name"]).to(device)
+    flops_model = get_model(cfg["model"]["name"], num_samples=num_samples).to(device)
     flops = measure_flops(flops_model, device, num_samples)
     del flops_model
     peak_mem_mb = measure_peak_memory(model, device, num_samples)
