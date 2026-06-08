@@ -40,6 +40,7 @@ class LCNN(nn.Module):
         num_classes: int = 2,
         n_fft: int = 512,
         hop_length: int = 256,
+        num_samples: int = 64_000,
     ):
         super().__init__()
         self.n_fft = n_fft
@@ -78,13 +79,25 @@ class LCNN(nn.Module):
             nn.MaxPool2d(2, 2),
         )
 
-        # After 4 MaxPool2d(2,2): (B, 32, 16, 15) for 64000 samples
-        # Flatten → 32*16*15 = 7680 → FC with MFM → output
+        # classifier 입력 차원을 num_samples에서 자동 계산
+        # STFT → 4× MaxPool2d(2,2) 후 (B, 32, F_out, T_out)
+        #   64000 → 7680, 32000 → 3584, 128000 → 15872
+        feat_dim = self._calc_feat_dim(num_samples, n_fft, hop_length)
         self.classifier = nn.Sequential(
-            nn.Linear(32 * 16 * 15, 160),
+            nn.Linear(feat_dim, 160),
             MFM1d(),  # → 80
             nn.Linear(80, num_classes),
         )
+
+    @staticmethod
+    def _calc_feat_dim(num_samples: int, n_fft: int, hop_length: int) -> int:
+        """STFT + 4× MaxPool2d 후 flatten 차원 계산."""
+        T = (num_samples - n_fft) // hop_length + 1
+        F = n_fft // 2 + 1
+        for _ in range(4):
+            T = T // 2
+            F = F // 2
+        return 32 * F * T
 
     def _spectrogram(self, x: torch.Tensor) -> torch.Tensor:
         """Compute log power spectrogram from raw waveform."""

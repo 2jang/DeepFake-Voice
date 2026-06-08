@@ -218,7 +218,7 @@ def main() -> int:
         print(f"{'='*60}")
 
         # 모델 로드
-        model = get_model(cfg["model"]["name"]).to(device)
+        model = get_model(cfg["model"]["name"], num_samples=num_samples).to(device)
         load_checkpoint(model, ckpt_path)
         if device.type == "cuda":
             model = torch.compile(model)
