@@ -38,7 +38,10 @@ _font_set = False
 for _candidate in ["Malgun Gothic", "NanumGothic", "NanumBarunGothic",
                     "AppleGothic", "Noto Sans CJK KR", "Noto Sans KR"]:
     from matplotlib.font_manager import findfont, FontProperties
-    _fp = findfont(FontProperties(family=_candidate), fallback_to_default=False)
+    try:
+        _fp = findfont(FontProperties(family=_candidate), fallback_to_default=False)
+    except ValueError:
+        continue
     if _fp and "DejaVu" not in _fp and "dejavu" not in _fp.lower():
         matplotlib.rcParams["font.family"] = _candidate
         _font_set = True
