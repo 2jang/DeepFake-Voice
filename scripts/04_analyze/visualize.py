@@ -33,13 +33,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# 한글 폰트 설정
-for font in ["Malgun Gothic", "NanumGothic", "AppleGothic", "DejaVu Sans"]:
-    try:
-        matplotlib.rcParams["font.family"] = font
+# 한글 폰트 설정 — 실제 사용 가능 여부를 확인한 뒤 설정
+_font_set = False
+for _candidate in ["Malgun Gothic", "NanumGothic", "NanumBarunGothic",
+                    "AppleGothic", "Noto Sans CJK KR", "Noto Sans KR"]:
+    from matplotlib.font_manager import findfont, FontProperties
+    _fp = findfont(FontProperties(family=_candidate), fallback_to_default=False)
+    if _fp and "DejaVu" not in _fp and "dejavu" not in _fp.lower():
+        matplotlib.rcParams["font.family"] = _candidate
+        _font_set = True
         break
-    except Exception:
-        continue
+
+if not _font_set:
+    # 한글 폰트가 전혀 없으면 영문 라벨만 깨짐 없이 표시
+    matplotlib.rcParams["font.family"] = "DejaVu Sans"
+    print("  [WARN] 한글 폰트 미설치 — 그래프 라벨이 영문 fallback 됩니다.")
+    print("         설치: sudo apt install fonts-nanum && fc-cache -fv")
+
 matplotlib.rcParams["axes.unicode_minus"] = False
 
 # 논문 스타일
