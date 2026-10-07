@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한국어 딥페이크 음성 탐지 데모</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>🎙️ 한국어 딥페이크 음성 탐지</h1>
+    <p class="sub">경량 안티스푸핑 모델 실시간 데모<span id="devicePill" class="pill">모델 로딩 중…</span></p>
+  </header>
+
+  <!-- 입력 -->
+  <section class="card">
+    <div class="tabs">
+      <button id="tabMicBtn" class="active">🎤 마이크 녹음</button>
+      <button id="tabFileBtn">📁 파일 업로드</button>
+      <button id="tabStreamBtn">📡 실시간 감시</button>
+    </div>
+
+    <div id="tabMic">
+      <div class="mic-area">
+        <button id="recordBtn" class="record-btn" title="녹음 시작/종료"><span class="dot"></span></button>
+        <div id="recTimer" class="rec-timer">00:00.0</div>
+        <canvas id="liveWave" width="900" height="64"></canvas>
+        <p class="hint">버튼을 눌러 녹음 시작 → 다시 누르면 종료 후 바로 분석합니다 (1초 이상 권장)<br>
+        원음 보존을 위해 브라우저 노이즈 제거·자동 게인은 끄고 무손실 WAV로 전송합니다</p>
+      </div>
+    </div>
+
+    <div id="tabFile" hidden>
+      <div id="dropzone" class="dropzone">
+        <div class="big">📂</div>
+        <div>오디오 파일을 끌어다 놓거나 클릭해서 선택</div>
+        <div class="formats">WAV · MP3 · FLAC · OGG · M4A · WEBM (최대 60MB, 5분 초과분은 잘라서 분석)</div>
+        <input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a,.webm,.aac,.opus" hidden>
+      </div>
+    </div>
+
+    <div id="tabStream" hidden>
+      <div class="stream-area">
+        <div class="stream-head">
+          <div id="liveIndicator" class="live-indicator idle">
+            <div class="live-icon" id="liveIcon">📡</div>
+            <div>
+              <div class="live-label" id="liveLabel">대기 중</div>
+              <div class="live-sub" id="liveSub">감시를 시작하면 말하는 동안 0.5초마다 판정합니다</div>
+            </div>
+            <div class="live-pct" id="livePct">—</div>
+          </div>
+        </div>
+        <canvas id="streamChart" width="1800" height="320"></canvas>
+        <div class="lvl-track"><div id="lvlBar" class="lvl-bar"></div></div>
+        <div class="stream-controls">
+          <button id="streamBtn" class="stream-btn">▶ 감시 시작</button>
+          <label>모델 <select id="streamModelSelect"></select></label>
+        </div>
+        <div class="meta-chips" id="streamStats"></div>
+        <p class="hint">2초 윈도우 모델이 최근 2초 음성을 0.5초 간격으로 재판정합니다.
+        판정선(0.5) 위로 올라가면 딥페이크 의심입니다.</p>
+      </div>
+    </div>
+
+    <div class="settings-row">
+      <label>모델
+        <select id="modelSelect"></select>
+      </label>
+      <label><input type="checkbox" id="compareChk"> 전체 모델 비교 (6개 동시 분석)</label>
+    </div>
+    <div id="modelDesc" class="model-desc"></div>
+  </section>
+
+  <!-- 상태 -->
+  <section class="card" id="statusCard" hidden>
+    <div class="status" id="statusInner">
+      <div class="spinner"></div><span id="statusText">분석 중…</span>
+    </div>
+  </section>
+
+  <!-- 결과 -->
+  <section class="card" id="resultCard" hidden>
+    <div id="warnBox" class="warn-box" hidden></div>
+
+    <div id="verdictBanner" class="verdict">
+      <div class="icon" id="verdictIcon"></div>
+      <div>
+        <div class="label" id="verdictLabel"></div>
+        <div class="conf" id="verdictConf"></div>
+      </div>
+    </div>
+
+    <div class="prob-bar"><div class="fake-part" id="fakePart"></div><div class="real-part"></div></div>
+    <div class="prob-legend">
+      <span class="f">🔴 FAKE <b id="fakePct"></b></span>
+      <span class="r">REAL <b id="realPct"></b> 🟢</span>
+    </div>
+
+    <div class="meta-chips" id="metaChips"></div>
+    <audio id="player" controls></audio>
+
+    <h3>구간별 분석 <span class="small" id="segTitle"></span></h3>
+    <canvas id="waveCanvas" width="1800" height="240"></canvas>
+    <div class="seg-list" id="segList"></div>
+
+    <h3>스펙트로그램 <span class="small">— 모델이 보는 입력 (log power, n_fft=512)</span></h3>
+    <img id="specImg" class="spec-img" alt="spectrogram">
+    <div class="hint" id="specCaption" style="text-align:left"></div>
+
+    <div id="compareWrap" hidden>
+      <h3>모델별 비교</h3>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>모델</th><th>파라미터</th><th>T2 EER</th><th>판정</th><th>P(fake)</th><th></th><th>추론</th></tr></thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기록 -->
+  <section class="card" id="historyCard" hidden>
+    <h3>분석 기록 <button id="clearHist" class="btn-sm" style="float:right">지우기</button></h3>
+    <div id="histList"></div>
+  </section>
+
+  <footer class="foot">
+    <b>판정 기준</b> — 임계값 0.5: 윈도우별 P(fake) 평균이 0.5 이상이면 딥페이크로 판정합니다.
+    0.4~0.6 구간은 "판별 불확실"로 표시합니다.<br>
+    오디오는 모델 학습 조건과 동일하게 16kHz mono로 변환 후, 윈도우 길이(기본 4초) 단위 50% overlap로 분석합니다.<br>
+    실시간 감시는 2초 윈도우 모델이 최근 2초를 0.5초마다 재판정하며, 표시되는 판정은 최근 윈도우들의 지수이동평균(EMA)입니다.<br>
+    ⚠️ 본 데모는 한국어 중심(KoAAD·SpeechFake 등) 학습 모델의 연구용 데모입니다.
+    학습 도메인 밖 음성(다른 언어, 특수 녹음 환경, 최신 TTS)은 오판할 수 있습니다.
+  </footer>
+
+</div>
+
+<script src="/static/recorder.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
