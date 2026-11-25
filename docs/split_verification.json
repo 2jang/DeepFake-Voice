@@ -1,0 +1,230 @@
+{
+  "counts": {
+    "C1/train": {
+      "rows": 373090,
+      "unique": 373090,
+      "dupes": 0
+    },
+    "C1/dev": {
+      "rows": 69844,
+      "unique": 69844,
+      "dupes": 0
+    },
+    "C2/train": {
+      "rows": 555802,
+      "unique": 555802,
+      "dupes": 0
+    },
+    "C2/dev": {
+      "rows": 95800,
+      "unique": 95800,
+      "dupes": 0
+    },
+    "C3/train": {
+      "rows": 139068,
+      "unique": 139068,
+      "dupes": 0
+    },
+    "C3/dev": {
+      "rows": 11148,
+      "unique": 11148,
+      "dupes": 0
+    },
+    "C_all/train": {
+      "rows": 1067960,
+      "unique": 734862,
+      "dupes": 333098
+    },
+    "C_all/dev": {
+      "rows": 176792,
+      "unique": 174808,
+      "dupes": 1984
+    },
+    "C_all_v2/train": {
+      "rows": 728661,
+      "unique": 728661,
+      "dupes": 0
+    },
+    "C_all_v2/dev": {
+      "rows": 68053,
+      "unique": 68053,
+      "dupes": 0
+    }
+  },
+  "train_dev": {
+    "C1": {
+      "dev_unique": 69844,
+      "overlap": 0,
+      "rate_pct": 0.0
+    },
+    "C2": {
+      "dev_unique": 95800,
+      "overlap": 0,
+      "rate_pct": 0.0
+    },
+    "C3": {
+      "dev_unique": 11148,
+      "overlap": 0,
+      "rate_pct": 0.0
+    },
+    "C_all": {
+      "dev_unique": 174808,
+      "overlap": 112956,
+      "rate_pct": 64.62
+    },
+    "C_all_v2": {
+      "dev_unique": 68053,
+      "overlap": 0,
+      "rate_pct": 0.0
+    }
+  },
+  "eval_leak": {
+    "C1": {
+      "T1": {
+        "eval_files": 982,
+        "file_overlap": 0,
+        "eval_speakers": 493,
+        "speaker_overlap": 0,
+        "speaker_overlap_pct": 0.0
+      },
+      "T2": {
+        "eval_files": 26977,
+        "file_overlap": 0,
+        "eval_speakers": 701,
+        "speaker_overlap": 0,
+        "speaker_overlap_pct": 0.0
+      },
+      "T3": {
+        "eval_files": 116544,
+        "file_overlap": 0,
+        "eval_speakers": 70,
+        "speaker_overlap": 9,
+        "speaker_overlap_pct": 12.86
+      }
+    },
+    "C2": {
+      "T1": {
+        "eval_files": 982,
+        "file_overlap": 0,
+        "eval_speakers": 493,
+        "speaker_overlap": 2,
+        "speaker_overlap_pct": 0.41
+      },
+      "T2": {
+        "eval_files": 26977,
+        "file_overlap": 0,
+        "eval_speakers": 701,
+        "speaker_overlap": 0,
+        "speaker_overlap_pct": 0.0
+      },
+      "T3": {
+        "eval_files": 116544,
+        "file_overlap": 0,
+        "eval_speakers": 70,
+        "speaker_overlap": 10,
+        "speaker_overlap_pct": 14.29
+      }
+    },
+    "C3": {
+      "T1": {
+        "eval_files": 982,
+        "file_overlap": 0,
+        "eval_speakers": 493,
+        "speaker_overlap": 0,
+        "speaker_overlap_pct": 0.0
+      },
+      "T2": {
+        "eval_files": 26977,
+        "file_overlap": 0,
+        "eval_speakers": 701,
+        "speaker_overlap": 560,
+        "speaker_overlap_pct": 79.89
+      },
+      "T3": {
+        "eval_files": 116544,
+        "file_overlap": 0,
+        "eval_speakers": 70,
+        "speaker_overlap": 0,
+        "speaker_overlap_pct": 0.0
+      }
+    },
+    "C_all": {
+      "T1": {
+        "eval_files": 982,
+        "file_overlap": 0,
+        "eval_speakers": 493,
+        "speaker_overlap": 2,
+        "speaker_overlap_pct": 0.41
+      },
+      "T2": {
+        "eval_files": 26977,
+        "file_overlap": 0,
+        "eval_speakers": 701,
+        "speaker_overlap": 560,
+        "speaker_overlap_pct": 79.89
+      },
+      "T3": {
+        "eval_files": 116544,
+        "file_overlap": 0,
+        "eval_speakers": 70,
+        "speaker_overlap": 11,
+        "speaker_overlap_pct": 15.71
+      }
+    },
+    "C_all_v2": {
+      "T1": {
+        "eval_files": 982,
+        "file_overlap": 0,
+        "eval_speakers": 493,
+        "speaker_overlap": 2,
+        "speaker_overlap_pct": 0.41
+      },
+      "T2": {
+        "eval_files": 26977,
+        "file_overlap": 0,
+        "eval_speakers": 701,
+        "speaker_overlap": 572,
+        "speaker_overlap_pct": 81.6
+      },
+      "T3": {
+        "eval_files": 116544,
+        "file_overlap": 0,
+        "eval_speakers": 70,
+        "speaker_overlap": 9,
+        "speaker_overlap_pct": 12.86
+      }
+    }
+  },
+  "speaker_semantics": {
+    "koaad": {
+      "files": 113595,
+      "speakers": 708,
+      "files_per_speaker": 160.4,
+      "verdict": "화자/시스템 단위"
+    },
+    "mailabs": {
+      "files": 450103,
+      "speakers": 48,
+      "files_per_speaker": 9377.1,
+      "verdict": "시스템 단위(소수)"
+    },
+    "mlaad": {
+      "files": 293214,
+      "speakers": 297,
+      "files_per_speaker": 987.3,
+      "verdict": "화자/시스템 단위"
+    },
+    "speechfake-md": {
+      "files": 81955,
+      "speakers": 5,
+      "files_per_speaker": 16391.0,
+      "verdict": "시스템 단위(소수)"
+    },
+    "speechfake-real": {
+      "files": 2350,
+      "speakers": 2350,
+      "files_per_speaker": 1.0,
+      "verdict": "파일 단위(화자 분할 아님)"
+    }
+  }
+}
